@@ -1,0 +1,8 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/CommonExtention/.vs/CommonExtention
+/CommonExtention/CommonExtention/bin
+/CommonExtention/CommonExtention/obj
+/CommonExtention/CommonExtention/.vs
