@@ -10,9 +10,9 @@ namespace CommonExtention.Extention
     /// </summary>
     public static class ExtentionString
     {
-        #region 初始化一个新的 GUID 对象字符串
+        #region 初始化一个字符串形式的 GUID 对象
         /// <summary>
-        /// 初始化一个新的 <see cref="Guid"/> 对象字符串
+        /// 初始化一个字符串形式的 <see cref="Guid"/> 对象
         /// </summary>
         /// <returns>返回 <see cref="Guid.NewGuid()"/> 的 <see cref="string"/> 表示形式</returns>
         public static string NewGuid()
