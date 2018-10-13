@@ -13,8 +13,8 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Int16}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 属性为 true，则返回 <see cref="Nullable{Int16}"/> 的 Value；
-        /// 如果 value 参数的 HasValue 为 false，则返回 0。
+        /// 如果当前实例的 HasValue 属性为 true，则返回 <see cref="Nullable{Int16}"/> 的 Value；
+        /// 如果当前实例的 HasValue 为 false，则返回 0。
         /// </returns>
         public static short ToInt16(this short? value)
         {
@@ -29,8 +29,8 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Int32}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的HasValue 为 true，则返回 <see cref="Nullable{Int32}"/> 的 Value；
-        /// 如果 value 参数的HasValue 为 false，则返回 0。
+        /// 如果当前实例的HasValue 为 true，则返回 <see cref="Nullable{Int32}"/> 的 Value；
+        /// 如果当前实例的HasValue 为 false，则返回 0。
         /// </returns>
         public static int ToInt(this int? value)
         {
@@ -45,8 +45,8 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Int64}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 true，则返回 <see cref="Nullable{Int64}"/> 的 Value；
-        /// 如果 value 参数的 HasValue 为 false，则返回 0。
+        /// 如果当前实例的 HasValue 为 true，则返回 <see cref="Nullable{Int64}"/> 的 Value；
+        /// 如果当前实例的 HasValue 为 false，则返回 0。
         /// </returns>
         public static long ToInt64(this long? value)
         {
@@ -61,8 +61,8 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Single}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 true，则返回 <see cref="Nullable{Single}"/> 的 Value；
-        /// 如果 value 参数的 HasValue 为 false，则返回 0。
+        /// 如果当前实例的 HasValue 为 true，则返回 <see cref="Nullable{Single}"/> 的 Value；
+        /// 如果当前实例的 HasValue 为 false，则返回 0。
         /// </returns>
         public static float ToSingle(this float? value)
         {
@@ -77,8 +77,8 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Single}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 true，则返回 <see cref="Nullable{Single}"/> 的 Value；
-        /// 如果 value 参数的 HasValue 为 false，则返回 0。
+        /// 如果当前实例的 HasValue 为 true，则返回 <see cref="Nullable{Single}"/> 的 Value；
+        /// 如果当前实例的 HasValue 为 false，则返回 0。
         /// </returns>
         public static double ToDouble(this double? value)
         {
@@ -93,8 +93,8 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Decimal}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 true，则返回 <see cref="Nullable{Decimal}"/> 的 Value；
-        /// 如果 value 参数的 HasValue 为 false，则返回 0。
+        /// 如果当前实例的 HasValue 为 true，则返回 <see cref="Nullable{Decimal}"/> 的 Value；
+        /// 如果当前实例的 HasValue 为 false，则返回 0。
         /// </returns>
         public static decimal ToDecimal(this decimal? value)
         {
@@ -109,7 +109,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Int16}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
+        /// 如果当前实例的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
         /// 否则返回此实例的值的千分位字符串表示形式。
         /// </returns>
         public static string ToThousand(this short? value)
@@ -125,7 +125,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Int32}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
+        /// 如果当前实例的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
         /// 否则返回此实例的值的千分位字符串表示形式。
         /// </returns>
         public static string ToThousand(this int? value)
@@ -141,7 +141,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Int64}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
+        /// 如果当前实例的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
         /// 否则返回此实例的值的千分位字符串表示形式。
         /// </returns>
         public static string ToThousand(this long? value)
@@ -157,7 +157,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Single}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
+        /// 如果当前实例的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
         /// 否则返回此实例的值的千分位字符串表示形式。
         /// </returns>
         public static string ToThousand(this float? value)
@@ -173,7 +173,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Double}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
+        /// 如果当前实例的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
         /// 否则返回此实例的值的千分位字符串表示形式。
         /// </returns>
         public static string ToThousand(this double? value)
@@ -189,7 +189,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{Decimal}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
+        /// 如果当前实例的 HasValue 为 false，则返回 <see cref="string.Empty"/>；
         /// 否则返回此实例的值的千分位字符串表示形式。
         /// </returns>
         public static string ToThousand(this decimal? value)
@@ -205,7 +205,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{DateTime}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 属性为 true，则返回格式为 yyyy-MM-dd 的字符串；
+        /// 如果当前实例的 HasValue 属性为 true，则返回格式为 yyyy-MM-dd 的字符串；
         /// 否则返回 <see cref="string.Empty"/>;
         /// </returns>
         public static string ToFormatDate(this DateTime? value)
@@ -221,7 +221,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="Nullable{DateTime}"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数的 HasValue 属性为 true，则返回格式为 yyyy-MM-dd HH:mm:ss 字符串；
+        /// 如果当前实例的 HasValue 属性为 true，则返回格式为 yyyy-MM-dd HH:mm:ss 字符串；
         /// 否则返回 <see cref="string.Empty"/> ;
         /// </returns>
         public static string ToFormatDateTime(this DateTime? value)

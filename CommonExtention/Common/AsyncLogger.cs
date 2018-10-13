@@ -87,7 +87,7 @@ namespace CommonExtention.Common
                 var _dir = _fileInfo.Directory;
                 if (!_dir.Exists) _dir.Create();    //如果文件夹不存在，则创建
 
-                //允许多个进程同时写入
+                //允许多个线程同时写入
                 using (var _fileStream = new FileStream(_path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
                     var _streamWrite = new StreamWriter(_fileStream, Encoding.Default);
@@ -132,7 +132,7 @@ namespace CommonExtention.Common
             var _dir = _fileInfo.Directory;
             if (!_dir.Exists) _dir.Create();    //如果文件夹不存在，则创建
 
-            //允许多个进程同时写入
+            //允许多个线程同时写入
             using (var _fileStream = new FileStream(_path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
             {
                 var _streamWrite = new StreamWriter(_fileStream, Encoding.Default);
@@ -173,7 +173,7 @@ namespace CommonExtention.Common
             var _dir = _fileInfo.Directory;
             if (!_dir.Exists) _dir.Create();    //如果文件夹不存在，则创建
 
-            //允许多个进程同时写入
+            //允许多个线程同时写入
             using (var _fileStream = new FileStream(_path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
             {
                 var _streamWrite = new StreamWriter(_fileStream, Encoding.Default);

@@ -12,11 +12,8 @@ namespace CommonExtention.Extention
         /// 指示指定的 <see cref="object"/> 对象是否不为 null
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
-        /// <returns>如果 value 参数不为 null ，则为 true；否则为 false。</returns>
-        public static bool NotNull(this object value)
-        {
-            return value != null;
-        }
+        /// <returns>如果当前 object 不为 null ，则为 true；否则为 false。</returns>
+        public static bool NotNull(this object value) => value != null;
         #endregion
 
         #region 指示指定的 object 对象不是 null 和 System.String.Empty 字符串
@@ -24,11 +21,8 @@ namespace CommonExtention.Extention
         /// 指示指定的 <see cref="object"/> 对象不为 null 和 <see cref="string.Empty"/> 字符串
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
-        /// <returns>如果 value 参数不为 null 和空字符串 ("")，则为 true；否则为 false。</returns>
-        public static bool NotNullAndEmpty(this object value)
-        {
-            return value != null && value.ToString() != string.Empty;
-        }
+        /// <returns>如果当前 object 不为 null 和空字符串 ("")，则为 true；否则为 false。</returns>
+        public static bool NotNullAndEmpty(this object value) => value != null && value.ToString() != string.Empty;
         #endregion
 
         #region 指示指定的 object 对象是否为 null
@@ -36,11 +30,8 @@ namespace CommonExtention.Extention
         /// 指示指定的 <see cref="object"/> 对象是否为 null
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
-        /// <returns>如果 value 参数为 null，则返回true；否则为 false。</returns>
-        public static bool IsNull(this object value)
-        {
-            return value == null;
-        }
+        /// <returns>如果当前 object 为 null，则返回true；否则为 false。</returns>
+        public static bool IsNull(this object value) => value == null;
         #endregion
 
         #region 指示指定的 object 对象是 null 还是 System.String.Empty 字符串
@@ -48,11 +39,8 @@ namespace CommonExtention.Extention
         /// 指示指定的 object 对象是 null 还是 <see cref="string.Empty"/> 字符串
         /// </summary>
         /// <param name="value">要检测的Object对象</param>
-        /// <returns>如果 value 参数为 null 或空字符串 ("")，则为 true；否则为 false。</returns>
-        public static bool IsNullOrEmpty(this object value)
-        {
-            return value == null || value.ToNotSpaceString() == string.Empty;
-        }
+        /// <returns>如果当前 object 为 null 或空字符串 ("")，则为 true；否则为 false。</returns>
+        public static bool IsNullOrEmpty(this object value) => value == null || value.ToNotSpaceString() == string.Empty;
         #endregion
 
         #region 将指定的 object 对象转换不为 null 的 System.String 表示形式
@@ -61,7 +49,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="object"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数不为 null，则返回 value 参数的 <see cref="string"/> 表示形式；
+        /// 如果当前 object 不为 null，则返回 value 参数的 <see cref="string"/> 表示形式；
         /// 否则返回 <see cref="string.Empty"/>。
         /// </returns>
         public static string ToNotNullString(this object value)
@@ -77,7 +65,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">要转换的 <see cref="object"/> 对象</param>
         /// <returns>
-        /// 如果 value 参数不为 null，则返回 value 参数去除空格后的 <see cref="string"/> 表示形式；
+        /// 如果当前 object 不为 null，则返回 value 参数去除空格后的 <see cref="string"/> 表示形式；
         /// 否则返回 <see cref="string.Empty"/>。
         /// </returns>
         public static string ToNotSpaceString(this object value)

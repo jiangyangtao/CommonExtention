@@ -211,7 +211,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="dt">要清除空行的DataTable</param>
         /// <returns>返回清除空行后的DataTable。</returns>
-        public static DataTable ToClearEmptyRow(this DataTable dt)
+        public static DataTable ClearEmptyRow(this DataTable dt)
         {
             for (int i = dt.Rows.Count - 1; i >= 0; i--)
             {

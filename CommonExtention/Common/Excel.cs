@@ -204,7 +204,7 @@ namespace CommonExtention.Common
         /// <summary>
         /// 删除Excel文件
         /// </summary>
-        public void DeleteExcel()
+        public void DeleteFile()
         {
             if (File.Exists(_Path)) File.Delete(_Path);
         }

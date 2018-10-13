@@ -15,10 +15,8 @@ namespace CommonExtention.Extention
         /// 初始化一个字符串形式的 <see cref="Guid"/> 对象
         /// </summary>
         /// <returns>返回 <see cref="Guid.NewGuid()"/> 的 <see cref="string"/> 表示形式</returns>
-        public static string NewGuid()
-        {
-            return Guid.NewGuid().ToString();
-        }
+        public static string NewGuid() => Guid.NewGuid().ToString();
+
         #endregion
 
         #region 将字符串形式的Unix时间转换为DateTime对象
@@ -41,11 +39,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为 null
         /// </summary>
         /// <param name="value"></param>
-        /// <returns>如果 value 参数为 null，则返回true；否则为 false。</returns>
-        public static bool IsNull(this string value)
-        {
-            return value == null;
-        }
+        /// <returns>如果字符串为 null，则返回true；否则为 false。</returns>
+        public static bool IsNull(this string value) => value == null;
         #endregion
 
         #region 指示指定的字符串是否为 System.String.Empty 字符串
@@ -53,11 +48,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为 <see cref="string.Empty"/> 字符串
         /// </summary>
         /// <param name="value"></param>
-        /// <returns>如果 value 参数为空字符串 ("")，则为 true；否则为 false。</returns>
-        public static bool IsEmpty(this string value)
-        {
-            return value == string.Empty;
-        }
+        /// <returns>如果字符串为空字符串 ("")，则为 true；否则为 false。</returns>
+        public static bool IsEmpty(this string value) => value == string.Empty;
         #endregion
 
         #region 指示指定的字符串是 null 还是 System.String.Empty 字符串
@@ -65,11 +57,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是 null 还是 <see cref="string.Empty"/> 字符串
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数为 null 或空字符串 ("")，则为 true；否则为 false。</returns>
-        public static bool IsNullOrEmpty(this string value)
-        {
-            return string.IsNullOrEmpty(value);
-        }
+        /// <returns>如果字符串为 null 或空字符串 ("")，则为 true；否则为 false。</returns>
+        public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
         #endregion
 
         #region 指示指定的字符串是否不为 null
@@ -77,11 +66,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否不为 null
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数不为 null ，则为 true；否则为 false。</returns>
-        public static bool NotNull(this string value)
-        {
-            return value != null;
-        }
+        /// <returns>如果字符串不为 null ，则为 true；否则为 false。</returns>
+        public static bool NotNull(this string value) => value != null;
         #endregion
 
         #region 指示指定的字符串是否不为 System.String.Empty 字符串
@@ -89,11 +75,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否不为 <see cref="string.Empty"/> 字符串
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数不为空字符串 ("")，则为 true；否则为 false。</returns>
-        public static bool NotEmpty(this string value)
-        {
-            return value != string.Empty;
-        }
+        /// <returns>如果字符串不为空字符串 ("")，则为 true；否则为 false。</returns>
+        public static bool NotEmpty(this string value) => value != string.Empty;
         #endregion
 
         #region 指示指定的字符串不为 null 和 System.String.Empty 字符串
@@ -101,24 +84,21 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串不为 null 和不为 <see cref="string.Empty"/> 字符串
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数不为 null 和空字符串 ("")，则为 true；否则为 false。</returns>
-        public static bool NotNullAndEmpty(this string value)
-        {
-            return !string.IsNullOrEmpty(value);
-        }
+        /// <returns>如果字符串不为 null 和空字符串 ("")，则为 true；否则为 false。</returns>
+        public static bool NotNullAndEmpty(this string value) => !string.IsNullOrEmpty(value);
         #endregion
 
-        #region 指示指定的字符串是否为中华人民共和国第二代身份证
+        #region 指示指定的字符串是否为中华人民共和国第二代身份证号码
         /// <summary>
-        /// 指示指定的字符串是否为中华人民共和国第二代身份证
+        /// 指示指定的字符串是否为中华人民共和国第二代身份证号码
         /// </summary>
         /// <param name="value">要检测的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 false；
-        /// 如果 value 参数不是是中华人民共和国第二代身份证，则返回 false；
+        /// 如果字符串为 null 或空字符串 ("")，则返回 false；
+        /// 如果字符串不是是中华人民共和国第二代身份证号码，则返回 false；
         /// 否则返回 true。
         /// </returns>
-        public static bool IsChinaIdentityCard(this string value)
+        public static bool IsChinaIdentityNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return false;
             var objReg = new Regex(@"^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$");
@@ -191,11 +171,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="short"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="short"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsInt16(this string value)
-        {
-            return short.TryParse(value, out short i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="short"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsInt16(this string value) => short.TryParse(value, out short i);
         #endregion
 
         #region 指示指定的字符串是否为等效的Int32类型
@@ -203,11 +180,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="int"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="int"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsInt(this string value)
-        {
-            return int.TryParse(value, out int i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="int"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsInt(this string value) => int.TryParse(value, out int i);
         #endregion
 
         #region 指示指定的字符串是否为等效的Int64类型
@@ -215,11 +189,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="long"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="long"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsInt64(this string value)
-        {
-            return long.TryParse(value, out long i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="long"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsInt64(this string value) => long.TryParse(value, out long i);
         #endregion
 
         #region 指示指定的字符串是否为等效的Decimal类型
@@ -227,11 +198,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="decimal"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="decimal"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsDecimal(this string value)
-        {
-            return decimal.TryParse(value, out decimal i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="decimal"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsDecimal(this string value) => decimal.TryParse(value, out decimal i);
         #endregion
 
         #region 指示指定的字符串是否为等效的Single类型
@@ -239,11 +207,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="float"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="float"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsSingle(this string value)
-        {
-            return float.TryParse(value, out float i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="float"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsSingle(this string value) => float.TryParse(value, out float i);
         #endregion
 
         #region 指示指定的字符串是否为等效的Double类型
@@ -251,11 +216,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="double"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="double"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsDouble(this string value)
-        {
-            return double.TryParse(value, out double i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="double"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsDouble(this string value) => double.TryParse(value, out double i);
         #endregion
 
         #region 指示指定的字符串是否为等效的DadeTime对象
@@ -263,11 +225,8 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="DateTime"/> 对象
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="DateTime"/> 对象，则返回true；否则返回false。</returns>
-        public static bool IsDateTime(this string value)
-        {
-            return DateTime.TryParse(value, out DateTime d);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="DateTime"/> 对象，则返回true；否则返回false。</returns>
+        public static bool IsDateTime(this string value) => DateTime.TryParse(value, out DateTime d);
         #endregion
 
         #region 指示指定的字符串是否为等效的Boolean类型
@@ -275,25 +234,19 @@ namespace CommonExtention.Extention
         /// 指示指定的字符串是否为等效的 <see cref="bool"/> 类型
         /// </summary>
         /// <param name="value">要检测的字符串</param>
-        /// <returns>如果 value 参数的值为等效的 <see cref="bool"/> 类型，则返回true；否则返回false。</returns>
-        public static bool IsBoolean(this string value)
-        {
-            return bool.TryParse(value, out bool i);
-        }
+        /// <returns>如果字符串的值为等效的 <see cref="bool"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsBoolean(this string value) => bool.TryParse(value, out bool i);
         #endregion
 
         #region 指示指定要加密的字符串进行MD5加密(16位小写)
         /// <summary>
         /// 指示指定要加密的字符串进行MD5加密(16位小写)
         /// </summary>
-        /// <param name="s">要加密的字符串</param>
+        /// <param name="value">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回16位小写的MD5密文
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回16位小写的MD5密文
         /// </returns>
-        public static string ToMD5(this string s)
-        {
-            return MessageDigestAlgorithm.MD5String(s);
-        }
+        public static string ToMD5(this string value) => MessageDigestAlgorithm.MD5String(value);
         #endregion
 
         #region 指示指定要加密的字符串进行MD5的16位大写加密
@@ -302,12 +255,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回16位大写的MD5密文
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回16位大写的MD5密文
         /// </returns>
-        public static string ToMD5Upper16(this string s)
-        {
-            return MessageDigestAlgorithm.MD5Upper16(s);
-        }
+        public static string ToMD5Upper16(this string s) => MessageDigestAlgorithm.MD5Upper16(s);
         #endregion
 
         #region 指示指定要加密的字符串进行MD5的32位小写加密
@@ -316,12 +266,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回32位小写的MD5密文
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回32位小写的MD5密文
         /// </returns>
-        public static string ToMD5Lower32(this string s)
-        {
-            return MessageDigestAlgorithm.MD5Lower32(s);
-        }
+        public static string ToMD5Lower32(this string s) => MessageDigestAlgorithm.MD5Lower32(s);
         #endregion
 
         #region 指示指定要加密的字符串进行MD5的32位大写加密
@@ -330,12 +277,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回32位大写的MD5密文
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回32位大写的MD5密文
         /// </returns>
-        public static string ToMD5Upper32(this string s)
-        {
-            return MessageDigestAlgorithm.MD5Upper32(s);
-        }
+        public static string ToMD5Upper32(this string s) => MessageDigestAlgorithm.MD5Upper32(s);
         #endregion
 
         #region 指示指定要加密的字符串进行MD5混淆加密
@@ -344,13 +288,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回MD5的混淆加密密文。
         /// </returns>
-        public static string ToMD5Confusion(this string s)
-        {
-            return MessageDigestAlgorithm.MD5Confusion(s);
-        }
+        public static string ToMD5Confusion(this string s) => MessageDigestAlgorithm.MD5Confusion(s);
         #endregion
 
         #region 指示指定要加密的字符串进行SHA1算法加密(小写)
@@ -359,13 +300,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法小写的密文。
         /// </returns>
-        public static string ToSHA1(this string s)
-        {
-            return MessageDigestAlgorithm.SHA1Lower(s);
-        }
+        public static string ToSHA1(this string s) => MessageDigestAlgorithm.SHA1Lower(s);
         #endregion
 
         #region 指示指定要加密的字符串进行SHA1算法大写加密
@@ -374,13 +312,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法大写的密文。
         /// </returns>
-        public static string ToSHA1Upper(this string s)
-        {
-            return MessageDigestAlgorithm.SHA1Upper(s);
-        }
+        public static string ToSHA1Upper(this string s) => MessageDigestAlgorithm.SHA1Upper(s);
         #endregion
 
         #region 指示指定要加密的字符串进行SHA1算法小写加密
@@ -389,13 +324,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法小写的密文。
         /// </returns>
-        public static string ToSHA1Lower(this string s)
-        {
-            return MessageDigestAlgorithm.SHA1Lower(s);
-        }
+        public static string ToSHA1Lower(this string s) => MessageDigestAlgorithm.SHA1Lower(s);
         #endregion
 
         #region 指示指定要加密的字符串进行SHA1算法混淆加密
@@ -404,13 +336,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1的混淆加密密文。
         /// </returns>
-        public static string ToSHA1Confusion(this string s)
-        {
-            return MessageDigestAlgorithm.SHA1Confusion(s);
-        }
+        public static string ToSHA1Confusion(this string s) => MessageDigestAlgorithm.SHA1Confusion(s);
         #endregion
 
         #region 指示指定要加密的字符串进行DES算法加密
@@ -423,16 +352,13 @@ namespace CommonExtention.Extention
         /// 向量：长度最少8位，如果不指定则使用 key 参数作为向量；
         /// 如果指定，多于8位则截取。</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回DES算法加密后的密文。
         /// </returns>
         /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="Exception"> key 参数长度少于8位。</exception>
         /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
-        public static string ToDesEncrypt(this string value, string key, string iv = "")
-        {
-            return DataEncryptionStandard.Encrypt(value, key, iv);
-        }
+        public static string ToDesEncrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Encrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行DES算法解密
@@ -445,16 +371,13 @@ namespace CommonExtention.Extention
         /// 向量：长度必须为8位，如果不指定则为使用 key 参数作为向量；
         /// 如果指定，多于8位则截取。</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回DES算法解密后的明文。
         /// </returns>
         /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="Exception"> key 参数长度少于8位。</exception>
         /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
-        public static string ToDesDecrypt(this string value, string key, string iv = "")
-        {
-            return DataEncryptionStandard.Decrypt(value, key, iv);
-        }
+        public static string ToDesDecrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Decrypt(value, key, iv);
         #endregion
 
         #region 指示指定要加密的字符串进行3DES算法加密
@@ -467,16 +390,13 @@ namespace CommonExtention.Extention
         /// 向量：长度必须为8位，如果不指定则使用 key 参数的前8位作为向量；
         /// 如果指定，多于8位则截取。</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回3DES算法加密后的密文。
         /// </returns>
         /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="Exception"> key 参数长度少于24位。</exception>
         /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
-        public static string To3DesEncrypt(this string value, string key, string iv = "")
-        {
-            return TripleDataEncryptionAlgorithm.Encrypt(value, key, iv);
-        }
+        public static string To3DesEncrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Encrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行3DES算法解密
@@ -489,16 +409,13 @@ namespace CommonExtention.Extention
         /// 向量：长度必须为8位，如果不指定则使用 key 参数的前8位作为向量；
         /// 如果指定，多于8位则截取。</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回3DES算法解密后的明文。
         /// </returns>
         /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="Exception"> key 参数长度少于24位。</exception>
         /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
-        public static string To3DesDecrypt(this string value, string key, string iv = "")
-        {
-            return TripleDataEncryptionAlgorithm.Decrypt(value, key, iv);
-        }
+        public static string To3DesDecrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Decrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行AES算法加密(CBC模式)
@@ -514,7 +431,7 @@ namespace CommonExtention.Extention
         /// 如果指定，多于16位则截取。
         /// </param>
         /// <returns>
-        /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回AES算法加密后的密文。
         /// </returns>
         /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
@@ -522,10 +439,7 @@ namespace CommonExtention.Extention
         /// <exception cref="Exception"> key 参数长度大于32位。</exception>
         /// <exception cref="Exception"> key 参数长度不是16位或者24位或者32位。</exception>
         /// <exception cref="Exception"> iv 参数不为空且长度小于16位。</exception>
-        public static string ToAesEncrypt(this string value, string key, string iv = "")
-        {
-            return AdvancedEncryptionStandard.Encrypt(value, key, iv);
-        }
+        public static string ToAesEncrypt(this string value, string key, string iv = "") => AdvancedEncryptionStandard.Encrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行AES算法解密(CBC模式)
@@ -541,7 +455,7 @@ namespace CommonExtention.Extention
         /// 如果指定，多于16位则截取。
         /// </param>
         /// <returns>
-        /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回AES算法解密后的明文。
         /// </returns>
         /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
@@ -549,10 +463,7 @@ namespace CommonExtention.Extention
         /// <exception cref="Exception"> key 参数长度大于32位。</exception>
         /// <exception cref="Exception"> key 参数长度不是16位或者24位或者32位。</exception>
         /// <exception cref="Exception"> iv 参数不为空且长度小于16位。</exception>
-        public static string ToAesDecrypt(this string s, string key, string iv = "")
-        {
-            return AdvancedEncryptionStandard.Decrypt(s, key, iv);
-        }
+        public static string ToAesDecrypt(this string s, string key, string iv = "") => AdvancedEncryptionStandard.Decrypt(s, key, iv);
         #endregion
 
         #region 将指定的字符串去除空格
@@ -574,7 +485,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数不为 null，则为 value 参数；
+        /// 如果字符串不为 null，则为 value 参数；
         /// 否则返回 <see cref="string.Empty"/>。
         /// </returns>
         public static string ToNotNullString(this string value)
@@ -590,9 +501,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回0；
-        /// 如果 value 参数转换失败，则返回0；
-        /// 如果 value 参数转换成功，则返回其等效的 <see cref="short"/> 值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回0；
+        /// 如果转换失败，则返回0；
+        /// 如果转换成功，则返回其等效的 <see cref="short"/> 值。
         /// </returns>
         public static short ToInt16(this string value)
         {
@@ -610,9 +521,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns> 
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回0；
-        /// 如果 value 参数转换失败，则返回0；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="int"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回0；
+        /// 如果转换失败，则返回0；
+        /// 如果转换成功，则返回等效的 <see cref="int"/> 的值。
         /// </returns>
         public static int ToInt(this string value)
         {
@@ -630,9 +541,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回0；
-        /// 如果 value 参数转换失败，则返回0；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="long"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回0；
+        /// 如果转换失败，则返回0；
+        /// 如果转换成功，则返回等效的 <see cref="long"/> 的值。
         /// </returns>
         public static long ToInt64(this string value)
         {
@@ -650,9 +561,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回0；
-        /// 如果 value 参数转换失败，则返回0；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="float"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回0；
+        /// 如果转换失败，则返回0；
+        /// 如果转换成功，则返回等效的 <see cref="float"/> 的值。
         /// </returns>
         public static float ToSingle(this string value)
         {
@@ -670,9 +581,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回0；
-        /// 如果 value 参数转换失败，则返回0；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="double"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回0；
+        /// 如果转换失败，则返回0；
+        /// 如果转换成功，则返回等效的 <see cref="double"/> 的值。
         /// </returns>
         public static double ToDouble(this string value)
         {
@@ -690,9 +601,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回0；
-        /// 如果 value 参数转换失败，则返回0；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="decimal"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回0；
+        /// 如果转换失败，则返回0；
+        /// 如果转换成功，则返回等效的 <see cref="decimal"/> 的值。
         /// </returns>
         public static decimal ToDecimal(this string value)
         {
@@ -710,9 +621,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则抛出异常("该字符串未被识别为有效的DateTime。")；
-        /// 如果 value 参数转换失败，则抛出异常("该字符串未被识别为有效的DateTime。")；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="DateTime"/> 的对象。
+        /// 如果字符串为 null 或空字符串 ("")，则抛出异常("该字符串未被识别为有效的DateTime。")；
+        /// 如果转换失败，则抛出异常("该字符串未被识别为有效的DateTime。")；
+        /// 如果转换成功，则返回等效的 <see cref="DateTime"/> 的对象。
         /// </returns>
         /// <exception cref="Exception"> value 参数为 null 或空字符串 ("")</exception>
         /// <exception cref="Exception"> value 参数转换失败。</exception>
@@ -733,9 +644,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 false；
-        /// 如果 value 参数转换失败，则返回 false；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="bool"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 false；
+        /// 如果转换失败，则返回 false；
+        /// 如果转换成功，则返回等效的 <see cref="bool"/> 的值。
         /// </returns>
         public static bool ToBoolean(this string value)
         {
@@ -753,9 +664,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回其等效的 <see cref="short"/> 值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回其等效的 <see cref="short"/> 值。
         /// </returns>
         public static short? ToNullableInt16(this string value)
         {
@@ -773,9 +684,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns> 
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="int"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="int"/> 的值。
         /// </returns>
         public static int? ToNullableInt(this string value)
         {
@@ -793,9 +704,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="long"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="long"/> 的值。
         /// </returns>
         public static long? ToNullableInt64(this string value)
         {
@@ -813,9 +724,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="float"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="float"/> 的值。
         /// </returns>
         public static float? ToNullableSingle(this string value)
         {
@@ -833,9 +744,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="double"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="double"/> 的值。
         /// </returns>
         public static double? ToNullableDouble(this string value)
         {
@@ -853,9 +764,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="decimal"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="decimal"/> 的值。
         /// </returns>
         public static decimal? ToNullableDecimal(this string value)
         {
@@ -873,9 +784,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="DateTime"/> 的对象。
+        /// 如果字符串为 null 或空字符串 ("")，，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="DateTime"/> 的对象。
         /// </returns>
         public static DateTime? ToNullableDateTime(this string value)
         {
@@ -894,9 +805,9 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="value">指定的字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 null；
-        /// 如果 value 参数转换失败，则返回 null；
-        /// 如果 value 参数转换成功，则返回等效的 <see cref="bool"/> 的值。
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 如果转换失败，则返回 null；
+        /// 如果转换成功，则返回等效的 <see cref="bool"/> 的值。
         /// </returns>
         public static bool? ToNullableBoolean(this string value)
         {
@@ -914,13 +825,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要计算的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的16位MD5哈希/散列值。
         /// </returns>
-        public static string To16MD5Hash(this string s)
-        {
-            return MessageDigestAlgorithm.Get16MD5Hash(s);
-        }
+        public static string To16MD5Hash(this string s) => MessageDigestAlgorithm.Get16MD5Hash(s);
         #endregion
 
         #region 计算指定字符串的32位MD5的哈希/散列值
@@ -929,13 +837,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要计算的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的32位MD5哈希/散列值。
         /// </returns>
-        public static string To32MD5Hash(this string s)
-        {
-            return MessageDigestAlgorithm.Get32MD5Hash(s);
-        }
+        public static string To32MD5Hash(this string s) => MessageDigestAlgorithm.Get32MD5Hash(s);
         #endregion
 
         #region 计算指定字符串的SHA1算法的哈希/散列值
@@ -944,13 +849,10 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="s">要计算的字符串</param>
         /// <returns>
-        /// 如果 s 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的SHA1算法哈希/散列值。
         /// </returns>
-        public static string ToSHA1Hash(this string s)
-        {
-            return MessageDigestAlgorithm.GetSHA1Hash(s);
-        }
+        public static string ToSHA1Hash(this string s) => MessageDigestAlgorithm.GetSHA1Hash(s);
         #endregion
 
         #region 获取指定的字符串中包含的后缀名
@@ -960,9 +862,9 @@ namespace CommonExtention.Extention
         /// <param name="value">要获取后缀名的字符串</param>
         /// <param name="containDot">是否包含"."，true 则包含；false 则不包含，默认为包含</param>
         /// <returns>
-        /// 返回 value 参数包含"."，且 containDot 参数为 true 则返回最后一个"."后的字符串，包含"."；
-        /// 返回 value 参数包含"."，且 containDot 参数为 false 则返回最后一个"."后的字符串，不包含"."；
-        /// 如果 value 参数为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>
+        /// 返回字符串包含"."，且 containDot 参数为 true 则返回最后一个"."后的字符串，包含"."；
+        /// 返回字符串包含"."，且 containDot 参数为 false 则返回最后一个"."后的字符串，不包含"."；
+        /// 如果字符串为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>
         /// </returns>
         public static string ExtendName(this string value, bool containDot = true)
         {
@@ -977,76 +879,76 @@ namespace CommonExtention.Extention
         }
         #endregion
 
-        #region 获取指定的中华人民共和国第二代身份证字符串的出生日期
+        #region 获取指定的中华人民共和国第二代身份证号码字符串的出生日期
         /// <summary>
-        /// 获取指定的中华人民共和国第二代身份证字符串的出生日期
+        /// 获取指定的中华人民共和国第二代身份证号码字符串的出生日期
         /// </summary>
-        /// <param name="value">中华人民共和国第二代身份证字符串</param>
+        /// <param name="value">中华人民共和国第二代身份证号码字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者空字符串("")，则返回 null；
-        /// 如果 value 参数检验结果不为中华人民共和国第二代身份证，则返回 null；
-        /// 否则返回从6到14位的出生日期；
+        /// 如果字符串为 null 或者空字符串("")，则返回 null；
+        /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 null；
+        /// 否则返回从6到14位的出生日期。
         /// </returns>
-        public static DateTime? GetDateOfBirthOfChinaIDCard(this string value)
+        public static DateTime? GetDateOfBirthOfChinaIDNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return null;
-            if (!value.IsChinaIdentityCard()) return null;
+            if (!value.IsChinaIdentityNumber()) return null;
             return DateTime.Parse(value.Substring(6, 4) + "-" + value.Substring(10, 2) + "-" + value.Substring(12, 2));
         }
         #endregion
 
-        #region 获取指定的中华人民共和国第二代身份证字符串的当前年龄
+        #region 获取指定的中华人民共和国第二代身份证号码字符串的当前年龄
         /// <summary>
-        /// 获取指定的中华人民共和国第二代身份证字符串的当前年龄
+        /// 获取指定的中华人民共和国第二代身份证号码字符串的当前年龄
         /// </summary>
-        /// <param name="value">中华人民共和国第二代身份证字符串</param>
+        /// <param name="value">中华人民共和国第二代身份证号码字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者空字符串("")，则返回 null；
-        /// 如果 value 参数检验结果不为中华人民共和国第二代身份证，则返回 null；
-        /// 否则返回从出生日期到今天的年龄；
+        /// 如果字符串为 null 或者空字符串("")，则返回 null；
+        /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 null；
+        /// 否则返回从出生日期到今天的年龄。
         /// </returns>
-        public static int? GetAgeOfChinaIDCard(string value)
+        public static int? GetAgeOfChinaIDNumber(string value)
         {
             if (value.IsNullOrEmpty()) return null;
-            var _date = value.GetDateOfBirthOfChinaIDCard();
+            var _date = value.GetDateOfBirthOfChinaIDNumber();
             if (!_date.HasValue) return null;
             var diff = DateTime.Now.Subtract(_date.Value);
             return diff.Days / 365;
         }
         #endregion
 
-        #region 获取指定的中华人民共和国第二代身份证字符串的性别的文字
+        #region 获取指定的中华人民共和国第二代身份证号码字符串的性别的文字
         /// <summary>
-        /// 获取指定的中华人民共和国第二代身份证字符串的性别的文字
+        /// 获取指定的中华人民共和国第二代身份证号码字符串的性别的文字
         /// </summary>
-        /// <param name="value">中华人民共和国第二代身份证字符串</param>
+        /// <param name="value">中华人民共和国第二代身份证号码字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者空字符串("")，则返回 <see cref="string.Empty"/>；
-        /// 如果 value 参数检验结果不为中华人民共和国第二代身份证，则返回 <see cref="string.Empty"/>；
-        /// 否则返回性别文字，"男" / "女"；
+        /// 如果字符串为 null 或者空字符串("")，则返回 <see cref="string.Empty"/>；
+        /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 <see cref="string.Empty"/>；
+        /// 否则返回性别文字，"男" / "女"。
         /// </returns>
-        public static string GetSexTextOfChinaIDCard(this string value)
+        public static string GetSexTextOfChinaIDNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
-            if (!value.IsChinaIdentityCard()) return string.Empty;
+            if (!value.IsChinaIdentityNumber()) return string.Empty;
             return int.Parse(value.Substring(16, 1)) % 2 == 0 ? "女" : "男";
         }
         #endregion
 
-        #region 获取指定的中华人民共和国第二代身份证字符串的性别的数字
+        #region 获取指定的中华人民共和国第二代身份证号码字符串的性别的数字
         /// <summary>
-        /// 获取指定的中华人民共和国第二代身份证字符串的性别的数字
+        /// 获取指定的中华人民共和国第二代身份证号码字符串的性别的数字
         /// </summary>
-        /// <param name="value">中华人民共和国第二代身份证字符串</param>
+        /// <param name="value">中华人民共和国第二代身份证号码字符串</param>
         /// <returns>
-        /// 如果 value 参数为 null 或者空字符串("")，则返回 null；
-        /// 如果 value 参数检验结果不为中华人民共和国第二代身份证，则返回 null；
-        /// 否则返回性别的数字：1 - 男，2 - 女；
+        /// 如果字符串为 null 或者空字符串("")，则返回 null；
+        /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 null；
+        /// 否则返回性别的数字：1 - 男，2 - 女。
         /// </returns>
-        public static int? GetSexNoOfChinaIDCard(this string value)
+        public static int? GetSexNoOfChinaIDNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return null;
-            if (!value.IsChinaIdentityCard()) return null;
+            if (!value.IsChinaIdentityNumber()) return null;
             return int.Parse(value.Substring(16, 1)) % 2 == 0 ? 2 : 1;
         }
         #endregion

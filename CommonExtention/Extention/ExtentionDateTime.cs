@@ -13,10 +13,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="date"> <see cref="DateTime"/> 对象</param>
         /// <returns>Unix时间</returns>
-        public static long UnixTime(this DateTime date)
-        {
-            return (date.ToUniversalTime().Ticks - 621355968000000000L) / 10000000L;
-        }
+        public static long UnixTime(this DateTime date) => (date.ToUniversalTime().Ticks - 621355968000000000L) / 10000000L;
         #endregion
 
         #region 返回此实例的格式化后的日期字符串
@@ -25,10 +22,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="d"><see cref="DateTime"/></param>
         /// <returns>返回格式为 yyyy-MM-dd 字符串</returns>
-        public static string ToFormatDate(this DateTime d)
-        {
-            return d.ToString("yyyy-MM-dd");
-        }
+        public static string ToFormatDate(this DateTime d) => d.ToString("yyyy-MM-dd");
         #endregion
 
         #region 返回此实例的格式化后的日期时间字符串
@@ -37,10 +31,7 @@ namespace CommonExtention.Extention
         /// </summary>
         /// <param name="d"><see cref="DateTime"/></param>
         /// <returns>返回格式为 yyyy-MM-dd HH:mm:ss</returns>
-        public static string ToFormatDateTime(this DateTime d)
-        {
-            return d.ToString("yyyy-MM-dd HH:mm:ss");
-        }
+        public static string ToFormatDateTime(this DateTime d) => d.ToString("yyyy-MM-dd HH:mm:ss");
         #endregion
 
         #region 从此实例中计算出与当前时间的时间差
@@ -83,10 +74,8 @@ namespace CommonExtention.Extention
         /// 如果时间差小于60分钟，则返回“N分钟前”；
         /// 如果时间差小于60秒，则返回“N秒前”；
         /// </returns>
-        public static string BeforeTimeRange(this DateTime time)
-        {
-            return GetBeforeTimeRange(time);
-        }
+        public static string BeforeTimeRange(this DateTime time) => GetBeforeTimeRange(time);
+        
 
         /// <summary>
         /// 从此实例中计算出与当前时间之前的时间差
@@ -134,10 +123,7 @@ namespace CommonExtention.Extention
         /// 如果时间差小于60分钟，则返回“N分钟后”；
         /// 如果时间差小于60秒，则返回“N秒后”；
         /// </returns>
-        public static string AfterTimeRange(this DateTime time)
-        {
-            return GetAfterTimeRange(time);
-        }
+        public static string AfterTimeRange(this DateTime time) => GetAfterTimeRange(time);
 
         /// <summary>
         /// 从此实例中计算出与当前时间之后的时间差
