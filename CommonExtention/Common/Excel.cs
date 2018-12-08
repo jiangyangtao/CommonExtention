@@ -1,4 +1,4 @@
-﻿using CommonExtention.Extention;
+﻿using CommonExtention.Extensions;
 using System;
 using System.Data;
 using System.Data.OleDb;

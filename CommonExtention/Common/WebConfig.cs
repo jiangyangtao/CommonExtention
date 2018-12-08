@@ -1,4 +1,4 @@
-﻿using CommonExtention.Extention;
+﻿using CommonExtention.Extensions;
 using System.Configuration;
 
 namespace CommonExtention.Common
