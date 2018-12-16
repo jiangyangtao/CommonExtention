@@ -91,6 +91,7 @@ namespace CommonExtention.Extensions
                 case "Single": return Convert.ToSingle(value);
                 case "Double": return Convert.ToDouble(value);
                 case "Boolean": return "\"" + value.ToString() + "\"";
+                case "DBNull": return string.Empty;
             }
             return value.ToString();
         }

@@ -88,6 +88,25 @@ namespace CommonExtention.Extensions
         public static bool NotNullAndEmpty(this string value) => !string.IsNullOrEmpty(value);
         #endregion
 
+        #region 指示指定的字符串是否为邮箱
+        /// <summary>
+        /// 指示指定的字符串是否为邮箱
+        /// </summary>
+        /// <param name="value">要验证的字符串</param>
+        /// <returns>
+        /// 如果字符串为 null 或者空字符串("")，则返回 false;
+        /// 否则返回验证的结果。
+        /// </returns>
+        public static bool IsEmail(this string value)
+        {
+            if (value.IsNullOrEmpty()) return false;
+
+            var emailStr = @"([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,5})+";
+            var emailReg = new Regex(emailStr);
+            return emailReg.IsMatch(value.Trim());
+        }
+        #endregion
+
         #region 指示指定的字符串是否为中华人民共和国第二代身份证号码
         /// <summary>
         /// 指示指定的字符串是否为中华人民共和国第二代身份证号码
