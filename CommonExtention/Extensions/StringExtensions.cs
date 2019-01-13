@@ -649,7 +649,6 @@ namespace CommonExtention.Extensions
         public static DateTime ToDateTime(this string value)
         {
             if (value.IsNullOrEmpty()) throw new Exception("该字符串未被识别为有效的DateTime。");
-            if (IsInt64(value)) return UnixToDateTime(value);
 
             var isParsed = DateTime.TryParse(value, out DateTime _d);
             if (!isParsed) throw new Exception("该字符串未被识别为有效的DateTime。");
@@ -810,7 +809,6 @@ namespace CommonExtention.Extensions
         public static DateTime? ToNullableDateTime(this string value)
         {
             if (value.IsNullOrEmpty()) return null;
-            if (IsInt64(value)) return UnixToDateTime(value);
 
             var isParsed = DateTime.TryParse(value, out DateTime _d);
             if (!isParsed) return null;
@@ -872,30 +870,6 @@ namespace CommonExtention.Extensions
         /// 否则返回计算所得的SHA1算法哈希/散列值。
         /// </returns>
         public static string ToSHA1Hash(this string s) => MessageDigestAlgorithm.GetSHA1Hash(s);
-        #endregion
-
-        #region 获取指定的字符串中包含的后缀名
-        /// <summary>
-        /// 获取指定的字符串中包含的后缀名
-        /// </summary>
-        /// <param name="value">要获取后缀名的字符串</param>
-        /// <param name="containDot">是否包含"."，true 则包含；false 则不包含，默认为包含</param>
-        /// <returns>
-        /// 返回字符串包含"."，且 containDot 参数为 true 则返回最后一个"."后的字符串，包含"."；
-        /// 返回字符串包含"."，且 containDot 参数为 false 则返回最后一个"."后的字符串，不包含"."；
-        /// 如果字符串为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>
-        /// </returns>
-        public static string ExtendName(this string value, bool containDot = true)
-        {
-            if (value.IsNullOrEmpty()) return string.Empty;
-
-            var _lastName = string.Empty;
-            if (containDot) _lastName = value.Substring(value.LastIndexOf("."));
-            else _lastName = value.Substring(value.LastIndexOf(".") + 1);
-
-            if (_lastName.NotNullAndEmpty()) return _lastName;
-            return string.Empty;
-        }
         #endregion
 
         #region 获取指定的中华人民共和国第二代身份证号码字符串的出生日期

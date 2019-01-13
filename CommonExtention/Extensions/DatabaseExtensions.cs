@@ -9,44 +9,89 @@ namespace CommonExtention.Extensions
     /// </summary>
     public static class DatabaseExtensions
     {
-        #region 创建一个原始SQL查询，将该查询的结果将返回给 DataTable
+        #region 创建一个原始 Sql 查询，将该查询的结果返回给 DataTable
         /// <summary>
-        /// 创建一个原始 Sql 查询，将该查询的结果将返回给 <see cref="DataTable"/>
+        /// 创建一个原始 Sql 查询，将该查询的结果返回给 <see cref="DataTable"/>
         /// </summary>
         /// <param name="database"><see cref="Database"/></param>
         /// <param name="sql">Sql 查询字符串</param>
         /// <param name="parameters">Sql 查询字符串的参数集</param>
         /// <returns><see cref="DataTable"/></returns>
-        public static DataTable SqlQuery(this Database database, string sql, params object[] parameters)
+        public static DataTable SqlQueryToDataTable(this Database database, string sql, params object[] parameters)
         {
             if (database == null) return null;
             if (sql.IsNullOrEmpty()) return null;
 
-            var connection = new SqlConnection();
-            connection = (SqlConnection)database.Connection;
-            var cmd = new SqlCommand();
-            cmd.Connection = connection;
-            cmd.CommandText = sql;
-
-            if (parameters != null && parameters.Length > 0)
+            using (var connection = (SqlConnection)database.Connection)
             {
-                foreach (var item in parameters)
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
                 {
-                    cmd.Parameters.Add(item);
+                    cmd.Connection = connection;
+                    cmd.CommandText = sql;
+
+                    if (parameters != null && parameters.Length > 0)
+                    {
+                        foreach (SqlParameter parameter in parameters)
+                        {
+                            if (!parameter.ParameterName.Contains("@"))
+                                parameter.ParameterName = $"@{parameter.ParameterName}";
+                            cmd.Parameters.Add(parameter);
+                        }
+                    }
+
+                    //var adapter = new SqlDataAdapter(cmd);
+                    //var dataTable = new DataTable();
+                    //adapter.Fill(dataTable);
+                    //return dataTable;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var dt = new DataTable();
+                        dt.Load(reader);
+                        reader.Close();
+                        return dt;
+                    }
                 }
             }
+        }
+        #endregion
 
-            try
+        #region 创建一个原始 Sql 查询，将该查询的结果返回给 DataSet
+        /// <summary>
+        /// 创建一个原始 Sql 查询，将该查询的结果返回给 <see cref="DataSet"/>
+        /// </summary>
+        /// <param name="database">当前 <see cref="Database"/> 对象</param>
+        /// <param name="sql">要执行查询的 Sql 语句</param>
+        /// <param name="parameters">参数集</param>
+        /// <returns><see cref="DataSet"/></returns>
+        public static DataSet SqlQueryToDataSet(this Database database, string sql, params object[] parameters)
+        {
+            if (database == null) return null;
+            if (sql.IsNullOrEmpty()) return null;
+
+            using (var conn = (SqlConnection)database.Connection)
             {
-                var adapter = new SqlDataAdapter(cmd);
-                var dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                return dataTable;
-            }
-            finally
-            {
-                connection.Close();
-                connection.Dispose();
+                conn.Open();
+                using (var sqlCommand = conn.CreateCommand())
+                {
+                    sqlCommand.CommandText = sql;
+                    if (parameters != null && parameters.Length > 0)
+                    {
+                        foreach (SqlParameter parameter in parameters)
+                        {
+                            if (!parameter.ParameterName.Contains("@"))
+                                parameter.ParameterName = $"@{parameter.ParameterName}";
+                            sqlCommand.Parameters.Add(parameter);
+                        }
+                    }
+                    using (var adapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        var dataSet = new DataSet();
+                        adapter.Fill(dataSet);
+                        return dataSet;
+                    }
+                }
             }
         }
         #endregion

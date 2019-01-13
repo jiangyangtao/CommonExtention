@@ -7,6 +7,20 @@ namespace CommonExtention.Extensions
     /// </summary>
     public static class DateTimeExtensions
     {
+        #region DateTime 初始值
+        /// <summary>
+        /// <see cref="DateTime"/> 的初始值，公元 0001 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
+        /// </summary>
+        public static DateTime DateTimeInitial { get => new DateTime(1, 1, 1, 0, 0, 0, 0); }
+        #endregion
+
+        #region 数据库 DateTime 初始值 
+        /// <summary>
+        /// 数据库 <see cref="DateTime"/> 的初始值，公元 1900 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
+        /// </summary>
+        public static DateTime DatabaseDateTimeInitial { get => new DateTime(1900, 1, 1, 0, 0, 0, 0); }
+        #endregion
+
         #region 返回此实例的Unix时间
         /// <summary>
         /// 返回此实例的Unix时间
