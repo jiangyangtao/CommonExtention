@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using CommonExtention.Common;
 using CommonExtention.EncryptDecryption;
+using Newtonsoft.Json.Linq;
 
 namespace CommonExtention.Extensions
 {
@@ -19,7 +21,7 @@ namespace CommonExtention.Extensions
 
         #endregion
 
-        #region 将字符串形式的Unix时间转换为DateTime对象
+        #region 将字符串形式的Unix时间转换为 DateTime 对象
         /// <summary>
         /// 将字符串形式的Unix时间转为 <see cref="DateTime"/> 对象
         /// </summary>
@@ -119,73 +121,11 @@ namespace CommonExtention.Extensions
         /// </returns>
         public static bool IsChinaIdentityNumber(this string value)
         {
-            if (value.IsNullOrEmpty()) return false;
-            var objReg = new Regex(@"^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$");
-            string birthday = string.Empty;
-            if (!objReg.IsMatch(value))
-            {
-                return false;
-            }
-
-            if (value.Length == 15)
-            {
-                //取生日  
-                birthday = "19" + value.Substring(7, 6);
-                return IsDate(birthday);
-            }
-            else if (value.Length == 18)
-            {
-                //取生日  
-                birthday = value.Substring(6, 8);
-                if (IsDate(birthday))
-                {
-                    // 校验表  
-                    int[] check = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
-                    char[] checkSum = { '1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2' };
-                    // 校验源  
-                    string checkSource = value.Substring(0, 17);
-                    // 校验源转换成数字  
-                    var source = new List<int>();
-                    for (int i = 0; i < checkSource.Length; i++)
-                    {
-                        source.Add(Convert.ToInt32(checkSource.Substring(i, 1)));
-                    }
-                    // 校验源的校验和  
-                    string checkLast = value.Substring(17);
-                    int sum = 0;
-                    // 对应项求积，再把所有积求和  
-                    for (int i = 0; i < source.Count; i++)
-                    {
-                        sum += source[i] * check[i];
-                    }
-                    // 取余  
-                    int remainder = sum % 11;
-                    if (string.Equals(checkLast, checkSum[remainder].ToString()))
-                    {
-                        return true;
-                    }
-                }
-            }
-            else
-            {
-                return false;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// 是否是日期
-        /// </summary>
-        /// <param name="txt"></param>
-        /// <returns></returns>
-        private static bool IsDate(string txt)
-        {
-            Regex objReg = new Regex(@"((^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._]?)(10|12|0?[13578])([-\/\._]?)(3[01]|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._]?)(11|0?[469])([-\/\._]?)(30|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._]?)(0?2)([-\/\._]?)(2[0-8]|1[0-9]|0?[1-9])$)|(^([2468][048]00)([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([3579][26]00)([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([1][89][0][48])([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([2-9][0-9][0][48])([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([1][89][2468][048])([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([2-9][0-9][2468][048])([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([1][89][13579][26])([-\/\._]?)(0?2)([-\/\._]?)(29)$)|(^([2-9][0-9][13579][26])([-\/\._]?)(0?2)([-\/\._]?)(29)$))");
-            return objReg.IsMatch(txt);
+            return IdentityCardNumber.IsChinaIdentityNumber(value);
         }
         #endregion
 
-        #region 指示指定的字符串是否为等效的Int16类型
+        #region 指示指定的字符串是否为等效的 Int16 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="short"/> 类型
         /// </summary>
@@ -194,7 +134,7 @@ namespace CommonExtention.Extensions
         public static bool IsInt16(this string value) => short.TryParse(value, out short i);
         #endregion
 
-        #region 指示指定的字符串是否为等效的Int32类型
+        #region 指示指定的字符串是否为等效的 Int32 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="int"/> 类型
         /// </summary>
@@ -203,7 +143,7 @@ namespace CommonExtention.Extensions
         public static bool IsInt(this string value) => int.TryParse(value, out int i);
         #endregion
 
-        #region 指示指定的字符串是否为等效的Int64类型
+        #region 指示指定的字符串是否为等效的 Int64 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="long"/> 类型
         /// </summary>
@@ -212,7 +152,7 @@ namespace CommonExtention.Extensions
         public static bool IsInt64(this string value) => long.TryParse(value, out long i);
         #endregion
 
-        #region 指示指定的字符串是否为等效的Decimal类型
+        #region 指示指定的字符串是否为等效的 Decimal 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="decimal"/> 类型
         /// </summary>
@@ -221,7 +161,7 @@ namespace CommonExtention.Extensions
         public static bool IsDecimal(this string value) => decimal.TryParse(value, out decimal i);
         #endregion
 
-        #region 指示指定的字符串是否为等效的Single类型
+        #region 指示指定的字符串是否为等效的 Single 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="float"/> 类型
         /// </summary>
@@ -230,7 +170,7 @@ namespace CommonExtention.Extensions
         public static bool IsSingle(this string value) => float.TryParse(value, out float i);
         #endregion
 
-        #region 指示指定的字符串是否为等效的Double类型
+        #region 指示指定的字符串是否为等效的 Double 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="double"/> 类型
         /// </summary>
@@ -239,7 +179,7 @@ namespace CommonExtention.Extensions
         public static bool IsDouble(this string value) => double.TryParse(value, out double i);
         #endregion
 
-        #region 指示指定的字符串是否为等效的DadeTime对象
+        #region 指示指定的字符串是否为等效的 DadeTime 对象
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="DateTime"/> 对象
         /// </summary>
@@ -248,7 +188,7 @@ namespace CommonExtention.Extensions
         public static bool IsDateTime(this string value) => DateTime.TryParse(value, out DateTime d);
         #endregion
 
-        #region 指示指定的字符串是否为等效的Boolean类型
+        #region 指示指定的字符串是否为等效的 Boolean 类型
         /// <summary>
         /// 指示指定的字符串是否为等效的 <see cref="bool"/> 类型
         /// </summary>
@@ -257,9 +197,28 @@ namespace CommonExtention.Extensions
         public static bool IsBoolean(this string value) => bool.TryParse(value, out bool i);
         #endregion
 
-        #region 指示指定要加密的字符串进行MD5加密(16位小写)
+        #region 指示指定的字符串是否为等效的 Guid 类型
         /// <summary>
-        /// 指示指定要加密的字符串进行MD5加密(16位小写)
+        /// 指示指定的字符串是否为等效的 <see cref="Guid"/> 类型
+        /// </summary>
+        /// <param name="value">要检测的字符串</param>
+        /// <returns>如果字符串的值为等效的 <see cref="Guid"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsGuid(this string value) => Guid.TryParse(value, out Guid result);
+        #endregion
+
+        #region 指示指定的字符串是否为等效的 Guid 类型
+        /// <summary>
+        /// 指示指定的字符串是否为等效的 <see cref="Guid"/> 类型
+        /// </summary>
+        /// <param name="value">要检测的字符串</param>
+        /// <param name="format">指示当解释 input 时要使用的确切格式：“N”、“D”、“B”、“P”或“X”</param>
+        /// <returns>如果字符串的值为等效的 <see cref="Guid"/> 类型，则返回true；否则返回false。</returns>
+        public static bool IsGuid(this string value, string format) => Guid.TryParseExact(value, format, out Guid result);
+        #endregion
+
+        #region 指示指定要加密的字符串进行 MD5 加密(16位小写)
+        /// <summary>
+        /// 指示指定要加密的字符串进行 MD5 加密(16位小写)
         /// </summary>
         /// <param name="value">要加密的字符串</param>
         /// <returns>
@@ -268,9 +227,9 @@ namespace CommonExtention.Extensions
         public static string ToMD5(this string value) => MessageDigestAlgorithm.MD5String(value);
         #endregion
 
-        #region 指示指定要加密的字符串进行MD5的16位大写加密
+        #region 指示指定要加密的字符串进行 MD5 的16位大写加密
         /// <summary>
-        /// 指示指定要加密的字符串进行MD5的16位大写加密
+        /// 指示指定要加密的字符串进行 MD5 的16位大写加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -279,9 +238,9 @@ namespace CommonExtention.Extensions
         public static string ToMD5Upper16(this string s) => MessageDigestAlgorithm.MD5Upper16(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行MD5的32位小写加密
+        #region 指示指定要加密的字符串进行 MD5 的32位小写加密
         /// <summary>
-        /// 指示指定要加密的字符串进行MD5的32位小写加密
+        /// 指示指定要加密的字符串进行 MD5 的32位小写加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -290,9 +249,9 @@ namespace CommonExtention.Extensions
         public static string ToMD5Lower32(this string s) => MessageDigestAlgorithm.MD5Lower32(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行MD5的32位大写加密
+        #region 指示指定要加密的字符串进行 MD5 的32位大写加密
         /// <summary>
-        /// 指示指定要加密的字符串进行MD5的32位大写加密
+        /// 指示指定要加密的字符串进行 MD5 的32位大写加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -301,9 +260,9 @@ namespace CommonExtention.Extensions
         public static string ToMD5Upper32(this string s) => MessageDigestAlgorithm.MD5Upper32(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行MD5混淆加密
+        #region 指示指定要加密的字符串进行 MD5 混淆加密
         /// <summary>
-        /// 指示指定要加密的字符串进行MD5混淆加密
+        /// 指示指定要加密的字符串进行 MD5 混淆加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -313,9 +272,9 @@ namespace CommonExtention.Extensions
         public static string ToMD5Confusion(this string s) => MessageDigestAlgorithm.MD5Confusion(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行SHA1算法加密(小写)
+        #region 指示指定要加密的字符串进行 SHA1 算法加密(小写)
         /// <summary>
-        /// 指示指定要加密的字符串进行SHA1算法加密(小写)
+        /// 指示指定要加密的字符串进行 SHA1 算法加密(小写)
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -325,9 +284,9 @@ namespace CommonExtention.Extensions
         public static string ToSHA1(this string s) => MessageDigestAlgorithm.SHA1Lower(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行SHA1算法大写加密
+        #region 指示指定要加密的字符串进行 SHA1 算法大写加密
         /// <summary>
-        /// 指示指定要加密的字符串进行SHA1算法大写加密
+        /// 指示指定要加密的字符串进行 SHA1 算法大写加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -337,9 +296,9 @@ namespace CommonExtention.Extensions
         public static string ToSHA1Upper(this string s) => MessageDigestAlgorithm.SHA1Upper(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行SHA1算法小写加密
+        #region 指示指定要加密的字符串进行 SHA1 算法小写加密
         /// <summary>
-        /// 指示指定要加密的字符串进行SHA1算法小写加密
+        /// 指示指定要加密的字符串进行 SHA1 算法小写加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -349,9 +308,9 @@ namespace CommonExtention.Extensions
         public static string ToSHA1Lower(this string s) => MessageDigestAlgorithm.SHA1Lower(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行SHA1算法混淆加密
+        #region 指示指定要加密的字符串进行 SHA1 算法混淆加密
         /// <summary>
-        /// 指示指定要加密的字符串进行SHA1算法混淆加密
+        /// 指示指定要加密的字符串进行 SHA1 算法混淆加密
         /// </summary>
         /// <param name="s">要加密的字符串</param>
         /// <returns>
@@ -361,9 +320,9 @@ namespace CommonExtention.Extensions
         public static string ToSHA1Confusion(this string s) => MessageDigestAlgorithm.SHA1Confusion(s);
         #endregion
 
-        #region 指示指定要加密的字符串进行DES算法加密
+        #region 指示指定要加密的字符串进行 DES 算法加密
         /// <summary>
-        /// 指示指定要加密的字符串进行DES算法加密
+        /// 指示指定要加密的字符串进行 DES 算法加密
         /// </summary>
         /// <param name="value">要加密的字符串</param>
         /// <param name="key">密钥：长度最少8位，多于8位则截取。</param>
@@ -380,9 +339,9 @@ namespace CommonExtention.Extensions
         public static string ToDesEncrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Encrypt(value, key, iv);
         #endregion
 
-        #region 指示指定要解密的字符串进行DES算法解密
+        #region 指示指定要解密的字符串进行 DES 算法解密
         /// <summary>
-        /// 指示指定要解密的字符串进行DES算法解密
+        /// 指示指定要解密的字符串进行 DES 算法解密
         /// </summary>
         /// <param name="value">要解密的字符串</param>
         /// <param name="key">密钥：长度必须为8位，多于8位则截取。</param>
@@ -399,9 +358,9 @@ namespace CommonExtention.Extensions
         public static string ToDesDecrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Decrypt(value, key, iv);
         #endregion
 
-        #region 指示指定要加密的字符串进行3DES算法加密
+        #region 指示指定要加密的字符串进行 3DES 算法加密
         /// <summary>
-        /// 指示指定要加密的字符串进行3DES算法加密
+        /// 指示指定要加密的字符串进行 3DES 算法加密
         /// </summary>
         /// <param name="value">要加密的字符串</param>
         /// <param name="key">密钥：长度必须为24位，多于24位则截取。</param>
@@ -418,9 +377,9 @@ namespace CommonExtention.Extensions
         public static string To3DesEncrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Encrypt(value, key, iv);
         #endregion
 
-        #region 指示指定要解密的字符串进行3DES算法解密
+        #region 指示指定要解密的字符串进行 3DES 算法解密
         /// <summary>
-        /// 指示指定要解密的字符串进行3DES算法解密
+        /// 指示指定要解密的字符串进行 3DES 算法解密
         /// </summary>
         /// <param name="value">要解密的字符串</param>
         /// <param name="key">密钥：长度必须为24位，多于24位则截取。</param>
@@ -437,9 +396,9 @@ namespace CommonExtention.Extensions
         public static string To3DesDecrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Decrypt(value, key, iv);
         #endregion
 
-        #region 指示指定要解密的字符串进行AES算法加密(CBC模式)
+        #region 指示指定要解密的字符串进行 AES 算法加密(CBC模式)
         /// <summary>
-        /// 指示指定要解密的字符串进行AES算法加密(CBC模式)
+        /// 指示指定要解密的字符串进行 AES 算法加密(CBC模式)
         /// </summary>
         /// <param name="value">要加密的字符串</param>
         /// <param name="key">
@@ -461,9 +420,9 @@ namespace CommonExtention.Extensions
         public static string ToAesEncrypt(this string value, string key, string iv = "") => AdvancedEncryptionStandard.Encrypt(value, key, iv);
         #endregion
 
-        #region 指示指定要解密的字符串进行AES算法解密(CBC模式)
+        #region 指示指定要解密的字符串进行 AES 算法解密(CBC模式)
         /// <summary>
-        /// 指示指定要解密的字符串进行AES算法解密(CBC模式)
+        /// 指示指定要解密的字符串进行 AES 算法解密(CBC模式)
         /// </summary>
         /// <param name="s">要解密的字符串</param>
         /// <param name="key">
@@ -514,7 +473,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的Int16的值
+        #region 将数字的字符串表示形式转换为其等效的 Int16 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="short"/> 的值
         /// </summary>
@@ -534,7 +493,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的Int32的值
+        #region 将数字的字符串表示形式转换为其等效的 Int32 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="int"/> 的值
         /// </summary>
@@ -554,7 +513,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的Int64的值
+        #region 将数字的字符串表示形式转换为其等效的 Int64 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="long"/> 的值
         /// </summary>
@@ -574,7 +533,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的Single的值
+        #region 将数字的字符串表示形式转换为其等效的 Single 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="float"/> 的值
         /// </summary>
@@ -594,7 +553,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的Double的值
+        #region 将数字的字符串表示形式转换为其等效的 Double 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="double"/> 的值
         /// </summary>
@@ -614,7 +573,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的Decimal的值
+        #region 将数字的字符串表示形式转换为其等效的 Decimal 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="decimal"/> 的值
         /// </summary>
@@ -634,7 +593,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将时间的字符串表示形式转换为其等效的DateTime对象
+        #region 将时间的字符串表示形式转换为其等效的 DateTime 对象
         /// <summary>
         /// 将时间的字符串表示形式转换为其等效的 <see cref="DateTime"/> 对象
         /// </summary>
@@ -656,7 +615,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将布尔的字符串表示形式转换为其等效的Boolean的值
+        #region 将布尔的字符串表示形式转换为其等效的 Boolean 的值
         /// <summary>
         /// 将布尔的字符串表示形式转换为其等效的 <see cref="bool"/> 的值
         /// </summary>
@@ -676,7 +635,46 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的NullableInt16的值
+        #region 将 Guid 的字符串表示形式转换为其等效的 Guid 的值
+        /// <summary>
+        /// 将 <see cref="Guid"/> 的字符串表示形式转换为其等效的 <see cref="Guid"/> 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("") 或者转换失败，则返回 <see cref="Guid.Empty"/>；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid ToGuid(this string value)
+        {
+            if (value.IsNullOrEmpty()) return Guid.Empty;
+
+            var isParsed = Guid.TryParse(value, out Guid result);
+            if (!isParsed) return Guid.Empty;
+            return result;
+        }
+        #endregion
+
+        #region 将 Guid 的字符串表示形式转换为其等效的 Guid 的值
+        /// <summary>
+        /// 将 <see cref="Guid"/> 的字符串表示形式转换为其等效的 <see cref="Guid"/> 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <param name="format">指示当解释 input 时要使用的确切格式：“N”、“D”、“B”、“P”或“X”</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("") 或者转换失败，则返回 <see cref="Guid.Empty"/>；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid ToGuid(this string value,string format)
+        {
+            if (value.IsNullOrEmpty()) return Guid.Empty;
+
+            var isParsed = Guid.TryParseExact(value, format,out Guid result);
+            if (!isParsed) return Guid.Empty;
+            return result;
+        }
+        #endregion
+
+        #region 将数字的字符串表示形式转换为其等效的 Nullable{Int16} 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="Nullable{Int16}"/> 的值
         /// </summary>
@@ -696,7 +694,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的NullableInt32的值
+        #region 将数字的字符串表示形式转换为其等效的 Nullable{Int32} 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="Nullable{Int32}"/> 的值
         /// </summary>
@@ -716,7 +714,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的NullableInt64的值
+        #region 将数字的字符串表示形式转换为其等效的 Nullable{Int64} 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="Nullable{Int64}"/> 的值
         /// </summary>
@@ -736,7 +734,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的NullableSingle的值
+        #region 将数字的字符串表示形式转换为其等效的 Nullable{Single} 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="Nullable{Single}"/> 的值
         /// </summary>
@@ -756,7 +754,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的NullableDouble的值
+        #region 将数字的字符串表示形式转换为其等效的 Nullable{Double} 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="Nullable{Double}"/> 的值
         /// </summary>
@@ -776,7 +774,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字的字符串表示形式转换为其等效的NullableDecimal的值
+        #region 将数字的字符串表示形式转换为其等效的 Nullable{Decimal} 的值
         /// <summary>
         /// 将数字的字符串表示形式转换为其等效的 <see cref="Nullable{Decimal}"/> 的值
         /// </summary>
@@ -796,7 +794,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将时间的字符串表示形式转换为其等效的NullableDateTime对象
+        #region 将时间的字符串表示形式转换为其等效的 Nullable{DateTime} 对象
         /// <summary>
         /// 将时间的字符串表示形式转换为其等效的 <see cref="Nullable{DateTime}"/> 对象
         /// </summary>
@@ -816,7 +814,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将布尔的字符串表示形式转换为其等效的NullableBoolean的值
+        #region 将布尔的字符串表示形式转换为其等效的 Nullable{Boolean} 的值
         /// <summary>
         /// 将布尔的字符串表示形式转换为其等效的 <see cref="Nullable{Boolean}"/> 的值
         /// </summary>
@@ -836,9 +834,80 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 计算指定字符串的16位MD5的哈希/散列值
+        #region 将 Guid 的字符串表示形式转换为其等效的 Nullable{Guid} 的值
         /// <summary>
-        /// 计算指定字符串的16位MD5的哈希/散列值
+        /// 将 <see cref="Guid"/> 的字符串表示形式转换为其等效的 <see cref="Nullable{Guid}"/> 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("") 或者转换失败，则返回 null；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid? ToNullableGuid(this string value)
+        {
+            if (value.IsNullOrEmpty()) return null;
+
+            var isParsed = Guid.TryParse(value, out Guid result);
+            if (!isParsed) return null;
+            return result;
+        }
+        #endregion
+
+        #region 将 Guid 的字符串表示形式转换为其等效的 Nullable{Guid} 的值
+        /// <summary>
+        /// 将 <see cref="Guid"/> 的字符串表示形式转换为其等效的 <see cref="Nullable{Guid}"/> 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <param name="format">指示当解释 input 时要使用的确切格式：“N”、“D”、“B”、“P”或“X”</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("") 或者转换失败，则返回 null；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid? ToNullableGuid(this string value,string format)
+        {
+            if (value.IsNullOrEmpty()) return null;
+
+            var isParsed = Guid.TryParseExact(value, format, out Guid result);
+            if (!isParsed) return null;
+            return result;
+        }
+        #endregion
+        
+        #region 将 Json 的字符串表示形式转换为 Newtonsoft.Json.Linq.JObject 对象
+        /// <summary>
+        /// 将 Json 的字符串表示形式转换为 <see cref="JObject"/> 对象
+        /// </summary>
+        /// <param name="value">要转换的字符串</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 否则返回 <see cref="JObject"/> 对象。
+        /// </returns>
+        public static JObject ToJson(this string value)
+        {
+            if (value.IsNullOrEmpty()) return null;
+            return JObject.Parse(value);
+        }
+        #endregion
+
+        #region 将 Json 数组的字符串表示形式转换为 Newtonsoft.Json.Linq.JArray 对象
+        /// <summary>
+        /// 将 Json 数组的字符串表示形式转换为 <see cref="JArray"/> 对象
+        /// </summary>
+        /// <param name="value">要转换的字符串</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("")，则返回 null；
+        /// 否则返回 <see cref="JArray"/> 对象。
+        /// </returns>
+        public static JArray ToJsonArray(this string value)
+        {
+            if (value.IsNullOrEmpty()) return null;
+            return JArray.Parse(value);
+        }
+        #endregion
+
+        #region 计算指定字符串的16位 MD5 的哈希/散列值
+        /// <summary>
+        /// 计算指定字符串的16位 MD5 的哈希/散列值
         /// </summary>
         /// <param name="s">要计算的字符串</param>
         /// <returns>
@@ -848,9 +917,9 @@ namespace CommonExtention.Extensions
         public static string To16MD5Hash(this string s) => MessageDigestAlgorithm.Get16MD5Hash(s);
         #endregion
 
-        #region 计算指定字符串的32位MD5的哈希/散列值
+        #region 计算指定字符串的32位 MD5 的哈希/散列值
         /// <summary>
-        /// 计算指定字符串的32位MD5的哈希/散列值
+        /// 计算指定字符串的32位 MD5 的哈希/散列值
         /// </summary>
         /// <param name="s">要计算的字符串</param>
         /// <returns>
@@ -860,9 +929,9 @@ namespace CommonExtention.Extensions
         public static string To32MD5Hash(this string s) => MessageDigestAlgorithm.Get32MD5Hash(s);
         #endregion
 
-        #region 计算指定字符串的SHA1算法的哈希/散列值
+        #region 计算指定字符串的 SHA1 算法的哈希/散列值
         /// <summary>
-        /// 计算指定字符串的SHA1算法的哈希/散列值
+        /// 计算指定字符串的 SHA1 算法的哈希/散列值
         /// </summary>
         /// <param name="s">要计算的字符串</param>
         /// <returns>
@@ -870,6 +939,71 @@ namespace CommonExtention.Extensions
         /// 否则返回计算所得的SHA1算法哈希/散列值。
         /// </returns>
         public static string ToSHA1Hash(this string s) => MessageDigestAlgorithm.GetSHA1Hash(s);
+        #endregion
+
+        #region 获取指定的字符串中包含的后缀名
+        /// <summary>
+        /// 获取指定的字符串中包含的后缀名
+        /// </summary>
+        /// <param name="value">要获取后缀名的字符串</param>
+        /// <param name="containDot">是否包含"."，true 则包含；false 则不包含，默认为包含</param>
+        /// <returns>
+        /// 返回字符串包含"."，且 containDot 参数为 true 则返回最后一个"."后的字符串，包含"."；
+        /// 返回字符串包含"."，且 containDot 参数为 false 则返回最后一个"."后的字符串，不包含"."；
+        /// 如果字符串为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>
+        /// </returns>
+        public static string ExtendName(this string value, bool containDot = true)
+        {
+            if (value.IsNullOrEmpty()) return string.Empty;
+
+            var _lastName = string.Empty;
+            if (containDot) _lastName = value.Substring(value.LastIndexOf("."));
+            else _lastName = value.Substring(value.LastIndexOf(".") + 1);
+
+            if (_lastName.NotNullAndEmpty()) return _lastName;
+            return string.Empty;
+        }
+        #endregion
+
+        #region 获取 Json 的字符串表示形式中的值
+        /// <summary>
+        /// 获取 Json 的字符串表示形式中的值
+        /// </summary>
+        /// <param name="value">Json 的字符串表示形式</param>
+        /// <param name="key">要获取值的 Key</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>；
+        /// 否则返回 Key 对应的 Value。
+        /// </returns>
+        public static string GetJsonValue(this string value, string key)
+        {
+            if (value.IsNullOrEmpty()) return string.Empty;
+            var json = value.ToJson();
+            var result = json.GetKeyValue(key);
+            if (result.Value != null) return result.Value.ToString();
+            return string.Empty;
+        }
+        #endregion
+
+        #region 获取 Json 的字符串表示形式中的值
+        /// <summary>
+        /// 获取 Json 的字符串表示形式中的值
+        /// </summary>
+        /// <typeparam name="T">要获取值的类型</typeparam>
+        /// <param name="value">Json 的字符串表示形式</param>
+        /// <param name="key">要获取值的 Key</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>；
+        /// 否则返回 Key 对应的 Value
+        /// </returns>
+        public static T GetJsonValue<T>(this string value, string key)
+        {
+            if (value.IsNullOrEmpty()) return default(T);
+            var json = value.ToJson();
+            var result = json.GetValue(key);
+            if (result.HasValues) return result.Value<T>();
+            return default(T);
+        }
         #endregion
 
         #region 获取指定的中华人民共和国第二代身份证号码字符串的出生日期
@@ -920,7 +1054,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 <see cref="string.Empty"/>；
         /// 否则返回性别文字，"男" / "女"。
         /// </returns>
-        public static string GetSexTextOfChinaIDNumber(this string value)
+        public static string GetGenderTextOfChinaIDNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             if (!value.IsChinaIdentityNumber()) return string.Empty;
@@ -936,13 +1070,13 @@ namespace CommonExtention.Extensions
         /// <returns>
         /// 如果字符串为 null 或者空字符串("")，则返回 null；
         /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 null；
-        /// 否则返回性别的数字：1 - 男，2 - 女。
+        /// 否则返回性别的数字：0 - 女，1 - 男。
         /// </returns>
-        public static int? GetSexNoOfChinaIDNumber(this string value)
+        public static int? GetGenderCodeOfChinaIDNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return null;
             if (!value.IsChinaIdentityNumber()) return null;
-            return int.Parse(value.Substring(16, 1)) % 2 == 0 ? 2 : 1;
+            return int.Parse(value.Substring(16, 1)) % 2 == 0 ? 0 : 1;
         }
         #endregion
     }

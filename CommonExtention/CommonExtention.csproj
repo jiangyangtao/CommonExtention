@@ -82,6 +82,8 @@
     <Compile Include="Common\BasicsController.cs" />
     <Compile Include="Common\Excel.cs" />
     <Compile Include="Common\HttpCookieConfigure.cs" />
+    <Compile Include="Common\IdentityCardNumber.cs" />
+    <Compile Include="Common\Password.cs" />
     <Compile Include="Common\Serialization.cs" />
     <Compile Include="Common\WebConfig.cs" />
     <Compile Include="EncryptDecryption\AdvancedEncryptionStandard.cs" />
@@ -90,11 +92,15 @@
     <Compile Include="EncryptDecryption\TripleDataEncryptionAlgorithm.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\DatabaseExtensions.cs" />
+    <Compile Include="Extensions\DataColumnCollectionExtensions.cs" />
+    <Compile Include="Extensions\DataRowCollectionExtensions.cs" />
+    <Compile Include="Extensions\DataSetExtensions.cs" />
     <Compile Include="Extensions\DataTableExtensions.cs" />
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
-    <Compile Include="Extensions\GenericsExtensions.cs" />
+    <Compile Include="Extensions\FileInfoExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\SingleExtensions.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
