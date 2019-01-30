@@ -95,6 +95,7 @@
     <Compile Include="Extensions\DataColumnCollectionExtensions.cs" />
     <Compile Include="Extensions\DataRowCollectionExtensions.cs" />
     <Compile Include="Extensions\DataSetExtensions.cs" />
+    <Compile Include="Extensions\DataTableCollectionExtensions.cs" />
     <Compile Include="Extensions\DataTableExtensions.cs" />
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
