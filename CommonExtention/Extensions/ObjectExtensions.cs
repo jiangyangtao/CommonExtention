@@ -349,15 +349,15 @@ namespace CommonExtention.Extensions
         /// 如果转换失败，则抛出异常("该字符串未被识别为有效的DateTime。")；
         /// 如果转换成功，则返回等效的 <see cref="DateTime"/> 的对象。
         /// </returns>
-        /// <exception cref="Exception"> value 参数为 null 或空字符串 ("")</exception>
-        /// <exception cref="Exception"> value 参数转换失败。</exception>
+        /// <exception cref="ArgumentNullException"> value 参数为 null 或空字符串 ("")</exception>
+        /// <exception cref="InvalidCastException"> value 参数转换失败。</exception>
         public static DateTime ToDateTime(this object value)
         {
-            if (value.IsNullOrEmpty()) throw new Exception("该字符串未被识别为有效的DateTime。");
+            if (value.IsNullOrEmpty()) throw new InvalidCastException("该字符串未被识别为有效的DateTime。");
 
-            var isParsed = DateTime.TryParse(value.ToString(), out DateTime _d);
-            if (!isParsed) throw new Exception("该字符串未被识别为有效的DateTime。");
-            return _d;
+            var isParsed = DateTime.TryParse(value.ToString(), out DateTime dateTime);
+            if (!isParsed) throw new InvalidCastException("该字符串未被识别为有效的DateTime。");
+            return dateTime;
         }
         #endregion
 
@@ -371,12 +371,13 @@ namespace CommonExtention.Extensions
         /// 如果转换失败，则返回 false；
         /// 如果转换成功，则返回等效的 <see cref="bool"/> 的值。
         /// </returns>
+        /// <exception cref="InvalidCastException"> value 参数转换失败。</exception>
         public static bool ToBoolean(this object value)
         {
-            if (value.IsNullOrEmpty()) throw new Exception("该字符串未被识别为有效的布尔值。");
+            if (value.IsNullOrEmpty()) throw new InvalidCastException("该字符串未被识别为有效的布尔值。");
 
             var isParsed = bool.TryParse(value.ToString(), out bool _b);
-            if (!isParsed) throw new Exception("该字符串未被识别为有效的布尔值。");
+            if (!isParsed) throw new InvalidCastException("该字符串未被识别为有效的布尔值。");
             return _b;
         }
         #endregion

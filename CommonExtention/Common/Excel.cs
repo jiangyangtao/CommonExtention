@@ -16,12 +16,12 @@ namespace CommonExtention.Common
         /// 构造函数
         /// </summary>
         /// <param name="path">Excel路径</param>
-        /// <exception cref="Exception">path 参数为 null 或空字符串 ("")</exception>
-        /// <exception cref="Exception">未找到文件，或者没有文件夹、文件权限时，抛出 "未找到 path 中指定的文件"。</exception>
+        /// <exception cref="ArgumentNullException">path 参数为 null 或空字符串 ("")</exception>
+        /// <exception cref="DirectoryNotFoundException">未找到文件，或者没有文件夹、文件权限时，抛出 "未找到 path 中指定的文件"。</exception>
         public Excel(string path)
         {
-            if (path.IsNullOrEmpty()) throw new Exception("未将对象引用设置到对象的实例。");
-            if (!File.Exists(path)) throw new Exception("未找到 path 中指定的文件。");
+            if (path.IsNullOrEmpty()) throw new ArgumentNullException("未将对象引用设置到对象的实例。");
+            if (!File.Exists(path)) throw new DirectoryNotFoundException("未找到指定的文件。");
 
             ByteLength = new FileInfo(path).Length;
             FileSize = ByteLength.FileSize();
@@ -144,7 +144,7 @@ namespace CommonExtention.Common
         /// <returns>去除空行后的 <see cref="DataTable"/> 对象。</returns>
         public DataTable ReadData()
         {
-            if (_Path.IsNullOrEmpty()) throw new Exception("未找到 Excel 文件。");
+            if (_Path.IsNullOrEmpty()) throw new DirectoryNotFoundException("未找到 Excel 文件。");
             return Read(_Path);
         }
         #endregion
@@ -156,11 +156,11 @@ namespace CommonExtention.Common
         /// <param name="path">Excel路径</param>
         /// <param name="del">是否删除文件</param>
         /// <returns>去除空行后的 <see cref="DataTable"/> 对象。</returns>
-        /// <exception cref="Exception">path 参数为 null 或空字符串 ("")</exception>
-        /// <exception cref="Exception">未找到文件，或者没有文件夹、文件权限时，抛出 "未找到 path 中指定的文件"。</exception>
+        /// <exception cref="ArgumentNullException">path 参数为 null 或空字符串 ("")</exception>
+        /// <exception cref="DirectoryNotFoundException">未找到文件，或者没有文件夹、文件权限时，抛出 "未找到 path 中指定的文件"。</exception>
         public static DataTable ReadExcelData(string path, bool del = true)
         {
-            if (!System.IO.File.Exists(path)) throw new Exception("未找到 path 中指定的文件。");
+            if (!File.Exists(path)) throw new DirectoryNotFoundException("未找到指定的文件。");
 
             var strConn = "PRovider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 8.0;HDR=YES;IMEX=1\"";
             var Oleconn = new OleDbConnection(strConn);

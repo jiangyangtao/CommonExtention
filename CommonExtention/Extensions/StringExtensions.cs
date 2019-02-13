@@ -333,9 +333,9 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回DES算法加密后的密文。
         /// </returns>
-        /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
-        /// <exception cref="Exception"> key 参数长度少于8位。</exception>
-        /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
+        /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于8位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
         public static string ToDesEncrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Encrypt(value, key, iv);
         #endregion
 
@@ -352,9 +352,9 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回DES算法解密后的明文。
         /// </returns>
-        /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
-        /// <exception cref="Exception"> key 参数长度少于8位。</exception>
-        /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
+        /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于8位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
         public static string ToDesDecrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Decrypt(value, key, iv);
         #endregion
 
@@ -371,9 +371,9 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回3DES算法加密后的密文。
         /// </returns>
-        /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
-        /// <exception cref="Exception"> key 参数长度少于24位。</exception>
-        /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
+        /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于24位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
         public static string To3DesEncrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Encrypt(value, key, iv);
         #endregion
 
@@ -390,9 +390,9 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回3DES算法解密后的明文。
         /// </returns>
-        /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
-        /// <exception cref="Exception"> key 参数长度少于24位。</exception>
-        /// <exception cref="Exception"> iv 参数不为空且长度小于8位。 </exception>
+        /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于24位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
         public static string To3DesDecrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Decrypt(value, key, iv);
         #endregion
 
@@ -412,11 +412,11 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回AES算法加密后的密文。
         /// </returns>
-        /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
-        /// <exception cref="Exception"> key 参数长度少于16位。</exception>
-        /// <exception cref="Exception"> key 参数长度大于32位。</exception>
-        /// <exception cref="Exception"> key 参数长度不是16位或者24位或者32位。</exception>
-        /// <exception cref="Exception"> iv 参数不为空且长度小于16位。</exception>
+        /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于16位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度大于32位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度不是16位或者24位或者32位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于16位。</exception>
         public static string ToAesEncrypt(this string value, string key, string iv = "") => AdvancedEncryptionStandard.Encrypt(value, key, iv);
         #endregion
 
@@ -436,11 +436,11 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回AES算法解密后的明文。
         /// </returns>
-        /// <exception cref="Exception"> key 参数为 null 或者 空字符串("")。</exception>
-        /// <exception cref="Exception"> key 参数长度少于16位。</exception>
-        /// <exception cref="Exception"> key 参数长度大于32位。</exception>
-        /// <exception cref="Exception"> key 参数长度不是16位或者24位或者32位。</exception>
-        /// <exception cref="Exception"> iv 参数不为空且长度小于16位。</exception>
+        /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于16位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度大于32位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> key 参数长度不是16位或者24位或者32位。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于16位。</exception>
         public static string ToAesDecrypt(this string s, string key, string iv = "") => AdvancedEncryptionStandard.Decrypt(s, key, iv);
         #endregion
 
@@ -603,14 +603,14 @@ namespace CommonExtention.Extensions
         /// 如果转换失败，则抛出异常("该字符串未被识别为有效的DateTime。")；
         /// 如果转换成功，则返回等效的 <see cref="DateTime"/> 的对象。
         /// </returns>
-        /// <exception cref="Exception"> value 参数为 null 或空字符串 ("")</exception>
-        /// <exception cref="Exception"> value 参数转换失败。</exception>
+        /// <exception cref="ArgumentNullException"> value 参数为 null 或空字符串 ("")</exception>
+        /// <exception cref="InvalidCastException"> value 参数转换失败。</exception>
         public static DateTime ToDateTime(this string value)
         {
-            if (value.IsNullOrEmpty()) throw new Exception("该字符串未被识别为有效的DateTime。");
+            if (value.IsNullOrEmpty()) throw new InvalidCastException("该字符串未被识别为有效的DateTime。");
 
             var isParsed = DateTime.TryParse(value, out DateTime _d);
-            if (!isParsed) throw new Exception("该字符串未被识别为有效的DateTime。");
+            if (!isParsed) throw new InvalidCastException("该字符串未被识别为有效的DateTime。");
             return _d;
         }
         #endregion
@@ -625,12 +625,13 @@ namespace CommonExtention.Extensions
         /// 如果转换失败，则返回 false；
         /// 如果转换成功，则返回等效的 <see cref="bool"/> 的值。
         /// </returns>
+        /// <exception cref="InvalidCastException"> value 参数转换失败。</exception>
         public static bool ToBoolean(this string value)
         {
-            if (value.IsNullOrEmpty()) throw new Exception("该字符串未被识别为有效的布尔值。");
+            if (value.IsNullOrEmpty()) throw new InvalidCastException("该字符串未被识别为有效的布尔值。");
 
             var isParsed = bool.TryParse(value, out bool _b);
-            if (!isParsed) throw new Exception("该字符串未被识别为有效的布尔值。");
+            if (!isParsed) throw new InvalidCastException("该字符串未被识别为有效的布尔值。");
             return _b;
         }
         #endregion
