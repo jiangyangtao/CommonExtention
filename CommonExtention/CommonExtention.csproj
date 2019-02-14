@@ -78,10 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpResponseFormat\JsonResponseFormat.cs" />
     <Compile Include="Common\BasicsApiController.cs" />
     <Compile Include="Common\BasicsController.cs" />
     <Compile Include="Common\Excel.cs" />
     <Compile Include="Common\HttpCookieConfigure.cs" />
+    <Compile Include="HttpResponseFormat\HttpResponseMessageResponseFormat.cs" />
     <Compile Include="Common\IdentityCardNumber.cs" />
     <Compile Include="Common\Password.cs" />
     <Compile Include="Common\Serialization.cs" />
@@ -114,6 +116,9 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Common\AsyncLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HttpResponseFormat\ResponseEntity.cs" />
+    <Compile Include="HttpResponseFormat\ResponseFormat.cs" />
+    <Compile Include="HttpResponseFormat\ResponseGridEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
