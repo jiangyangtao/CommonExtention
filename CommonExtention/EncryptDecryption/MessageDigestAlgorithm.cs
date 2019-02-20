@@ -102,10 +102,10 @@ namespace CommonExtention.EncryptDecryption
             var s1 = MD5Lower32(value);
             var s2 = MD5Lower32(s1.Substring(0, 23));
             var s3 = MD5Lower32(s2.Substring(6, 18));
-            var _strBuilder = new StringBuilder(s3.Substring(4, 9));
-            _strBuilder.Append(s2.Substring(0, 10));
-            _strBuilder.Append(s3.Substring(23, 8));
-            _strBuilder.Append(s1.Substring(15, 10));
+            var _strBuilder = new StringBuilder(s3.Substring(4, 9))
+                .Append(s2.Substring(0, 10))
+                .Append(s3.Substring(23, 8))
+                .Append(s1.Substring(15, 10));
             return _strBuilder.ToString();
         }
         #endregion
@@ -172,10 +172,10 @@ namespace CommonExtention.EncryptDecryption
             var s2 = SHA1Lower(s1.Substring(7, 31));
             var s3 = SHA1Lower(s2.Substring(0, 26));
             var s4 = SHA1Lower(s3.Substring(15, 24) + s2.Substring(14, 22) + s1.Substring(3, 19));
-            var _strBuilder = new StringBuilder(s4.Substring(2, 17));
-            _strBuilder.Append(s3.Substring(5, 28));
-            _strBuilder.Append(s2.Substring(18, 15));
-            _strBuilder.Append(s1.Substring(9, 20));
+            var _strBuilder = new StringBuilder(s4.Substring(2, 17))
+                .Append(s3.Substring(5, 28))
+                .Append(s2.Substring(18, 15))
+                .Append(s1.Substring(9, 20));
             return _strBuilder.ToString();
         }
         #endregion

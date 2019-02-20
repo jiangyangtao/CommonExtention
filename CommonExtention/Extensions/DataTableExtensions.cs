@@ -22,17 +22,16 @@ namespace CommonExtention.Extensions
         /// <returns>如果 <see cref="DataTable"/> 为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串，包含 TableName。</returns>
         public static string ToJsonString(this DataTable dataTable)
         {
-            var jsonBuilder = new StringBuilder();
-            jsonBuilder.Append("{\"" + dataTable.TableName + "\":[");
+            var jsonBuilder = new StringBuilder("{\"" + dataTable.TableName + "\":[");
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 jsonBuilder.Append("{");
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
-                    jsonBuilder.Append("\"");
-                    jsonBuilder.Append(dataTable.Columns[j].ColumnName);
-                    jsonBuilder.Append("\":");
-                    jsonBuilder.Append(GetValueByType(dataTable.Rows[i][j]));
+                    jsonBuilder.Append("\"")
+                        .Append(dataTable.Columns[j].ColumnName)
+                        .Append("\":")
+                        .Append(GetValueByType(dataTable.Rows[i][j]));
                     if (j != dataTable.Columns.Count - 1) jsonBuilder.Append(",");
                 }
                 jsonBuilder.Append("},");
@@ -62,19 +61,19 @@ namespace CommonExtention.Extensions
                 jsonBuilder.Append("{");
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
-                    jsonBuilder.Append("\"");
-                    jsonBuilder.Append(dataTable.Columns[j].ColumnName);
-                    jsonBuilder.Append("\":");
-                    jsonBuilder.Append(GetValueByType(dataTable.Rows[i][j]));
+                    jsonBuilder.Append("\"")
+                        .Append(dataTable.Columns[j].ColumnName)
+                        .Append("\":")
+                        .Append(GetValueByType(dataTable.Rows[i][j]));
                     if (j != dataTable.Columns.Count - 1) jsonBuilder.Append(",");
                 }
                 jsonBuilder.Append("}");
                 if (i != dataTable.Rows.Count - 1) jsonBuilder.Append(",");
             }
             jsonBuilder.Append("]");
-            var _json = jsonBuilder.ToString();
-            if (_json.Substring(_json.Length - 1, 1) == ",") _json = _json.Substring(0, _json.Length - 1);
-            return _json;
+            var json = jsonBuilder.ToString();
+            if (json.Substring(json.Length - 1, 1) == ",") json = json.Substring(0, json.Length - 1);
+            return json;
         }
 
         /// <summary>

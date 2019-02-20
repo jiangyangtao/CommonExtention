@@ -71,7 +71,7 @@ namespace CommonExtention.Common
         /// <summary>
         /// 当前应用的相对路径
         /// </summary>
-        private static readonly string _map = string.Format("{0}log/{1} ", HttpRuntime.AppDomainAppPath, DateTime.Now.ToFormatDate());
+        private static readonly string _map = $"{HttpRuntime.AppDomainAppPath}log/{DateTime.Now.ToFormatDate()}";
 
         /// <summary>
         /// 异步写入异常

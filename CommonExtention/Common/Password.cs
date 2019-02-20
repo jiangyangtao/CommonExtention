@@ -38,10 +38,10 @@ namespace CommonExtention.Common
         public static string NewPassword(int length = 8, bool containsAtSymbol = false, bool containsSymbol = false)
         {
             var key = _Key;
-            if (containsSymbol) key = string.Format("{0}{1}", key, _Symbol);
+            if (containsSymbol) key = $"{key}{_Symbol}";
 
-            var passwordStringBuild = new StringBuilder();
             var random = new Random();
+            var passwordStringBuild = new StringBuilder();
             for (int i = 0; i < length; i++)
             {
                 passwordStringBuild.Append(key[random.Next(0, key.Length)]);
