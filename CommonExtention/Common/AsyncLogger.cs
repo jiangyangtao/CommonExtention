@@ -71,7 +71,7 @@ namespace CommonExtention.Common
         /// <summary>
         /// 当前应用的相对路径
         /// </summary>
-        private static readonly string _map = $"{HttpRuntime.AppDomainAppPath}log/{DateTime.Now.ToFormatDate()}";
+        private static readonly string _Map = $"{HttpRuntime.AppDomainAppPath}log/{DateTime.Now.ToFormatDate()}";
 
         /// <summary>
         /// 异步写入异常
@@ -82,7 +82,7 @@ namespace CommonExtention.Common
         {
             if (exception != null)
             {
-                var _path = _map + "error.txt";
+                var _path = $"{_Map}error.txt";
                 var _fileInfo = new FileInfo(_path);
                 var _dir = _fileInfo.Directory;
                 if (!_dir.Exists) _dir.Create();    //如果文件夹不存在，则创建
@@ -95,16 +95,15 @@ namespace CommonExtention.Common
                     try
                     {
                         streamWrite.BaseStream.Seek(0, SeekOrigin.End);
-                        streamWrite.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        streamWrite.WriteLine(DateTime.Now.ToFormatDateTime());
                         streamWrite.WriteLine("\r\n");
                         streamWrite.WriteLine("\r\n  异常信息：");
-                        streamWrite.WriteLine("\r\n\t请求地址：" + context.Request.Url.ToString());
-
-                        streamWrite.WriteLine("\r\n\t错误信息：" + exception.ExceptionMessage());
-                        streamWrite.WriteLine("\r\n\t错 误 源：" + exception.Source);
-                        streamWrite.WriteLine("\r\n\t异常方法：" + exception.TargetSite);
-                        streamWrite.WriteLine("\r\n\t堆栈信息：" + exception.StackTrace);
-                        streamWrite.WriteLine("\r\n\t浏览器标识：" + context.Request.UserAgent);
+                        streamWrite.WriteLine($"\r\n\t请求地址：{context.Request.Url.ToString()}");
+                        streamWrite.WriteLine($"\r\n\t错误信息：{exception.ExceptionMessage()}");
+                        streamWrite.WriteLine($"\r\n\t错 误 源：{exception.Source}");
+                        streamWrite.WriteLine($"\r\n\t异常方法：{exception.TargetSite}");
+                        streamWrite.WriteLine($"\r\n\t堆栈信息：{exception.StackTrace}");
+                        streamWrite.WriteLine($"\r\n\t浏览器标识：{context.Request.UserAgent}");
                         streamWrite.WriteLine("\r\n");
 
                         //日志的分隔线
@@ -128,7 +127,7 @@ namespace CommonExtention.Common
         /// <param name="context"><see cref="HttpContext"/> 对象</param>
         private static void BeginLogInformation(string information, HttpContext context)
         {
-            var _path = _map + "key.txt";
+            var _path = $"{_Map}information.txt";
             var _fileInfo = new FileInfo(_path);
             var _dir = _fileInfo.Directory;
             if (!_dir.Exists) _dir.Create();    //如果文件夹不存在，则创建
@@ -140,13 +139,13 @@ namespace CommonExtention.Common
                 try
                 {
                     streamWrite.BaseStream.Seek(0, SeekOrigin.End);
-                    streamWrite.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    streamWrite.WriteLine(DateTime.Now.ToFormatDateTime());
                     streamWrite.WriteLine("\r\n");
                     streamWrite.WriteLine("\r\n");
-                    streamWrite.WriteLine("\r\n\t请求地址：" + context.Request.Url.ToString());
-                    streamWrite.WriteLine("\r\n\t记录信息：" + information);
+                    streamWrite.WriteLine($"\r\n\t请求地址：{context.Request.Url.ToString()}");
+                    streamWrite.WriteLine($"\r\n\t记录信息：{information}");
                     streamWrite.WriteLine("\r\n");
-                    streamWrite.WriteLine("\r\n\t浏览器标识：" + context.Request.UserAgent);
+                    streamWrite.WriteLine($"\r\n\t浏览器标识：{context.Request.UserAgent}");
 
                     //日志的分隔线
                     streamWrite.WriteLine("--------------------------------------------------------------------------------------------------------------\n");
@@ -169,7 +168,7 @@ namespace CommonExtention.Common
         /// <param name="context"><see cref="HttpContext"/> 对象</param>
         private static void BeginLogMvcRequest(MvcRequestModel model, HttpContext context)
         {
-            var _path = _map + "request.txt";
+            var _path = $"{_Map}request.txt";
             var _fileInfo = new FileInfo(_path);
             var _dir = _fileInfo.Directory;
             if (!_dir.Exists) _dir.Create();    //如果文件夹不存在，则创建
@@ -181,20 +180,20 @@ namespace CommonExtention.Common
                 try
                 {
                     streamWrite.BaseStream.Seek(0, SeekOrigin.End);
-                    streamWrite.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    streamWrite.WriteLine(DateTime.Now.ToFormatDateTime());
                     streamWrite.WriteLine("\r\n");
                     streamWrite.WriteLine("\r\n  请求信息：");
-                    streamWrite.WriteLine("\r\n\t浏览器标识：" + (model.UserAgent.IsNullOrEmpty() ? context.Request.UserAgent : model.UserAgent));
-                    streamWrite.WriteLine("\r\n\t请求地址：" + (model.Url.IsNullOrEmpty() ? context.Request.Url.ToString() : model.Url));
-                    streamWrite.WriteLine("\r\n\t请求类型：" + model.RequestType);
-                    streamWrite.WriteLine("\r\n\t控制器名：" + model.ControllerName);
-                    streamWrite.WriteLine("\r\n\tAction名：" + model.ActionName);
-                    if (model.IpAddress.NotNullAndEmpty()) streamWrite.WriteLine("\r\n\tIp  地址：" + model.IpAddress);
-                    if (model.RunTime.NotNullAndEmpty()) streamWrite.WriteLine("\r\n\t消耗时间：" + model.RunTime + "s");
+                    streamWrite.WriteLine($"\r\n\t浏览器标识：{(model.UserAgent.IsNullOrEmpty() ? context.Request.UserAgent : model.UserAgent)}");
+                    streamWrite.WriteLine($"\r\n\t请求地址：{(model.Url.IsNullOrEmpty() ? context.Request.Url.ToString() : model.Url)}");
+                    streamWrite.WriteLine($"\r\n\t请求类型：{model.RequestType}");
+                    streamWrite.WriteLine($"\r\n\t控制器名：{model.ControllerName}");
+                    streamWrite.WriteLine($"\r\n\tAction名：{model.ActionName}");
+                    if (model.IpAddress.NotNullAndEmpty()) streamWrite.WriteLine($"\r\n\tIp  地址：{model.IpAddress}");
+                    if (model.RunTime.NotNullAndEmpty()) streamWrite.WriteLine($"\r\n\t消耗时间：{model.RunTime} s");
                     streamWrite.WriteLine("\r\n\t参数信息：");
                     foreach (var item in model.Params)
                     {
-                        streamWrite.WriteLine("\r\n\t" + item.Key + "：" + item.Value);
+                        streamWrite.WriteLine($"\r\n\t {item.Key} ：{ item.Value}");
                     }
 
                     //日志的分隔线

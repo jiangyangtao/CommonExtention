@@ -30,8 +30,8 @@ namespace CommonExtention.Extensions
         public static DateTime UnixToDateTime(this string timeStamp)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-            long lTime = long.Parse(timeStamp + "0000000");
-            TimeSpan toNow = new TimeSpan(lTime);
+            long unix = long.Parse($"{timeStamp}0000000");
+            TimeSpan toNow = new TimeSpan(unix);
             return dtStart.Add(toNow);
         }
         #endregion
@@ -1021,7 +1021,7 @@ namespace CommonExtention.Extensions
         {
             if (value.IsNullOrEmpty()) return null;
             if (!value.IsChinaIdentityNumber()) return null;
-            return DateTime.Parse(value.Substring(6, 4) + "-" + value.Substring(10, 2) + "-" + value.Substring(12, 2));
+            return DateTime.Parse($"{value.Substring(6, 4)}-{value.Substring(10, 2)}-{value.Substring(12, 2)}");
         }
         #endregion
 

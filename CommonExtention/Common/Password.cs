@@ -6,9 +6,9 @@ using System.Text;
 namespace CommonExtention.Common
 {
     /// <summary>
-    /// 提供密码生成
+    /// 提供密码生成。此类不可被继承
     /// </summary>
-    public static class Password
+    public sealed class Password
     {
         #region Private property
         /// <summary>
@@ -35,7 +35,7 @@ namespace CommonExtention.Common
         /// <param name="containsAtSymbol">是否包含 @ 符号</param>
         /// <param name="containsSymbol">是否包含符号</param>
         /// <returns>返回一个包含数字和大小写字母的密码</returns>
-        public static string NewPassword(int length = 8, bool containsAtSymbol = false, bool containsSymbol = false)
+        public string NewPassword(int length = 8, bool containsAtSymbol = false, bool containsSymbol = false)
         {
             var key = _Key;
             if (containsSymbol) key = $"{key}{_Symbol}";
@@ -62,7 +62,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="password">密码</param>
         /// <returns>返回一个加入@符号的密码</returns>
-        private static string JoinAtSymbol(string password)
+        private string JoinAtSymbol(string password)
         {
             var index = new Random().Next(0, password.Length);
             return password.Replace(password[index], _AtSymbol);

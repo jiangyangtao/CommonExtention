@@ -22,7 +22,7 @@ namespace CommonExtention.Extensions
         /// <returns>如果 <see cref="DataTable"/> 为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串，包含 TableName。</returns>
         public static string ToJsonString(this DataTable dataTable)
         {
-            var jsonBuilder = new StringBuilder("{\"" + dataTable.TableName + "\":[");
+            var jsonBuilder = new StringBuilder("{\"").Append(dataTable.TableName).Append("\":[");
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 jsonBuilder.Append("{");
@@ -53,7 +53,7 @@ namespace CommonExtention.Extensions
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
             var jsonBuilder = new StringBuilder("{");
-            if (dataTable.TableName.NotNullAndEmpty()) jsonBuilder.Append("\"" + dataTable.TableName + "\":");
+            if (dataTable.TableName.NotNullAndEmpty()) jsonBuilder.Append($"\"{dataTable.TableName}\":");
 
             jsonBuilder.Append("[");
             for (int i = 0; i < dataTable.Rows.Count; i++)
@@ -87,15 +87,15 @@ namespace CommonExtention.Extensions
             var _type = value.GetType().Name;
             switch (_type)
             {
-                case "String": return "\"" + value.ToString().TrimStart().TrimEnd() + "\"";
-                case "DateTime": return "\"" + value.ToString().ToDateTime().ToFormatDateTime() + "\"";
+                case "String": return $"\"{value.ToString().TrimStart().TrimEnd()}\"";
+                case "DateTime": return $"\"{value.ToString().ToDateTime().ToFormatDateTime()}\"";
                 case "Int16": return value.ToString().ToInt16();
                 case "Int32": return value.ToString().ToInt();
                 case "Int64": return value.ToString().ToInt64();
                 case "Decimal": return value.ToString().ToDecimal();
                 case "Single": return value.ToString().ToSingle();
                 case "Double": return value.ToString().ToDouble();
-                case "Boolean": return "\"" + value.ToString() + "\"";
+                case "Boolean": return $"\"{value.ToString()}\"";
                 case "DBNull": return string.Empty;
             }
             return value.ToString();

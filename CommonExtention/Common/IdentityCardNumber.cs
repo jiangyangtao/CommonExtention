@@ -21,7 +21,7 @@ namespace CommonExtention.Common
             IsIdentityNumber = Verification(value);
             if (IsIdentityNumber)
             {
-                BirthDate = DateTime.Parse(value.Substring(6, 4) + "-" + value.Substring(10, 2) + "-" + value.Substring(12, 2));
+                BirthDate = DateTime.Parse($"{value.Substring(6, 4)}-{value.Substring(10, 2)}-{value.Substring(12, 2)}");
                 Age = CalculateAge(BirthDate.Value);
                 GenderCode = int.Parse(value.Substring(16, 1)) % 2 == 0 ? 0 : 1;
                 GenderText = GenderCode == 0 ? "女" : "男";
@@ -96,7 +96,7 @@ namespace CommonExtention.Common
             if (value.Length == 15)
             {
                 //取生日  
-                birthday = "19" + value.Substring(7, 6);
+                birthday = $"19{value.Substring(7, 6)}";
                 return IsDate(birthday);
             }
             else if (value.Length == 18)

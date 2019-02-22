@@ -89,7 +89,7 @@ namespace CommonExtention.Common
             if (path.IsNullOrEmpty()) throw new Exception("未将对象引用设置到对象的实例。");
             if (!File.Exists(path)) throw new Exception("未找到 path 中指定的文件。");
 
-            var strConn = "PRovider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 8.0;HDR=YES;IMEX=1\"";
+            var strConn = $"PRovider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Extended Properties=\"Excel 8.0;HDR=YES;IMEX=1\"";
             var Oleconn = new OleDbConnection(strConn);
             OleDbDataAdapter excelCommand = null;
             var excel_ds = new DataSet();
@@ -98,7 +98,7 @@ namespace CommonExtention.Common
                 Oleconn.Open();
                 var dataTable = Oleconn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                 var tableName = dataTable.Rows[1][2].ToString().Trim();
-                var strSql = "select * from [" + tableName + "]";
+                var strSql = $"select * from [{tableName}]";
                 excelCommand = new OleDbDataAdapter(strSql, Oleconn);
                 excelCommand.Fill(excel_ds, "excelData");
                 var dt = excel_ds.Tables[0];
@@ -162,7 +162,7 @@ namespace CommonExtention.Common
         {
             if (!File.Exists(path)) throw new DirectoryNotFoundException("未找到指定的文件。");
 
-            var strConn = "PRovider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 8.0;HDR=YES;IMEX=1\"";
+            var strConn = $"PRovider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Extended Properties=\"Excel 8.0;HDR=YES;IMEX=1\"";
             var Oleconn = new OleDbConnection(strConn);
             OleDbDataAdapter excelCommand = null;
             var excel_ds = new DataSet();
@@ -171,7 +171,7 @@ namespace CommonExtention.Common
                 Oleconn.Open();
                 var dataTable = Oleconn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                 var tableName = dataTable.Rows[1][2].ToString().Trim();
-                var strSql = "select * from [" + tableName + "]";
+                var strSql = $"select * from [{tableName}]";
                 excelCommand = new OleDbDataAdapter(strSql, Oleconn);
                 excelCommand.Fill(excel_ds, "excelData");
                 var dt = excel_ds.Tables[0];

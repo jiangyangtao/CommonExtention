@@ -16,9 +16,9 @@ namespace CommonExtention.Extensions
         /// <returns>返回 <see cref="DateTime"/> 对象</returns>
         public static DateTime ToDateTime(this long timeStamp)
         {
-            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-            long lTime = long.Parse(timeStamp + "0000000");
-            TimeSpan toNow = new TimeSpan(lTime);
+            var dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            var unix = long.Parse($"{timeStamp}0000000");
+            var toNow = new TimeSpan(unix);
             return dtStart.Add(toNow);
         }
         #endregion
