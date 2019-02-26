@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonExtention.Common;
+using System;
 
 namespace CommonExtention.Extensions
 {
@@ -32,6 +33,17 @@ namespace CommonExtention.Extensions
             if (exception == null) return string.Empty;
             if (exception.InnerException != null) return ExceptionMessage(exception.InnerException);
             return exception.Message;
+        }
+        #endregion
+
+        #region 将当前 Exception 对象用异步方式写入日志
+        /// <summary>
+        /// 将当前 <see cref="Exception"/> 对象用异步方式写入日志
+        /// </summary>
+        /// <param name="exception">当前 Exception 对象</param>
+        public static void WriteLogAsync(this Exception exception)
+        {
+            new AsyncLogger().LogException(exception);
         }
         #endregion
     }

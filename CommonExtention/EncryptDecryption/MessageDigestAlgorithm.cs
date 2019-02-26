@@ -10,6 +10,14 @@ namespace CommonExtention.EncryptDecryption
     /// </summary>
     public sealed class MessageDigestAlgorithm
     {
+        /// <summary>
+        /// 初始化 消息摘要算法加密 的新实例
+        /// </summary>
+        public MessageDigestAlgorithm()
+        {
+
+        }
+
         #region 将要加密的字符串进行加密(默认为16位小写)
         /// <summary>
         /// 将要加密的字符串进行 <see cref="MD5"/> 加密(默认为16位小写)
@@ -19,7 +27,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回16位小写的 <see cref="MD5"/> 密文。
         /// </returns>
-        public static string MD5String(string value) => MD5Lower16(value);
+        public string MD5String(string value) => MD5Lower16(value);
         #endregion
 
         #region 将要加密的字符串进行MD5的16位大写加密
@@ -31,7 +39,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回16位大写的 <see cref="MD5"/> 密文。
         /// </returns>
-        public static string MD5Upper16(string value)
+        public string MD5Upper16(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -50,7 +58,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回16位小写的 <see cref="MD5"/> 密文。
         /// </returns>
-        public static string MD5Lower16(string value) => MD5Upper16(value).ToLower();
+        public string MD5Lower16(string value) => MD5Upper16(value).ToLower();
         #endregion
 
         #region 将要加密的字符串进行MD5的32位大写加密
@@ -62,7 +70,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回32位大写的 <see cref="MD5"/> 密文。
         /// </returns>
-        public static string MD5Upper32(string value)
+        public string MD5Upper32(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             var _data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(value));
@@ -84,7 +92,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回32位小写的 <see cref="MD5"/> 密文。
         /// </returns>
-        public static string MD5Lower32(string value) => MD5Upper32(value).ToLower();
+        public string MD5Lower32(string value) => MD5Upper32(value).ToLower();
         #endregion
 
         #region 将要加密的字符串进行MD5混淆加密
@@ -96,7 +104,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回 <see cref="MD5"/> 的混淆加密密文。
         /// </returns>
-        public static string MD5Confusion(string value)
+        public string MD5Confusion(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             var s1 = MD5Lower32(value);
@@ -119,7 +127,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法小写的密文。
         /// </returns>
-        public static string SHA1(string value) => SHA1Upper(value).ToLower();
+        public string SHA1(string value) => SHA1Upper(value).ToLower();
         #endregion
 
         #region 将要加密的字符串进行SHA1算法大写加密
@@ -131,7 +139,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法大写的密文。
         /// </returns>
-        public static string SHA1Upper(string value)
+        public string SHA1Upper(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             var _data = new SHA1CryptoServiceProvider().ComputeHash(Encoding.Default.GetBytes(value));
@@ -153,7 +161,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法小写的密文。
         /// </returns>
-        public static string SHA1Lower(string value) => SHA1Upper(value).ToLower();
+        public string SHA1Lower(string value) => SHA1Upper(value).ToLower();
         #endregion
 
         #region 将要加密的字符串进行SHA1算法的混淆加密
@@ -165,7 +173,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1的混淆加密密文。
         /// </returns>
-        public static string SHA1Confusion(string value)
+        public string SHA1Confusion(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             var s1 = SHA1Lower(value);
@@ -189,7 +197,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的16位 <see cref="MD5"/> 哈希/散列值。
         /// </returns>
-        public static string Get16MD5Hash(string value)
+        public string Get16MD5Hash(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -207,7 +215,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的32位 <see cref="MD5"/> 哈希/散列值。
         /// </returns>
-        public static string Get32MD5Hash(string value)
+        public string Get32MD5Hash(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             var _data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(value));
@@ -225,7 +233,7 @@ namespace CommonExtention.EncryptDecryption
         /// 如果 value 参数为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的SHA1哈希/散列值。
         /// </returns>
-        public static string GetSHA1Hash(string value)
+        public string GetSHA1Hash(string value)
         {
             if (value.IsNullOrEmpty()) return string.Empty;
             var _data = new SHA1CryptoServiceProvider().ComputeHash(Encoding.Default.GetBytes(value));

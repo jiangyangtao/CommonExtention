@@ -78,10 +78,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="HttpResponseFormat\JsonResponseFormat.cs" />
     <Compile Include="Common\BasicsApiController.cs" />
     <Compile Include="Common\BasicsController.cs" />
-    <Compile Include="Common\Excel.cs" />
+    <Compile Include="Common\ReadExcel.cs" />
     <Compile Include="Common\HttpCookieConfigure.cs" />
     <Compile Include="HttpResponseFormat\HttpResponseMessageResponseFormat.cs" />
     <Compile Include="Common\IdentityCardNumber.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using CommonExtention.Common;
 using CommonExtention.EncryptDecryption;
@@ -90,9 +91,9 @@ namespace CommonExtention.Extensions
         public static bool NotNullAndEmpty(this string value) => !string.IsNullOrEmpty(value);
         #endregion
 
-        #region 指示指定的字符串是否为邮箱
+        #region 指示指定的字符串是否为电子邮箱
         /// <summary>
-        /// 指示指定的字符串是否为邮箱
+        /// 指示指定的字符串是否为电子邮箱
         /// </summary>
         /// <param name="value">要验证的字符串</param>
         /// <returns>
@@ -224,7 +225,7 @@ namespace CommonExtention.Extensions
         /// <returns>
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回16位小写的MD5密文
         /// </returns>
-        public static string ToMD5(this string value) => MessageDigestAlgorithm.MD5String(value);
+        public static string ToMD5(this string value) => new MessageDigestAlgorithm().MD5String(value);
         #endregion
 
         #region 指示指定要加密的字符串进行 MD5 的16位大写加密
@@ -235,7 +236,7 @@ namespace CommonExtention.Extensions
         /// <returns>
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回16位大写的MD5密文
         /// </returns>
-        public static string ToMD5Upper16(this string s) => MessageDigestAlgorithm.MD5Upper16(s);
+        public static string ToMD5Upper16(this string s) => new MessageDigestAlgorithm().MD5Upper16(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 MD5 的32位小写加密
@@ -246,7 +247,7 @@ namespace CommonExtention.Extensions
         /// <returns>
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回32位小写的MD5密文
         /// </returns>
-        public static string ToMD5Lower32(this string s) => MessageDigestAlgorithm.MD5Lower32(s);
+        public static string ToMD5Lower32(this string s) => new MessageDigestAlgorithm().MD5Lower32(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 MD5 的32位大写加密
@@ -257,7 +258,7 @@ namespace CommonExtention.Extensions
         /// <returns>
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；否则返回32位大写的MD5密文
         /// </returns>
-        public static string ToMD5Upper32(this string s) => MessageDigestAlgorithm.MD5Upper32(s);
+        public static string ToMD5Upper32(this string s) => new MessageDigestAlgorithm().MD5Upper32(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 MD5 混淆加密
@@ -269,7 +270,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回MD5的混淆加密密文。
         /// </returns>
-        public static string ToMD5Confusion(this string s) => MessageDigestAlgorithm.MD5Confusion(s);
+        public static string ToMD5Confusion(this string s) => new MessageDigestAlgorithm().MD5Confusion(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 SHA1 算法加密(小写)
@@ -281,7 +282,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法小写的密文。
         /// </returns>
-        public static string ToSHA1(this string s) => MessageDigestAlgorithm.SHA1Lower(s);
+        public static string ToSHA1(this string s) => new MessageDigestAlgorithm().SHA1Lower(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 SHA1 算法大写加密
@@ -293,7 +294,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法大写的密文。
         /// </returns>
-        public static string ToSHA1Upper(this string s) => MessageDigestAlgorithm.SHA1Upper(s);
+        public static string ToSHA1Upper(this string s) => new MessageDigestAlgorithm().SHA1Upper(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 SHA1 算法小写加密
@@ -305,7 +306,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1算法小写的密文。
         /// </returns>
-        public static string ToSHA1Lower(this string s) => MessageDigestAlgorithm.SHA1Lower(s);
+        public static string ToSHA1Lower(this string s) => new MessageDigestAlgorithm().SHA1Lower(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 SHA1 算法混淆加密
@@ -317,7 +318,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回SHA1的混淆加密密文。
         /// </returns>
-        public static string ToSHA1Confusion(this string s) => MessageDigestAlgorithm.SHA1Confusion(s);
+        public static string ToSHA1Confusion(this string s) => new MessageDigestAlgorithm().SHA1Confusion(s);
         #endregion
 
         #region 指示指定要加密的字符串进行 DES 算法加密
@@ -336,7 +337,7 @@ namespace CommonExtention.Extensions
         /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于8位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
-        public static string ToDesEncrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Encrypt(value, key, iv);
+        public static string ToDesEncrypt(this string value, string key, string iv = "") => new DataEncryptionStandard().Encrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行 DES 算法解密
@@ -355,7 +356,7 @@ namespace CommonExtention.Extensions
         /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于8位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
-        public static string ToDesDecrypt(this string value, string key, string iv = "") => DataEncryptionStandard.Decrypt(value, key, iv);
+        public static string ToDesDecrypt(this string value, string key, string iv = "") => new DataEncryptionStandard().Decrypt(value, key, iv);
         #endregion
 
         #region 指示指定要加密的字符串进行 3DES 算法加密
@@ -374,7 +375,7 @@ namespace CommonExtention.Extensions
         /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于24位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
-        public static string To3DesEncrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Encrypt(value, key, iv);
+        public static string To3DesEncrypt(this string value, string key, string iv = "") => new TripleDataEncryptionAlgorithm().Encrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行 3DES 算法解密
@@ -393,7 +394,7 @@ namespace CommonExtention.Extensions
         /// <exception cref="ArgumentNullException"> key 参数为 null 或者 空字符串("")。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度少于24位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于8位。 </exception>
-        public static string To3DesDecrypt(this string value, string key, string iv = "") => TripleDataEncryptionAlgorithm.Decrypt(value, key, iv);
+        public static string To3DesDecrypt(this string value, string key, string iv = "") => new TripleDataEncryptionAlgorithm().Decrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行 AES 算法加密(CBC模式)
@@ -417,7 +418,7 @@ namespace CommonExtention.Extensions
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度大于32位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度不是16位或者24位或者32位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于16位。</exception>
-        public static string ToAesEncrypt(this string value, string key, string iv = "") => AdvancedEncryptionStandard.Encrypt(value, key, iv);
+        public static string ToAesEncrypt(this string value, string key, string iv = "") => new AdvancedEncryptionStandard().Encrypt(value, key, iv);
         #endregion
 
         #region 指示指定要解密的字符串进行 AES 算法解密(CBC模式)
@@ -441,7 +442,7 @@ namespace CommonExtention.Extensions
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度大于32位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> key 参数长度不是16位或者24位或者32位。</exception>
         /// <exception cref="ArgumentOutOfRangeException"> iv 参数不为空且长度小于16位。</exception>
-        public static string ToAesDecrypt(this string s, string key, string iv = "") => AdvancedEncryptionStandard.Decrypt(s, key, iv);
+        public static string ToAesDecrypt(this string s, string key, string iv = "") => new AdvancedEncryptionStandard().Decrypt(s, key, iv);
         #endregion
 
         #region 将指定的字符串去除空格
@@ -906,6 +907,36 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
+        #region 将 Base64 字符串表示形式转换为等效的字符串
+        /// <summary>
+        /// 将 Base64 字符串表示形式转换为等效的字符串
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string FromBase64ToString(this string value)
+        {
+            if (value.IsNullOrEmpty()) return string.Empty;
+
+            var result = Convert.FromBase64String(value);
+            return Encoding.Default.GetString(result);
+        }
+        #endregion
+
+        #region 将当前字符串转换为 Base64 字符串表示形式
+        /// <summary>
+        /// 将当前字符串转换为 Base64 字符串表示形式
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToBase64String(this string value)
+        {
+            if (value.IsNullOrEmpty()) return string.Empty;
+
+            var result = Encoding.Default.GetBytes(value);
+            return Convert.ToBase64String(result);
+        }
+        #endregion
+
         #region 计算指定字符串的16位 MD5 的哈希/散列值
         /// <summary>
         /// 计算指定字符串的16位 MD5 的哈希/散列值
@@ -915,7 +946,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的16位MD5哈希/散列值。
         /// </returns>
-        public static string To16MD5Hash(this string s) => MessageDigestAlgorithm.Get16MD5Hash(s);
+        public static string To16MD5Hash(this string s) => new MessageDigestAlgorithm().Get16MD5Hash(s);
         #endregion
 
         #region 计算指定字符串的32位 MD5 的哈希/散列值
@@ -927,7 +958,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的32位MD5哈希/散列值。
         /// </returns>
-        public static string To32MD5Hash(this string s) => MessageDigestAlgorithm.Get32MD5Hash(s);
+        public static string To32MD5Hash(this string s) => new MessageDigestAlgorithm().Get32MD5Hash(s);
         #endregion
 
         #region 计算指定字符串的 SHA1 算法的哈希/散列值
@@ -939,7 +970,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串为 null 或者为空字符串("")，则返回 <see cref="string.Empty"/>；
         /// 否则返回计算所得的SHA1算法哈希/散列值。
         /// </returns>
-        public static string ToSHA1Hash(this string s) => MessageDigestAlgorithm.GetSHA1Hash(s);
+        public static string ToSHA1Hash(this string s) => new MessageDigestAlgorithm().GetSHA1Hash(s);
         #endregion
 
         #region 获取指定的字符串中包含的后缀名

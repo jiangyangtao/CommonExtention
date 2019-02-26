@@ -11,10 +11,18 @@ using System.Xml.Linq;
 namespace CommonExtention.Common
 {
     /// <summary>
-    /// 提供 实体、<see cref="DataTable"/> 对象、<see cref="DataSet"/> 对象、<see cref="List{T}"/> 集合、<see cref="XmlNode"/>、<see cref="XNode"/>、<see cref="XDocument"/> 的序列化和反序列化
+    /// 提供 实体、<see cref="DataTable"/> 对象、<see cref="DataSet"/> 对象、<see cref="List{T}"/> 集合、<see cref="XmlNode"/>、<see cref="XNode"/>、<see cref="XDocument"/> 的序列化和反序列化。此类不可被继承
     /// </summary>
-    public static class Serialization
+    public sealed class Serialization
     {
+        /// <summary>
+        /// 初始化 序列化 的新实例
+        /// </summary>
+        public Serialization()
+        {
+
+        }
+
         #region Entity
 
         #region Serialize
@@ -27,7 +35,7 @@ namespace CommonExtention.Common
         /// <returns>
         /// 如果 entity 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。
         /// </returns>
-        public static string SerializeEntityToJson<TEntity>(TEntity entity) where TEntity : class
+        public string SerializeEntityToJson<TEntity>(TEntity entity) where TEntity : class
         {
             if (entity == null) return string.Empty;
             return JsonConvert.SerializeObject(entity);
@@ -42,7 +50,7 @@ namespace CommonExtention.Common
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 entity 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。
         /// </returns>
-        public static string SerializeEntityToJson<TEntity>(TEntity entity, params JsonConverter[] converters) where TEntity : class
+        public string SerializeEntityToJson<TEntity>(TEntity entity, params JsonConverter[] converters) where TEntity : class
         {
             if (entity == null) return string.Empty;
             return JsonConvert.SerializeObject(entity, converters);
@@ -56,7 +64,7 @@ namespace CommonExtention.Common
         /// <param name="entity">要序列化的实体</param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 entity 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeEntityToJson<TEntity>(TEntity entity, JsonSerializerSettings settings) where TEntity : class
+        public string SerializeEntityToJson<TEntity>(TEntity entity, JsonSerializerSettings settings) where TEntity : class
         {
             if (entity == null) return string.Empty;
             return JsonConvert.SerializeObject(entity, settings);
@@ -70,7 +78,7 @@ namespace CommonExtention.Common
         /// <param name="entity">要序列化的实体</param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 entity 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeEntityToJson<TEntity>(TEntity entity, Newtonsoft.Json.Formatting formatting) where TEntity : class
+        public string SerializeEntityToJson<TEntity>(TEntity entity, Newtonsoft.Json.Formatting formatting) where TEntity : class
         {
             if (entity == null) return string.Empty;
             return JsonConvert.SerializeObject(entity, formatting);
@@ -85,7 +93,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 entity 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeEntityToJson<TEntity>(TEntity entity, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters) where TEntity : class
+        public string SerializeEntityToJson<TEntity>(TEntity entity, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters) where TEntity : class
         {
             if (entity == null) return string.Empty;
             return JsonConvert.SerializeObject(entity, formatting, converters);
@@ -100,7 +108,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 entity 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeEntityToJson<TEntity>(TEntity entity, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings) where TEntity : class
+        public string SerializeEntityToJson<TEntity>(TEntity entity, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings) where TEntity : class
         {
             if (entity == null) return string.Empty;
             return JsonConvert.SerializeObject(entity, formatting, settings);
@@ -118,7 +126,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后指定类型的实体。
         /// </returns>
-        public static TEntity DeserializeJsonToEntity<TEntity>(string json) where TEntity : class
+        public TEntity DeserializeJsonToEntity<TEntity>(string json) where TEntity : class
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<TEntity>(json);
@@ -134,7 +142,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后指定类型的实体。
         /// </returns>
-        public static TEntity DeserializeJsonToEntity<TEntity>(string json, JsonSerializerSettings settings) where TEntity : class
+        public TEntity DeserializeJsonToEntity<TEntity>(string json, JsonSerializerSettings settings) where TEntity : class
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<TEntity>(json, settings);
@@ -150,7 +158,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后指定类型的实体。
         /// </returns>
-        public static TEntity DeserializeJsonToEntity<TEntity>(string json, params JsonConverter[] converters) where TEntity : class
+        public TEntity DeserializeJsonToEntity<TEntity>(string json, params JsonConverter[] converters) where TEntity : class
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<TEntity>(json, converters);
@@ -168,7 +176,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="dataTable">要序列化的 <see cref="DataTable"/></param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串，包含 TableName。</returns>
-        public static string SerializeDataTableToJson(DataTable dataTable) => dataTable.ToJsonString();
+        public string SerializeDataTableToJson(DataTable dataTable) => dataTable.ToJsonString();
 
 
         /// <summary>
@@ -176,7 +184,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="dataTable">要序列化的 <see cref="DataTable"/></param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串，不包含 TableName。</returns>
-        public static string SerializeDataTableToJsonArray(DataTable dataTable)
+        public string SerializeDataTableToJsonArray(DataTable dataTable)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
@@ -189,7 +197,7 @@ namespace CommonExtention.Common
         /// <param name="dataTable">要序列化的 <see cref="DataTable"/></param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataTableToJsonArray(DataTable dataTable, Newtonsoft.Json.Formatting formatting)
+        public string SerializeDataTableToJsonArray(DataTable dataTable, Newtonsoft.Json.Formatting formatting)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
@@ -202,7 +210,7 @@ namespace CommonExtention.Common
         /// <param name="dataTable">要序列化的 <see cref="DataTable"/></param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataTableToJsonArray(DataTable dataTable, JsonSerializerSettings settings)
+        public string SerializeDataTableToJsonArray(DataTable dataTable, JsonSerializerSettings settings)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
@@ -215,7 +223,7 @@ namespace CommonExtention.Common
         /// <param name="dataTable">要序列化的 <see cref="DataTable"/></param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataTableToJsonArray(DataTable dataTable, params JsonConverter[] converters)
+        public string SerializeDataTableToJsonArray(DataTable dataTable, params JsonConverter[] converters)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
@@ -229,7 +237,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataTableToJsonArray(DataTable dataTable, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings)
+        public string SerializeDataTableToJsonArray(DataTable dataTable, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
@@ -243,7 +251,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataTableToJsonArray(DataTable dataTable, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters)
+        public string SerializeDataTableToJsonArray(DataTable dataTable, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
@@ -262,7 +270,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="DataTable"/> 对象。
         /// </returns>
-        public static DataTable DeserializeJsonToDataTable(string json)
+        public DataTable DeserializeJsonToDataTable(string json)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<DataTable>(json);
@@ -277,7 +285,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="DataTable"/> 对象。
         /// </returns>
-        public static DataTable DeserializeJsonToDataTable(string json, JsonSerializerSettings settings)
+        public DataTable DeserializeJsonToDataTable(string json, JsonSerializerSettings settings)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<DataTable>(json, settings);
@@ -292,7 +300,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="DataTable"/> 对象。
         /// </returns>
-        public static DataTable DeserializeJsonToDataTable(string json, params JsonConverter[] converters)
+        public DataTable DeserializeJsonToDataTable(string json, params JsonConverter[] converters)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<DataTable>(json, converters);
@@ -310,7 +318,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="dataSet">要序列化的 <see cref="DataSet"/></param>
         /// <returns>如果 dataSet 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataSetToJson(DataSet dataSet)
+        public string SerializeDataSetToJson(DataSet dataSet)
         {
             if (dataSet == null || dataSet.Tables.Count <= 0) return string.Empty;
 
@@ -323,7 +331,7 @@ namespace CommonExtention.Common
         /// <param name="dataSet">要序列化的 <see cref="DataSet"/></param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 dataSet 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataSetToJson(DataSet dataSet, params JsonConverter[] converters)
+        public string SerializeDataSetToJson(DataSet dataSet, params JsonConverter[] converters)
         {
             if (dataSet == null) return string.Empty;
             return JsonConvert.SerializeObject(dataSet, converters);
@@ -335,7 +343,7 @@ namespace CommonExtention.Common
         /// <param name="dataSet">要序列化的 <see cref="DataSet"/></param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 dataSet 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataSetToJson(DataSet dataSet, JsonSerializerSettings settings)
+        public string SerializeDataSetToJson(DataSet dataSet, JsonSerializerSettings settings)
         {
             if (dataSet == null) return string.Empty;
             return JsonConvert.SerializeObject(dataSet, settings);
@@ -347,7 +355,7 @@ namespace CommonExtention.Common
         /// <param name="dataSet">要序列化的 <see cref="DataSet"/></param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 dataSet 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataSetToJson(DataSet dataSet, Newtonsoft.Json.Formatting formatting)
+        public string SerializeDataSetToJson(DataSet dataSet, Newtonsoft.Json.Formatting formatting)
         {
             if (dataSet == null) return string.Empty;
             return JsonConvert.SerializeObject(dataSet, formatting);
@@ -360,7 +368,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 dataSet 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataSetToJson(DataSet dataSet, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters)
+        public string SerializeDataSetToJson(DataSet dataSet, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters)
         {
             if (dataSet == null) return string.Empty;
             return JsonConvert.SerializeObject(dataSet, formatting, converters);
@@ -373,7 +381,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 dataSet 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeDataSetToJson(DataSet dataSet, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings)
+        public string SerializeDataSetToJson(DataSet dataSet, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings)
         {
             if (dataSet == null) return string.Empty;
             return JsonConvert.SerializeObject(dataSet, formatting, settings);
@@ -389,7 +397,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="DataSet"/> 对象。
         /// </returns>
-        public static DataSet DeserializeJsonToDataSet(string json)
+        public DataSet DeserializeJsonToDataSet(string json)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<DataSet>(json);
@@ -404,7 +412,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="DataSet"/> 对象。
         /// </returns>
-        public static DataSet DeserializeJsonToDataSet(string json, JsonSerializerSettings settings)
+        public DataSet DeserializeJsonToDataSet(string json, JsonSerializerSettings settings)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<DataSet>(json, settings);
@@ -419,7 +427,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="DataSet"/> 对象。
         /// </returns>
-        public static DataSet DeserializeJsonToDataSet(string json, params JsonConverter[] converters)
+        public DataSet DeserializeJsonToDataSet(string json, params JsonConverter[] converters)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<DataSet>(json, converters);
@@ -438,7 +446,7 @@ namespace CommonExtention.Common
         /// <typeparam name="T">要序列化的集合的类型</typeparam>
         /// <param name="list">要序列化的 <see cref="List{T}"/></param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeListToJson<T>(List<T> list)
+        public string SerializeListToJson<T>(List<T> list)
         {
             if (list == null || list.Count <= 0) return string.Empty;
 
@@ -452,7 +460,7 @@ namespace CommonExtention.Common
         /// <param name="list">要序列化的 <see cref="List{T}"/></param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeListToJson<T>(List<T> list, params JsonConverter[] converters)
+        public string SerializeListToJson<T>(List<T> list, params JsonConverter[] converters)
         {
             if (list == null) return string.Empty;
             return JsonConvert.SerializeObject(list, converters);
@@ -465,7 +473,7 @@ namespace CommonExtention.Common
         /// <param name="list">要序列化的 <see cref="List{T}"/></param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeListToJson<T>(List<T> list, JsonSerializerSettings settings)
+        public string SerializeListToJson<T>(List<T> list, JsonSerializerSettings settings)
         {
             if (list == null) return string.Empty;
             return JsonConvert.SerializeObject(list, settings);
@@ -478,7 +486,7 @@ namespace CommonExtention.Common
         /// <param name="list">要序列化的 <see cref="List{T}"/></param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeListToJson<T>(List<T> list, Newtonsoft.Json.Formatting formatting)
+        public string SerializeListToJson<T>(List<T> list, Newtonsoft.Json.Formatting formatting)
         {
             if (list == null) return string.Empty;
             return JsonConvert.SerializeObject(list, formatting);
@@ -492,7 +500,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="converters">序列化时使用的转换器的集合</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeListToJson<T>(List<T> list, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters)
+        public string SerializeListToJson<T>(List<T> list, Newtonsoft.Json.Formatting formatting, params JsonConverter[] converters)
         {
             if (list == null) return string.Empty;
             return JsonConvert.SerializeObject(list, formatting, converters);
@@ -506,7 +514,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="settings">序列化的设置</param>
         /// <returns>如果 dataTable 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeListToJson<T>(List<T> list, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings)
+        public string SerializeListToJson<T>(List<T> list, Newtonsoft.Json.Formatting formatting, JsonSerializerSettings settings)
         {
             if (list == null) return string.Empty;
             return JsonConvert.SerializeObject(list, formatting, settings);
@@ -523,7 +531,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="List{T}"/> 集合。
         /// </returns>
-        public static List<T> DeserializeJsonToList<T>(string json)
+        public List<T> DeserializeJsonToList<T>(string json)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<List<T>>(json);
@@ -538,7 +546,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="List{T}"/> 集合。
         /// </returns>
-        public static List<T> DeserializeJsonToList<T>(string json, JsonSerializerSettings settings)
+        public List<T> DeserializeJsonToList<T>(string json, JsonSerializerSettings settings)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<List<T>>(json, settings);
@@ -553,7 +561,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="List{T}"/> 集合。
         /// </returns>
-        public static List<T> DeserializeJsonToList<T>(string json, params JsonConverter[] converters)
+        public List<T> DeserializeJsonToList<T>(string json, params JsonConverter[] converters)
         {
             if (json.IsNullOrEmpty()) return null;
             return JsonConvert.DeserializeObject<List<T>>(json, converters);
@@ -572,7 +580,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="node">要序列化的 XML 文档中的单个节点</param>
         /// <returns>如果 node 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XmlNode node)
+        public string SerializeXmlToJson(XmlNode node)
         {
             if (node == null) return string.Empty;
 
@@ -585,7 +593,7 @@ namespace CommonExtention.Common
         /// <param name="node">要序列化的 XML 文档中的单个节点</param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 node 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XmlNode node, Newtonsoft.Json.Formatting formatting)
+        public string SerializeXmlToJson(XmlNode node, Newtonsoft.Json.Formatting formatting)
         {
             if (node == null) return string.Empty;
 
@@ -599,7 +607,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="omitRootObject">是否省略根对象的写入</param>
         /// <returns>如果 node 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XmlNode node, Newtonsoft.Json.Formatting formatting, bool omitRootObject)
+        public string SerializeXmlToJson(XmlNode node, Newtonsoft.Json.Formatting formatting, bool omitRootObject)
         {
             if (node == null) return string.Empty;
 
@@ -613,7 +621,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="xDocument">要序列化的 <see cref="XDocument"/> </param>
         /// <returns>如果 xDocument 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XDocument xDocument)
+        public string SerializeXmlToJson(XDocument xDocument)
         {
             if (xDocument == null) return string.Empty;
 
@@ -626,7 +634,7 @@ namespace CommonExtention.Common
         /// <param name="xDocument">要序列化的 <see cref="XDocument"/> </param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 xDocument 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XDocument xDocument, Newtonsoft.Json.Formatting formatting)
+        public string SerializeXmlToJson(XDocument xDocument, Newtonsoft.Json.Formatting formatting)
         {
             if (xDocument == null) return string.Empty;
 
@@ -640,7 +648,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="omitRootObject">是否省略根对象的写入</param>
         /// <returns>如果 xDocument 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XDocument xDocument, Newtonsoft.Json.Formatting formatting, bool omitRootObject)
+        public string SerializeXmlToJson(XDocument xDocument, Newtonsoft.Json.Formatting formatting, bool omitRootObject)
         {
             if (xDocument == null) return string.Empty;
 
@@ -654,7 +662,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="node">要序列化的 <see cref="XNode"/> </param>
         /// <returns>如果 node 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XNode node)
+        public string SerializeXmlToJson(XNode node)
         {
             if (node == null) return string.Empty;
 
@@ -667,7 +675,7 @@ namespace CommonExtention.Common
         /// <param name="node">要序列化的 <see cref="XNode"/> </param>
         /// <param name="formatting">序列化的格式</param>
         /// <returns>如果 node 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XNode node, Newtonsoft.Json.Formatting formatting)
+        public string SerializeXmlToJson(XNode node, Newtonsoft.Json.Formatting formatting)
         {
             if (node == null) return string.Empty;
 
@@ -681,7 +689,7 @@ namespace CommonExtention.Common
         /// <param name="formatting">序列化的格式</param>
         /// <param name="omitRootObject">是否省略根对象的写入</param>
         /// <returns>如果 node 参数为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string SerializeXmlToJson(XNode node, Newtonsoft.Json.Formatting formatting, bool omitRootObject)
+        public string SerializeXmlToJson(XNode node, Newtonsoft.Json.Formatting formatting, bool omitRootObject)
         {
             if (node == null) return string.Empty;
 
@@ -704,7 +712,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="XmlDocument"/>。
         /// </returns>
-        public static XmlDocument DeserializeJsonToXmlNode(string json)
+        public XmlDocument DeserializeJsonToXmlNode(string json)
         {
             if (json.IsNullOrEmpty()) return null;
 
@@ -720,7 +728,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="XmlDocument"/>。
         /// </returns>
-        public static XmlDocument DeserializeJsonToXmlNode(string json, string deserializeRootElementName)
+        public XmlDocument DeserializeJsonToXmlNode(string json, string deserializeRootElementName)
         {
             if (json.IsNullOrEmpty()) return null;
 
@@ -737,7 +745,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="XmlDocument"/>。
         /// </returns>
-        public static XmlDocument DeserializeJsonToXmlNode(string json, string deserializeRootElementName, bool writeArrayAttribute)
+        public XmlDocument DeserializeJsonToXmlNode(string json, string deserializeRootElementName, bool writeArrayAttribute)
         {
             if (json.IsNullOrEmpty()) return null;
 
@@ -756,7 +764,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="XDocument"/>。
         /// </returns>
-        public static XDocument DeserializeXNode(string json)
+        public XDocument DeserializeXNode(string json)
         {
             if (json.IsNullOrEmpty()) return null;
 
@@ -772,7 +780,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="XDocument"/>。
         /// </returns>
-        public static XDocument DeserializeXNode(string json, string deserializeRootElementName)
+        public XDocument DeserializeXNode(string json, string deserializeRootElementName)
         {
             if (json.IsNullOrEmpty()) return null;
 
@@ -789,7 +797,7 @@ namespace CommonExtention.Common
         /// 如果字符串为 null 或空字符串 ("")，则返回 null；
         /// 否则返回反序列化后的 <see cref="XDocument"/>。
         /// </returns>
-        public static XDocument DeserializeXNode(string json, string deserializeRootElementName, bool writeArrayAttribute)
+        public XDocument DeserializeXNode(string json, string deserializeRootElementName, bool writeArrayAttribute)
         {
             if (json.IsNullOrEmpty()) return null;
 

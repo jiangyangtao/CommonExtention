@@ -9,8 +9,16 @@ namespace CommonExtention.Common
     /// <summary>
     /// 提供Excel读取功能。此类不可被继承
     /// </summary>
-    public sealed class Excel
+    public sealed class ReadExcel
     {
+        /// <summary>
+        /// 初始化 Excel读取 的新实例
+        /// </summary>
+        public ReadExcel()
+        {
+
+        }
+
         #region 构造函数
         /// <summary>
         /// 构造函数
@@ -18,7 +26,7 @@ namespace CommonExtention.Common
         /// <param name="path">Excel路径</param>
         /// <exception cref="ArgumentNullException">path 参数为 null 或空字符串 ("")</exception>
         /// <exception cref="DirectoryNotFoundException">未找到文件，或者没有文件夹、文件权限时，抛出 "未找到 path 中指定的文件"。</exception>
-        public Excel(string path)
+        public ReadExcel(string path)
         {
             if (path.IsNullOrEmpty()) throw new ArgumentNullException("未将对象引用设置到对象的实例。");
             if (!File.Exists(path)) throw new DirectoryNotFoundException("未找到指定的文件。");
@@ -146,57 +154,6 @@ namespace CommonExtention.Common
         {
             if (_Path.IsNullOrEmpty()) throw new DirectoryNotFoundException("未找到 Excel 文件。");
             return Read(_Path);
-        }
-        #endregion
-
-        #region 读取Excel数据
-        /// <summary>
-        /// 读取Excel数据
-        /// </summary>
-        /// <param name="path">Excel路径</param>
-        /// <param name="del">是否删除文件</param>
-        /// <returns>去除空行后的 <see cref="DataTable"/> 对象。</returns>
-        /// <exception cref="ArgumentNullException">path 参数为 null 或空字符串 ("")</exception>
-        /// <exception cref="DirectoryNotFoundException">未找到文件，或者没有文件夹、文件权限时，抛出 "未找到 path 中指定的文件"。</exception>
-        public static DataTable ReadExcelData(string path, bool del = true)
-        {
-            if (!File.Exists(path)) throw new DirectoryNotFoundException("未找到指定的文件。");
-
-            var strConn = $"PRovider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Extended Properties=\"Excel 8.0;HDR=YES;IMEX=1\"";
-            var Oleconn = new OleDbConnection(strConn);
-            OleDbDataAdapter excelCommand = null;
-            var excel_ds = new DataSet();
-            try
-            {
-                Oleconn.Open();
-                var dataTable = Oleconn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                var tableName = dataTable.Rows[1][2].ToString().Trim();
-                var strSql = $"select * from [{tableName}]";
-                excelCommand = new OleDbDataAdapter(strSql, Oleconn);
-                excelCommand.Fill(excel_ds, "excelData");
-                var dt = excel_ds.Tables[0];
-
-                for (int i = dt.Rows.Count - 1; i >= 0; i--)
-                {
-                    var emptyCount = 0;
-                    for (int j = 0; j < dt.Columns.Count; j++)
-                    {
-                        var item = dt.Rows[i][j].ToString();
-                        if (!string.IsNullOrEmpty(item)) break;
-                        else emptyCount++;
-                    }
-
-                    if (emptyCount == dt.Columns.Count) dt.Rows.RemoveAt(i);
-                }
-
-                return dt;
-            }
-            finally
-            {
-                if (Oleconn.State != ConnectionState.Closed) Oleconn.Close();
-                Oleconn.Dispose();
-                if (del) File.Delete(path);
-            }
         }
         #endregion
 

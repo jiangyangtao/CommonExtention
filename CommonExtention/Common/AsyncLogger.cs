@@ -12,12 +12,20 @@ namespace CommonExtention.Common
     /// </summary>
     public sealed class AsyncLogger
     {
+        /// <summary>
+        /// 初始化 异步日志 的新实例
+        /// </summary>
+        public AsyncLogger()
+        {
+
+        }
+
         #region 静态方法
         /// <summary>
         /// 记录异常
         /// </summary>
         /// <param name="exception"><see cref="Exception"/> 对象</param>
-        public static void LogException(Exception exception)
+        public void LogException(Exception exception)
         {
             //异步线程无法访问到主线程的HttpContext，所以要直接将主线程的HttpContext做为参数传给异步
             new AsyncLogException(BeginLogException).BeginInvoke(exception, HttpContext.Current, null, null);
@@ -27,7 +35,7 @@ namespace CommonExtention.Common
         /// 记录关键信息
         /// </summary>
         /// <param name="information">关键信息</param>
-        public static void LogInformation(string information)
+        public void LogInformation(string information)
         {
             //异步线程无法访问到主线程的HttpContext，所以要直接将主线程的HttpContext做为参数传给异步
             new AsyncLogInformation(BeginLogInformation).BeginInvoke(information, HttpContext.Current, null, null);
@@ -37,7 +45,7 @@ namespace CommonExtention.Common
         /// 记录Mvc请求信息
         /// </summary>
         /// <param name="model"><see cref="MvcRequestModel"/> 对象</param>
-        public static void LogMvcRequest(MvcRequestModel model)
+        public void LogMvcRequest(MvcRequestModel model)
         {
             //异步线程无法访问到主线程的HttpContext，所以要直接将主线程的HttpContext做为参数传给异步
             new AsyncLogMvcRequest(BeginLogMvcRequest).BeginInvoke(model, HttpContext.Current, null, null);
@@ -71,14 +79,14 @@ namespace CommonExtention.Common
         /// <summary>
         /// 当前应用的相对路径
         /// </summary>
-        private static readonly string _Map = $"{HttpRuntime.AppDomainAppPath}log/{DateTime.Now.ToFormatDate()}";
+        private readonly string _Map = $"{HttpRuntime.AppDomainAppPath}log/{DateTime.Now.ToFormatDate()}";
 
         /// <summary>
         /// 异步写入异常
         /// </summary>
         /// <param name="exception"><see cref="Exception"/> 对象</param>
         /// <param name="context"><see cref="HttpContext"/> 对象</param>
-        private static void BeginLogException(Exception exception, HttpContext context)
+        private void BeginLogException(Exception exception, HttpContext context)
         {
             if (exception != null)
             {
@@ -125,7 +133,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="information">关键信息</param>
         /// <param name="context"><see cref="HttpContext"/> 对象</param>
-        private static void BeginLogInformation(string information, HttpContext context)
+        private void BeginLogInformation(string information, HttpContext context)
         {
             var _path = $"{_Map}information.txt";
             var _fileInfo = new FileInfo(_path);
@@ -166,7 +174,7 @@ namespace CommonExtention.Common
         /// </summary>
         /// <param name="model"><see cref="MvcRequestModel"/> 对象</param>
         /// <param name="context"><see cref="HttpContext"/> 对象</param>
-        private static void BeginLogMvcRequest(MvcRequestModel model, HttpContext context)
+        private void BeginLogMvcRequest(MvcRequestModel model, HttpContext context)
         {
             var _path = $"{_Map}request.txt";
             var _fileInfo = new FileInfo(_path);
