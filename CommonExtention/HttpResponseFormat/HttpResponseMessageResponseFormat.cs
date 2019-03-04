@@ -11,43 +11,18 @@ using System.Text;
 namespace CommonExtention.HttpResponseFormat
 {
     /// <summary>
-    /// <see cref="HttpResponseMessage"/> 通用返回格式
+    /// <see cref="HttpResponseMessage"/> 返回格式。此类不可被继承
     /// </summary>
-    public class HttpResponseMessageResponseFormat
+    public sealed class HttpResponseMessageResponseFormat : HttpResponseMessageFormat
     {
-        #region 设置返回结果
+        #region 构造函数
         /// <summary>
-        /// 设置返回结果
+        /// 初始化 <see cref="HttpResponseMessageResponseFormat"/> 类的新实例
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        private static HttpResponseMessage SetResponseResult<T>(T response) where T : class
-        {
-            var json = JObject.FromObject(response);
-            return new HttpResponseMessage()
-            {
-                Content = new StringContent(json.ToString(), Encoding.UTF8),
-                StatusCode = HttpStatusCode.OK,
-            };
-        }
+        public HttpResponseMessageResponseFormat() { }
         #endregion
 
         #region Json通用返回格式
-        /// <summary>
-        /// Json通用返回格式：返回成功
-        /// </summary>
-        /// <returns>
-        /// Json格式 : {code:0,data:"",count:0,message:Success}
-        /// </returns>
-        public static HttpResponseMessage ResponseSuccess() => SetResponseResult(new ResponseEntity()
-        {
-            Code = 0,
-            Data = null,
-            Count = 0,
-            Message = "Success",
-        });
-
         /// <summary>
         /// Json通用返回格式：返回成功
         /// </summary>
@@ -56,13 +31,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:data,count:1,message:Success}
         /// </returns>
-        public static HttpResponseMessage ResponseSuccess<T>(T data, int count = 1) => SetResponseResult(new ResponseEntity()
-        {
-            Code = 0,
-            Data = data,
-            Count = data == null ? 0 : count,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseSuccess<T>(T data, int count = 1) => base.ResponseSuccess();
 
         /// <summary>
         /// Json通用返回格式：返回成功
@@ -72,13 +41,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:List,count:List.Count(),message:Success}
         /// </returns>
-        public static HttpResponseMessage ResponseSuccess<T>(List<T> list, int count = 0) => SetResponseResult(new ResponseEntity()
-        {
-            Code = 0,
-            Data = list,
-            Count = count == 0 ? list.Count : count,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseSuccess<T>(List<T> list, int count = 0) => base.ResponseSuccess(list, count);
 
         /// <summary>
         /// Json通用返回格式：返回成功
@@ -88,13 +51,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:DataTable,count:DataTable.Rows.Count,message:Success}
         /// </returns>
-        public static HttpResponseMessage ResponseSuccess(DataTable dataTable, int count = 0) => SetResponseResult(new ResponseEntity()
-        {
-            Code = 0,
-            Data = dataTable,
-            Count = count == 0 ? dataTable.Rows.Count : count,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseSuccess(DataTable dataTable, int count = 0) => base.ResponseSuccess(dataTable, count);
 
         /// <summary>
         /// Json通用返回格式：返回失败
@@ -104,13 +61,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
         /// </returns>
-        public static HttpResponseMessage ResponseFail(int code = -1, string message = "Unknown error") => SetResponseResult(new ResponseEntity()
-        {
-            Code = code,
-            Data = null,
-            Count = 0,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseFail(int code = -1, string message = "Unknown error") => base.ResponseFail(code, message);
         #endregion
 
         #region Json通用网格返回格式
@@ -122,13 +73,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,rows:data,total:1,message:Success}
         /// </returns>
-        public static HttpResponseMessage ResponseGridResult<T>(T data, int count = 1) => SetResponseResult(new ResponseGridEntity()
-        {
-            Code = 0,
-            Rows = data,
-            Total = data == null ? 0 : count,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseGridResult<T>(T data, int count = 1) => base.ResponseGridResult();
 
         /// <summary>
         /// Json通用网格返回格式：返回成功
@@ -138,13 +83,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,rows:List,total:List.Count(),message:Success}
         /// </returns>
-        public static HttpResponseMessage ResponseGridResult<T>(List<T> list, int count = 0) => SetResponseResult(new ResponseGridEntity()
-        {
-            Code = 0,
-            Rows = list,
-            Total = count == 0 ? list.Count : count,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseGridResult<T>(List<T> list, int count = 0) => base.ResponseGridResult(list, count);
 
         /// <summary>
         /// Json通用网格返回格式：返回成功
@@ -154,13 +93,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,rows:DataTable,total:DataTable.Rows.Count,message:Success}
         /// </returns>
-        public static HttpResponseMessage ResponseGridResult(DataTable dataTable, int count = 0) => SetResponseResult(new ResponseGridEntity()
-        {
-            Code = 0,
-            Rows = dataTable,
-            Total = count == 0 ? dataTable.Rows.Count : count,
-            Message = "Success",
-        });
+        public new HttpResponseMessage ResponseGridResult(DataTable dataTable, int count = 0) => base.ResponseGridResult(dataTable, count);
 
         /// <summary>
         /// Json通用网格返回格式：返回失败
@@ -170,13 +103,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:-1,rows:[],total:0,message:Unknown error}
         /// </returns>
-        public static HttpResponseMessage ResponseGridResult(int code = -1, string message = "Unknown error") => SetResponseResult(new ResponseGridEntity()
-        {
-            Code = code,
-            Rows = null,
-            Total = 0,
-            Message = message,
-        });
+        public new HttpResponseMessage ResponseGridResult(int code = -1, string message = "Unknown error") => base.ResponseGridResult(code, message);
         #endregion
     }
 }

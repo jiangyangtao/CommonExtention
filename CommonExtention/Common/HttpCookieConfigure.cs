@@ -9,6 +9,13 @@ namespace CommonExtention.Common
     /// </summary>
     public sealed class HttpCookieConfigure
     {
+        #region 构造函数
+        /// <summary>
+        /// 初始化 <see cref="HttpCookieConfigure"/> 类的新实例
+        /// </summary>
+        public HttpCookieConfigure() { }
+        #endregion
+
         #region 指示Cookie是否存在
         /// <summary>
         /// 指示Cookie是否存在

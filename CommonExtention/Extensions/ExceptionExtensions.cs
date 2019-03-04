@@ -43,7 +43,7 @@ namespace CommonExtention.Extensions
         /// <param name="exception">当前 Exception 对象</param>
         public static void WriteLogAsync(this Exception exception)
         {
-            new AsyncLogger().LogException(exception);
+            AsyncLogger.LogException(exception);
         }
         #endregion
     }

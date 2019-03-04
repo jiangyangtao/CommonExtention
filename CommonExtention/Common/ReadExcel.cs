@@ -11,17 +11,9 @@ namespace CommonExtention.Common
     /// </summary>
     public sealed class ReadExcel
     {
-        /// <summary>
-        /// 初始化 Excel读取 的新实例
-        /// </summary>
-        public ReadExcel()
-        {
-
-        }
-
         #region 构造函数
         /// <summary>
-        /// 构造函数
+        /// 初始化 <see cref="ReadExcel"/> 类的新实例
         /// </summary>
         /// <param name="path">Excel路径</param>
         /// <exception cref="ArgumentNullException">path 参数为 null 或空字符串 ("")</exception>

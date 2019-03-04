@@ -8,6 +8,11 @@ namespace CommonExtention.Eititys
     public sealed class MvcRequestModel
     {
         /// <summary>
+        /// 初始化 <see cref="MvcRequestModel"/> 类的新实例
+        /// </summary>
+        public MvcRequestModel() { }
+
+        /// <summary>
         /// 请求的控制器名
         /// </summary>
         public string ControllerName { set; get; }

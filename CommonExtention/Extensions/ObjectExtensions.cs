@@ -75,14 +75,15 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 指示指定的 object 是否为等效的 String 类型
+        #region 指示指定的 object 是否为等效的 System.String 类型
         /// <summary>
         /// 指示指定的 <see cref="object"/> 是否为等效的 <see cref="string"/> 类型
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="string"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="string"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsString(this object value)
         {
@@ -97,8 +98,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="short"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="short"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsInt16(this object value)
         {
@@ -113,8 +115,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="int"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="int"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsInt(this object value)
         {
@@ -129,8 +132,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="long"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="long"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsInt64(this object value)
         {
@@ -145,8 +149,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="decimal"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="decimal"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsDecimal(this object value)
         {
@@ -161,8 +166,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="float"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="float"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsSingle(this object value)
         {
@@ -177,8 +183,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="double"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="double"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsDouble(this object value)
         {
@@ -193,8 +200,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 值为等效的 <see cref="DateTime"/> 对象，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="DateTime"/> 对象，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsDateTime(this object value)
         {
@@ -209,8 +217,9 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <param name="value">要检测的 <see cref="object"/> </param>
         /// <returns>
-        /// 如果 value 值为 null，则返回 false；
-        /// 如果 value 为等效的 <see cref="bool"/> 类型，则返回true；否则返回false。
+        /// 如果 <see cref="object"/> 对象为 null，则返回 false；
+        /// 如果 <see cref="object"/> 对象为 <see cref="bool"/> 类型，则返回true；
+        /// 否则返回false。
         /// </returns>
         public static bool IsBoolean(this object value)
         {
@@ -218,7 +227,7 @@ namespace CommonExtention.Extensions
             return value.GetType().Name == "Boolean";
         }
         #endregion
-
+        
         #region 将数字形式的 object 对象转换为其等效的 Int16 的值
         /// <summary>
         /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="short"/> 的值
@@ -382,9 +391,48 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字形式的 object 对象转换为其等效的 NullableInt16 的值
+        #region 将 Guid 形式的 object 对象转换为其等效的 Guid 的值
         /// <summary>
-        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Int16}"/> 的值
+        /// 将 <see cref="Guid"/> 的形式的 <see cref="object"/> 对象转换为其等效的 <see cref="Guid"/> 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <returns>
+        /// 如果<see cref="object"/> 对象为 null 或空字符串 ("") 或者转换失败，则返回 <see cref="Guid.Empty"/>；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid ToGuid(this object value)
+        {
+            if (value.IsNullOrEmpty()) return Guid.Empty;
+
+            var isParsed = Guid.TryParse(value.ToString(), out Guid result);
+            if (!isParsed) return Guid.Empty;
+            return result;
+        }
+        #endregion
+
+        #region 将 Guid 形式的 object 对象转换为其等效的 Guid 的值
+        /// <summary>
+        /// 将 <see cref="Guid"/> 的形式的 <see cref="object"/> 对象转换为其等效的 <see cref="Guid"/> 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <param name="format">指示当解释 input 时要使用的确切格式：“N”、“D”、“B”、“P”或“X”</param>
+        /// <returns>
+        /// 如果<see cref="object"/> 对象为 null 或空字符串 ("") 或者转换失败，则返回 <see cref="Guid.Empty"/>；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid ToGuid(this object value, string format)
+        {
+            if (value.IsNullOrEmpty()) return Guid.Empty;
+
+            var isParsed = Guid.TryParseExact(value.ToString(), format, out Guid result);
+            if (!isParsed) return Guid.Empty;
+            return result;
+        }
+        #endregion
+
+        #region 将数字形式的 object 对象转换为其等效的 short? 的值
+        /// <summary>
+        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="short"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
@@ -402,9 +450,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字形式的 object 对象转换为其等效的 NullableInt32 的值
+        #region 将数字形式的 object 对象转换为其等效的 int? 的值
         /// <summary>
-        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Int32}"/> 的值
+        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="int"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns> 
@@ -422,9 +470,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字形式的 object 对象转换为其等效的 NullableInt64 的值
+        #region 将数字形式的 object 对象转换为其等效的 long? 的值
         /// <summary>
-        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Int64}"/> 的值
+        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="long"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
@@ -442,9 +490,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字形式的 object 对象转换为其等效的 NullableSingle 的值
+        #region 将数字形式的 object 对象转换为其等效的 float? 的值
         /// <summary>
-        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Single}"/> 的值
+        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="float"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
@@ -462,9 +510,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字形式的 object 对象转换为其等效的 NullableDouble 的值
+        #region 将数字形式的 object 对象转换为其等效的 double? 的值
         /// <summary>
-        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Double}"/> 的值
+        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="double"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
@@ -482,9 +530,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将数字形式的 object 对象转换为其等效的 NullableDecimal 的值
+        #region 将数字形式的 object 对象转换为其等效的 decimal? 的值
         /// <summary>
-        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Decimal}"/> 的值
+        /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="decimal"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
@@ -502,9 +550,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将时间形式的 object 对象转换为其等效的 NullableDateTime 对象
+        #region 将时间形式的 object 对象转换为其等效的 DateTime? 对象
         /// <summary>
-        /// 将时间的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{DateTime}"/> 对象
+        /// 将时间的 <see cref="object"/> 对象转换为其等效的 <see cref="DateTime"/>? 对象
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
@@ -522,13 +570,13 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将布尔形式的 object 对象转换为其等效的 NullableBoolean 的值
+        #region 将布尔形式的 object 对象转换为其等效的 bool? 的值
         /// <summary>
-        /// 将布尔的 <see cref="object"/> 对象转换为其等效的 <see cref="Nullable{Boolean}"/> 的值
+        /// 将布尔的 <see cref="object"/> 对象转换为其等效的 <see cref="bool"/>? 的值
         /// </summary>
         /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns>
-        /// 如果 <see cref="object"/> 对象为 null 或空字符串 ("")，则返回 null；
+        /// 如果 <see cref="object"/> 对象为 null，则返回 null；
         /// 如果转换失败，则返回 null；
         /// 如果转换成功，则返回等效的 <see cref="bool"/> 的值。
         /// </returns>
@@ -539,6 +587,45 @@ namespace CommonExtention.Extensions
             var isParsed = bool.TryParse(value.ToString(), out bool _b);
             if (!isParsed) return null;
             return _b;
+        }
+        #endregion
+
+        #region 将 Guid 形式的 object 对象转换为其等效的 Guid? 的值
+        /// <summary>
+        /// 将 <see cref="Guid"/> 的形式 <see cref="object"/> 对象转换为其等效的 <see cref="Guid"/>? 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <returns>
+        /// 如果 <see cref="object"/> 对象为 null，则返回 null；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid? ToNullableGuid(this object value)
+        {
+            if (value.IsNullOrEmpty()) return null;
+
+            var isParsed = Guid.TryParse(value.ToString(), out Guid result);
+            if (!isParsed) return null;
+            return result;
+        }
+        #endregion
+
+        #region 将 Guid 形式的 object 对象转换为其等效的 Guid? 的值
+        /// <summary>
+        /// 将 <see cref="Guid"/> 形式的 <see cref="object"/> 对象转换为其等效的 <see cref="Guid"/>? 的值
+        /// </summary>
+        /// <param name="value">指定的字符串</param>
+        /// <param name="format">指示当解释 input 时要使用的确切格式：“N”、“D”、“B”、“P”或“X”</param>
+        /// <returns>
+        /// 如果 <see cref="object"/> 对象为 null，则返回 null；
+        /// 否则返回等效的 <see cref="Guid"/> 的值。
+        /// </returns>
+        public static Guid? ToNullableGuid(this object value, string format)
+        {
+            if (value.IsNullOrEmpty()) return null;
+
+            var isParsed = Guid.TryParseExact(value.ToString(), format, out Guid result);
+            if (!isParsed) return null;
+            return result;
         }
         #endregion
     }

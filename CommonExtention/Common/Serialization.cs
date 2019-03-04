@@ -15,13 +15,12 @@ namespace CommonExtention.Common
     /// </summary>
     public sealed class Serialization
     {
+        #region 构造函数
         /// <summary>
-        /// 初始化 序列化 的新实例
+        /// 初始化 <see cref="Serialization"/> 类的新实例
         /// </summary>
-        public Serialization()
-        {
-
-        }
+        public Serialization() { }
+        #endregion
 
         #region Entity
 

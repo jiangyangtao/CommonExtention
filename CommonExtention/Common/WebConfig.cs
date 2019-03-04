@@ -8,6 +8,13 @@ namespace CommonExtention.Common
     /// </summary>
     public sealed class WebConfig
     {
+        #region 构造函数
+        /// <summary>
+        /// 初始化 <see cref="WebConfig"/> 类的新实例
+        /// </summary>
+        public WebConfig() { }
+        #endregion
+
         #region 根据指定的 key 获取 Web.Config 文件中 AppSettings 节点对应的 value 值
         /// <summary>
         /// 根据指定的 key 获取 Web.Config 文件中 <see cref="ConfigurationManager.AppSettings"/> 节点对应的 value 值
