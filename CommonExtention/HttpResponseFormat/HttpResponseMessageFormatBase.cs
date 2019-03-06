@@ -8,15 +8,15 @@ using System.Text;
 namespace CommonExtention.HttpResponseFormat
 {
     /// <summary>
-    /// <see cref="HttpResponseMessage"/> 格式化。此类不可被实例化
+    /// <see cref="HttpResponseMessage"/> 格式化基类。此类不可被实例化
     /// </summary>
-    public abstract class HttpResponseMessageFormat
+    public abstract class HttpResponseMessageFormatBase
     {
         #region 构造函数
         /// <summary>
-        /// 初始化 <see cref="HttpResponseMessageFormat"/> 类的新实例
+        /// 初始化 <see cref="HttpResponseMessageFormatBase"/> 类的新实例
         /// </summary>
-        public HttpResponseMessageFormat() { }
+        public HttpResponseMessageFormatBase() { }
         #endregion
 
         #region 设置返回结果

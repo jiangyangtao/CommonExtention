@@ -13,7 +13,7 @@ namespace CommonExtention.HttpResponseFormat
     /// <summary>
     /// <see cref="HttpResponseMessage"/> 返回格式。此类不可被继承
     /// </summary>
-    public sealed class HttpResponseMessageResponseFormat : HttpResponseMessageFormat
+    public sealed class HttpResponseMessageResponseFormat : HttpResponseMessageFormatBase
     {
         #region 构造函数
         /// <summary>

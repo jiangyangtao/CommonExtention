@@ -7,6 +7,25 @@ namespace CommonExtention.Extensions
     /// </summary>
     public static class ObjectExtensions
     {
+        #region 对当前类的每个属性执行指定操作
+        /// <summary>
+        /// 对当前类的每个属性执行指定操作
+        /// </summary>
+        /// <typeparam name="T">执行指定操作的类的类型</typeparam>
+        /// <param name="value">执行指定操作的类</param>
+        /// <param name="action">要对当前类的每个属性执行的 <see cref="Action{T}"/> 委托</param>
+        public static void ForIn<T>(this T value, Action<string, object> action) where T : class
+        {
+            if (value == null) return;
+            var properties = typeof(T).GetProperties();
+            foreach (var item in properties)
+            {
+                var val = item.GetValue(value, null);
+                action(item.Name, val);
+            }
+        }
+        #endregion
+
         #region 指示指定的 object 对象是否不为 null
         /// <summary>
         /// 指示指定的 <see cref="object"/> 对象是否不为 null
@@ -113,7 +132,7 @@ namespace CommonExtention.Extensions
         /// <summary>
         /// 指示指定的 <see cref="object"/> 是否为等效的 <see cref="int"/> 类型
         /// </summary>
-        /// <param name="value">要检测的 <see cref="object"/> </param>
+        /// <param name="value">要检测的 <see cref="object"/></param>
         /// <returns>
         /// 如果 <see cref="object"/> 对象为 null，则返回 false；
         /// 如果 <see cref="object"/> 对象为 <see cref="int"/> 类型，则返回true；
@@ -227,7 +246,7 @@ namespace CommonExtention.Extensions
             return value.GetType().Name == "Boolean";
         }
         #endregion
-        
+
         #region 将数字形式的 object 对象转换为其等效的 Int16 的值
         /// <summary>
         /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="short"/> 的值
@@ -252,7 +271,7 @@ namespace CommonExtention.Extensions
         /// <summary>
         /// 将数字的 <see cref="object"/> 对象转换为其等效的 <see cref="int"/> 的值
         /// </summary>
-        /// <param name="value">指定的 <see cref="object"/> 对象/param>
+        /// <param name="value">指定的 <see cref="object"/> 对象</param>
         /// <returns> 
         /// 如果 <see cref="object"/> 对象为 null 或空字符串 ("")，则返回0；
         /// 如果转换失败，则返回0；

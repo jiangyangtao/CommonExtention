@@ -81,10 +81,12 @@
     <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="Common\SequentialGuidGenerator.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
-    <Compile Include="HttpResponseFormat\HttpResponseMessageFormat.cs" />
+    <Compile Include="Extensions\HttpRequestExtensions.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="HttpResponseFormat\HttpResponseMessageFormatBase.cs" />
     <Compile Include="HttpResponseFormat\HttpResponseMessageResultFormat.cs" />
     <Compile Include="HttpResponseFormat\JsonResponseFormat.cs" />
-    <Compile Include="HttpResponseFormat\JsonFormat.cs" />
+    <Compile Include="HttpResponseFormat\JsonFormatBase.cs" />
     <Compile Include="Common\BasicsApiController.cs" />
     <Compile Include="Common\BasicsController.cs" />
     <Compile Include="Common\ReadExcel.cs" />
@@ -124,7 +126,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HttpResponseFormat\ResponseEntity.cs" />
     <Compile Include="HttpResponseFormat\JsonResultFormat.cs" />
-    <Compile Include="HttpResponseFormat\ResponseGridEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

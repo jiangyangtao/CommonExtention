@@ -141,7 +141,7 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <typeparam name="T">源 <see cref="List{T}"/> 集合元素的类型</typeparam>
         /// <param name="list">源 <see cref="List{T}"/> 集合</param>
-        /// <param name="action">要对 <see cref="List{T}"/> 的每个元素执行的 <see cref="Action"/> 委托</param>
+        /// <param name="action">要对 <see cref="List{T}"/> 的每个元素执行的 <see cref="Action{T}"/> 委托</param>
         public static void ForEach<T>(this List<T> list, Action<T, int> action)
         {
             for (int i = 0; i < list.Count; i++)
