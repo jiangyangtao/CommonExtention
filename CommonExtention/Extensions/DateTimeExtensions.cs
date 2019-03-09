@@ -49,38 +49,40 @@ namespace CommonExtention.Extensions
         public static DateTime MySqlDateTimeMaxValue { get => DateTime.MaxValue; }
         #endregion
 
-        #region 返回此实例的Unix时间
+        #region 将当前 DateTime 实例转换为 Unix 时间
         /// <summary>
-        /// 返回此实例的Unix时间
+        /// 将当前 <see cref="DateTime"/> 实例转换为 Unix 时间
         /// </summary>
-        /// <param name="date"> <see cref="DateTime"/> 对象</param>
-        /// <returns>Unix时间</returns>
-        public static long UnixTime(this DateTime date) => (date.ToUniversalTime().Ticks - 621355968000000000L) / 10000000L;
+        /// <param name="date">要转换的 <see cref="DateTime"/> 实例</param>
+        /// <returns><see cref="DateTime"/> 实例对应的 Unix 时间</returns>
+        public static long ToUnixTime(this DateTime date) => (date.ToUniversalTime().Ticks - 621355968000000000L) / 10000000L;
         #endregion
 
-        #region 返回此实例的格式化后的日期字符串
+        #region 将当前 DateTime 实例转换为格式化后的日期的字符串表示形式
         /// <summary>
-        /// 返回此实例的格式化后的日期字符串
+        /// 将当前 <see cref="DateTime"/> 实例转换为格式化后的日期的字符串表示形式
         /// </summary>
-        /// <param name="d"><see cref="DateTime"/></param>
-        /// <returns>返回格式为 yyyy-MM-dd 字符串</returns>
-        public static string ToFormatDate(this DateTime d) => d.ToString("yyyy-MM-dd");
+        /// <param name="d">要转换的 <see cref="DateTime"/> 实例</param>
+        /// <param name="format">标准或自定义日期和时间格式的字符串，默认为"yyyy-MM-dd"。</param>
+        /// <returns>当前 <see cref="DateTime"/> 对象的值的字符串表示形式，由 format 指定</returns>
+        public static string ToFormatDate(this DateTime d, string format = "yyyy-MM-dd") => d.ToString(format);
         #endregion
 
-        #region 返回此实例的格式化后的日期时间字符串
+        #region 将当前 DateTime 实例转换为格式化后的日期时间的字符串表示形式
         /// <summary>
-        /// 返回此实例的格式化后的日期时间字符串
+        /// 将当前 <see cref="DateTime"/> 实例转换为格式化后的日期时间的字符串表示形式
         /// </summary>
-        /// <param name="d"><see cref="DateTime"/></param>
-        /// <returns>返回格式为 yyyy-MM-dd HH:mm:ss</returns>
-        public static string ToFormatDateTime(this DateTime d) => d.ToString("yyyy-MM-dd HH:mm:ss");
+        /// <param name="d">要转换的 <see cref="DateTime"/> 实例</param>
+        /// <param name="format">标准或自定义日期和时间格式的字符串，默认为"yyyy-MM-dd HH:mm:ss"。</param>
+        /// <returns>当前 <see cref="DateTime"/> 对象的值的字符串表示形式，由 format 指定</returns>
+        public static string ToFormatDateTime(this DateTime d, string format = "yyyy-MM-dd HH:mm:ss") => d.ToString(format);
         #endregion
 
-        #region 从此实例中计算出与当前时间的时间差
+        #region 从当前 DateTime 实例中计算出与当前时间的时间差
         /// <summary>
-        /// 从此实例中计算出与当前时间的时间差
+        /// 从当前 <see cref="DateTime"/> 实例中计算出与当前时间的时间差
         /// </summary>
-        /// <param name="time"> <see cref="DateTime"/> </param>
+        /// <param name="time">要取得时间差的 <see cref="DateTime"/> 实例</param>
         /// <returns>
         /// 如果是之前的时间差大于365天，则返回“N前年”；
         /// 如果是之前时间差小于365天，大于30天，则返回“N个月前”；
@@ -103,11 +105,11 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 从此实例中计算出与当前时间之前的时间差
+        #region 从当前 DateTime 实例中计算出与当前时间之前的时间差
         /// <summary>
-        /// 从此实例中计算出与当前时间之前的时间差
+        /// 从当前 <see cref="DateTime"/> 实例中计算出与当前时间之前的时间差
         /// </summary>
-        /// <param name="time"> <see cref="DateTime"/> </param>
+        /// <param name="time">要取得时间差的 <see cref="DateTime"/> 实例</param>
         /// <returns>
         /// 如果时间差大于365天，则返回“N前年”；
         /// 如果时间差小于365天，大于30天，则返回“N个月前”；
@@ -120,7 +122,7 @@ namespace CommonExtention.Extensions
 
 
         /// <summary>
-        /// 从此实例中计算出与当前时间之前的时间差
+        /// 从当前 <see cref="DateTime"/> 实例中计算出与当前时间之前的时间差
         /// </summary>
         /// <param name="time"></param>
         /// <returns>string</returns>
@@ -152,11 +154,11 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 从此实例中计算出与当前时间之后的时间差
+        #region 从当前 DateTime 实例中计算出与当前时间之后的时间差
         /// <summary>
-        /// 从此实例中计算出与当前时间之后的时间差
+        /// 从当前 <see cref="DateTime"/> 实例中计算出与当前时间之后的时间差
         /// </summary>
-        /// <param name="time"> <see cref="DateTime"/> </param>
+        /// <param name="time">要取得时间差的 <see cref="DateTime"/> 实例</param>
         /// <returns>
         /// 如果时间差大于365天，则返回“N年后”；
         /// 如果时间差小于365天，大于30天，则返回“N个月后”；
@@ -168,7 +170,7 @@ namespace CommonExtention.Extensions
         public static string AfterTimeRange(this DateTime time) => GetAfterTimeRange(time);
 
         /// <summary>
-        /// 从此实例中计算出与当前时间之后的时间差
+        /// 从当前 <see cref="DateTime"/> 实例中计算出与当前时间之后的时间差
         /// </summary>
         /// <param name="time"> <see cref="DateTime"/> </param>
         /// <returns>string</returns>
@@ -208,93 +210,98 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 从此实例中取得当前月的第一天
+        #region 从当前 DateTime 实例中取得当前月的第一天
         /// <summary>
-        /// 从此实例中取得当前月的第一天
+        /// 从当前 <see cref="DateTime"/> 实例中取得当前月的第一天
         /// </summary>
-        /// <param name="dateTime">要取得月份第一天的 <see cref="DateTime"/> 对象</param>
+        /// <param name="dateTime">要取得月份第一天的 <see cref="DateTime"/> 实例</param>
         /// <param name="mode">时间模式，默认为当前时间的时分秒</param>
-        /// <returns>当前实例月份的第一天</returns>
-        public static DateTime FirstDayOfMonth(this DateTime dateTime, TimeMode mode = TimeMode.now) => dateTime.AddDays(1 - dateTime.Day).GetDateTime(mode);
+        /// <returns>当前实例月份的第一天的 <see cref="DateTime"/> 实例</returns>
+        public static DateTime FirstDayOfMonth(this DateTime dateTime, TimeMode mode = TimeMode.Now) => dateTime.AddDays(1 - dateTime.Day).ToDateTimeOfMode(mode);
 
-
-        private static DateTime GetDateTime(this DateTime dateTime, TimeMode timeMode = TimeMode.now)
+        /// <summary>
+        /// 转换为指定模式的 <see cref="DateTime"/> 实例
+        /// </summary>
+        /// <param name="dateTime">要转换的 <see cref="DateTime"/> 实例</param>
+        /// <param name="timeMode">时间模式，默认为当前时间的时分秒</param>
+        /// <returns>指定模式的 <see cref="DateTime"/> 实例</returns>
+        private static DateTime ToDateTimeOfMode(this DateTime dateTime, TimeMode timeMode = TimeMode.Now)
         {
-            if (timeMode == TimeMode.zero) return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, 0);
-            if (timeMode == TimeMode.full) return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999);
+            if (timeMode == TimeMode.Zero) return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, 0);
+            if (timeMode == TimeMode.Full) return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999);
             return dateTime;
         }
         #endregion
 
-        #region 从此实例中取得当前月的最后一天
+        #region 从当前 DateTime 实例中取得当前月的最后一天
         /// <summary>
-        /// 从此实例中取得当前月的最后一天
+        /// 从当前 <see cref="DateTime"/> 实例中取得当前月的最后一天
         /// </summary>
         /// <param name="dateTime">要取得月份最后一天的 <see cref="DateTime"/> 实例</param>
         /// <param name="mode">时间模式，默认为当前时间的时分秒</param>
-        /// <returns>当前实例月份的最后一天</returns>
-        public static DateTime LastDayOfMonth(this DateTime dateTime, TimeMode mode = TimeMode.now) => dateTime.AddDays(1 - dateTime.Day).AddMonths(1).AddDays(-1).GetDateTime(mode);
+        /// <returns>当前实例月份的最后一天的 <see cref="DateTime"/> 实例</returns>
+        public static DateTime LastDayOfMonth(this DateTime dateTime, TimeMode mode = TimeMode.Now) => dateTime.AddDays(1 - dateTime.Day).AddMonths(1).AddDays(-1).ToDateTimeOfMode(mode);
         #endregion
 
-        #region 从此实例中取得当前周以星期天开始的第一天
+        #region 从当前 DateTime 实例中取得当前周以星期天开始的第一天
         /// <summary>  
-        /// 从此实例中取得当前周以星期天开始的第一天
+        /// 从当前 <see cref="DateTime"/> 实例中取得当前周以星期天开始的第一天
         /// </summary>
-        /// <param name="dateTime">要取得当前周第一天的  <see cref="DateTime"/> 实例</param>
+        /// <param name="dateTime">要取得当前周第一天的 <see cref="DateTime"/> 实例</param>
         /// <param name="mode">时间模式，默认为当前时间的时分秒</param>
-        /// <returns>当前周的第一天</returns>
-        public static DateTime FirstDayOfWeekFromSunday(this DateTime dateTime, TimeMode mode = TimeMode.now)
+        /// <returns>当前周的第一天的 <see cref="DateTime"/> 实例</returns>
+        public static DateTime FirstDayOfWeekFromSunday(this DateTime dateTime, TimeMode mode = TimeMode.Now)
         {
             var weekNow = Convert.ToInt32(dateTime.DayOfWeek);
             var daydiff = (-1) * weekNow;
-            return dateTime.AddDays(daydiff).GetDateTime(mode);
+            return dateTime.AddDays(daydiff).ToDateTimeOfMode(mode);
         }
         #endregion
 
-        #region 从此实例中取得当前周以星期一开始的第一天
+        #region 从当前 DateTime 实例中取得当前周以星期一开始的第一天
         /// <summary>
-        /// 从此实例中取得当前周以星期一开始的第一天
+        /// 从当前 <see cref="DateTime"/> 实例中取得当前周以星期一开始的第一天
         /// </summary>
-        /// <param name="dateTime">要取得当前周第一天的  <see cref="DateTime"/> 实例</param>
+        /// <param name="dateTime">要取得当前周第一天的 <see cref="DateTime"/> 实例</param>
         /// <param name="mode">时间模式，默认为当前时间的时分秒</param>
-        /// <returns>当前周的第一天</returns>
-        public static DateTime FirstDayOfWeekFromMonday(this DateTime dateTime, TimeMode mode = TimeMode.now)
+        /// <returns>当前周的第一天的 <see cref="DateTime"/> 实例</returns>
+        public static DateTime FirstDayOfWeekFromMonday(this DateTime dateTime, TimeMode mode = TimeMode.Now)
         {
             var weekNow = Convert.ToInt32(dateTime.DayOfWeek);
             weekNow = (weekNow == 0 ? (7 - 1) : (weekNow - 1));
             var daydiff = (-1) * weekNow;
-            return dateTime.AddDays(daydiff).GetDateTime(mode);
+            return dateTime.AddDays(daydiff).ToDateTimeOfMode(mode);
         }
         #endregion
 
-        #region 从此实例中取得当前周以星期天开始的最后一天
+        #region 从当前 DateTime 实例中取得当前周以星期天开始的最后一天
         /// <summary>
-        /// 从此实例中取得当前周以星期天开始的最后一天
+        /// 从当前 <see cref="DateTime"/> 实例中取得当前周以星期天开始的最后一天
         /// </summary>  
-        /// <param name="dateTime">要取得当前周最后一天的  <see cref="DateTime"/> 实例</param>
+        /// <param name="dateTime">要取得当前周最后一天的 <see cref="DateTime"/> 实例</param>
         /// <param name="mode">时间模式，默认为当前时间的时分秒</param>
-        /// <returns>当前周的最后一天</returns>  
-        public static DateTime LastDayOfWeekFromSunday(this DateTime dateTime, TimeMode mode = TimeMode.now)
+        /// <returns>当前周的最后一天的 <see cref="DateTime"/> 实例</returns>  
+        public static DateTime LastDayOfWeekFromSunday(this DateTime dateTime, TimeMode mode = TimeMode.Now)
         {
             int weeknow = Convert.ToInt32(dateTime.DayOfWeek);
             int daydiff = (7 - weeknow) - 1;
-            return dateTime.AddDays(daydiff).GetDateTime(mode);
+            return dateTime.AddDays(daydiff).ToDateTimeOfMode(mode);
         }
         #endregion
 
-        #region 从此实例中取得当前周以星期一开始的最后一天
+        #region 从当前 DateTime 实例中取得当前周以星期一开始的最后一天
         /// <summary>  
-        /// 从此实例中取得当前周以星期一开始的最后一天
+        /// 从当前 <see cref="DateTime"/> 实例中取得当前周以星期一开始的最后一天
         /// </summary>  
-        /// <param name="dateTime">要取得当前周最后一天的  <see cref="DateTime"/> 实例</param>
+        /// <param name="dateTime">要取得当前周最后一天的 <see cref="DateTime"/> 实例</param>
         /// <param name="mode">时间模式，默认为当前时间的时分秒</param>
-        /// <returns>当前周的最后一天</returns>  
-        public static DateTime LastDayOfWeekFromMonday(this DateTime dateTime, TimeMode mode = TimeMode.now)
+        /// <returns>当前周的最后一天的 <see cref="DateTime"/> 实例</returns>  
+        public static DateTime LastDayOfWeekFromMonday(this DateTime dateTime, TimeMode mode = TimeMode.Now)
         {
             int weeknow = Convert.ToInt32(dateTime.DayOfWeek);
-            weeknow = (weeknow == 0 ? 7 : weeknow);
+            weeknow = weeknow == 0 ? 7 : weeknow;
             int daydiff = (7 - weeknow);
-            return dateTime.AddDays(daydiff).GetDateTime(mode);
+            return dateTime.AddDays(daydiff).ToDateTimeOfMode(mode);
         }
         #endregion
     }
@@ -308,17 +315,17 @@ namespace CommonExtention.Extensions
         /// <summary>
         /// 返回当前的时分秒
         /// </summary>
-        now = 1,
+        Now,
 
         /// <summary>
         /// 返回00:00:00.000
         /// </summary>
-        zero = 2,
+        Zero,
 
         /// <summary>
         /// 返回23:59:59.999
         /// </summary>
-        full = 3
+        Full
     }
     #endregion
 }

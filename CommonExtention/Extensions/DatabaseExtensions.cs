@@ -40,11 +40,6 @@ namespace CommonExtention.Extensions
                         }
                     }
 
-                    //var adapter = new SqlDataAdapter(cmd);
-                    //var dataTable = new DataTable();
-                    //adapter.Fill(dataTable);
-                    //return dataTable;
-
                     using (var reader = cmd.ExecuteReader())
                     {
                         var dt = new DataTable();
@@ -64,11 +59,13 @@ namespace CommonExtention.Extensions
         /// <param name="database">当前 <see cref="Database"/> 对象</param>
         /// <param name="sql">要执行查询的 Sql 语句</param>
         /// <param name="parameters">参数集</param>
-        /// <returns><see cref="DataSet"/></returns>
+        /// <returns>
+        /// 如果 database 参数为 null 或者 sql 参数为 null 和空字符串("")，则返回 null；
+        /// 否则返回填充数据后的<see cref="DataSet"/>
+        /// </returns>
         public static DataSet SqlQueryToDataSet(this Database database, string sql, params object[] parameters)
         {
-            if (database == null) return null;
-            if (sql.IsNullOrEmpty()) return null;
+            if (database == null|| sql.IsNullOrEmpty()) return null;
 
             using (var conn = (SqlConnection)database.Connection)
             {

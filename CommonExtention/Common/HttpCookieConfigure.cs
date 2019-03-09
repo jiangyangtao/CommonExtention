@@ -69,7 +69,7 @@ namespace CommonExtention.Common
         /// <summary>
         /// 使用的编码
         /// </summary>
-        private static readonly Encoding _enc = Encoding.UTF8;
+        private static readonly Encoding _Coding = Encoding.UTF8;
         #endregion
 
         #region 设置单个Cookie值
@@ -89,13 +89,13 @@ namespace CommonExtention.Common
             {
                 HttpContext.Current.Request.Cookies.Add(new HttpCookie(name));
             }
-            HttpContext.Current.Request.Cookies[name].Value = HttpUtility.UrlEncode(value, _enc);
+            HttpContext.Current.Request.Cookies[name].Value = HttpUtility.UrlEncode(value, _Coding);
             HttpContext.Current.Request.Cookies[name].HttpOnly = HttpOnly;
             if (HttpContext.Current.Response.Cookies[name] == null)
             {
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie(name));
             }
-            HttpContext.Current.Response.Cookies[name].Value = HttpUtility.UrlEncode(value, _enc);
+            HttpContext.Current.Response.Cookies[name].Value = HttpUtility.UrlEncode(value, _Coding);
             HttpContext.Current.Response.Cookies[name].HttpOnly = HttpOnly;
         }
         #endregion
@@ -136,7 +136,7 @@ namespace CommonExtention.Common
         public static string GetCookie(string name)
         {
             var temp = HttpContext.Current.Request.Cookies[name];
-            return temp != null ? HttpUtility.UrlDecode(temp.Value, _enc) : string.Empty;
+            return temp != null ? HttpUtility.UrlDecode(temp.Value, _Coding) : string.Empty;
         }
         #endregion
     }

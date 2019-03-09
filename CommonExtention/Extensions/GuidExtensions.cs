@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CommonExtention.Extensions
 {
@@ -10,32 +7,32 @@ namespace CommonExtention.Extensions
     /// </summary>
     public static class GuidExtensions
     {
-        /// <summary>
-        /// Guid for database
-        /// </summary>
-        public static Guid NewID
-        {
-            get
-            {
-                var guidArray = Guid.NewGuid().ToByteArray();
-                var dbMinDate = DateTimeExtensions.MsSQLDateTimeInitial;
-                var nowDate = DateTime.Now;
+        ///// <summary>
+        ///// Guid for database
+        ///// </summary>
+        //public static Guid NewID
+        //{
+        //    get
+        //    {
+        //        var guidArray = Guid.NewGuid().ToByteArray();
+        //        var dbMinDate = DateTimeExtensions.MsSQLDateTimeInitial;
+        //        var nowDate = DateTime.Now;
 
-                var days = new TimeSpan(nowDate.Ticks - dbMinDate.Ticks);
-                var msSecond = new TimeSpan(nowDate.Ticks - (new DateTime(nowDate.Year, nowDate.Month, nowDate.Day).Ticks));
+        //        var days = new TimeSpan(nowDate.Ticks - dbMinDate.Ticks);
+        //        var msSecond = new TimeSpan(nowDate.Ticks - (new DateTime(nowDate.Year, nowDate.Month, nowDate.Day).Ticks));
 
-                var daysArray = BitConverter.GetBytes(days.Days);
-                var msSecondArray = BitConverter.GetBytes((long)(msSecond.TotalMilliseconds / 3.333333));
+        //        var daysArray = BitConverter.GetBytes(days.Days);
+        //        var msSecondArray = BitConverter.GetBytes((long)(msSecond.TotalMilliseconds / 3.333333));
 
-                Array.Reverse(daysArray);
-                Array.Reverse(msSecondArray);
+        //        Array.Reverse(daysArray);
+        //        Array.Reverse(msSecondArray);
 
-                Array.Copy(daysArray, daysArray.Length - 2, guidArray, guidArray.Length - 6, 2);
-                Array.Copy(msSecondArray, daysArray.Length - 4, guidArray, guidArray.Length - 4, 4);
+        //        Array.Copy(daysArray, daysArray.Length - 2, guidArray, guidArray.Length - 6, 2);
+        //        Array.Copy(msSecondArray, daysArray.Length - 4, guidArray, guidArray.Length - 4, 4);
 
-                return new Guid(guidArray);
-            }
-        }
+        //        return new Guid(guidArray);
+        //    }
+        //}
 
         #region 指示指定的 Guid 是否为 System.Guid.Empty
         /// <summary>

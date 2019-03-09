@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using CommonExtention.Common;
+﻿using CommonExtention.Common;
 using CommonExtention.EncryptDecryption;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CommonExtention.Extensions
 {

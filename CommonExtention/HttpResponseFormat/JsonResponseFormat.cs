@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 
 namespace CommonExtention.HttpResponseFormat
@@ -36,7 +33,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:data,count:1,message:Success}
         /// </returns>
-        public new JsonResult ResponseSuccess<T>(T data, int count = 1) => new JsonResponseFormat().ResponseSuccess(data, count);
+        public new JsonResult ResponseSuccess<T>(T data, int count = 1) => base.ResponseSuccess(data, count);
 
         /// <summary>
         /// Json通用返回格式：返回成功
@@ -46,7 +43,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:List,count:List.Count(),message:Success}
         /// </returns>
-        public new JsonResult ResponseSuccess<T>(List<T> list, int count = 0) => new JsonResponseFormat().ResponseSuccess(list, count);
+        public new JsonResult ResponseSuccess<T>(List<T> list, int count = 0) => base.ResponseSuccess(list, count);
 
         /// <summary>
         /// Json通用返回格式：返回成功
@@ -56,7 +53,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:DataTable,count:DataTable.Rows.Count,message:Success}
         /// </returns>
-        public new JsonResult ResponseSuccess(DataTable dataTable, int count = 0) => new JsonResponseFormat().ResponseSuccess(dataTable, count);
+        public new JsonResult ResponseSuccess(DataTable dataTable, int count = 0) => base.ResponseSuccess(dataTable, count);
 
         /// <summary>
         /// Json通用返回格式：返回失败
@@ -66,7 +63,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
         /// </returns>
-        public new JsonResult ResponseFail(int code = -1, string message = "Unknown error") => new JsonResponseFormat().ResponseFail(code, message);
+        public new JsonResult ResponseFail(int code = -1, string message = "Unknown error") => base.ResponseFail(code, message);
         #endregion
 
         #region Json通用网格返回格式

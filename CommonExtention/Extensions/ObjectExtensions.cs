@@ -13,7 +13,10 @@ namespace CommonExtention.Extensions
         /// </summary>
         /// <typeparam name="T">执行指定操作的类的类型</typeparam>
         /// <param name="value">执行指定操作的类</param>
-        /// <param name="action">要对当前类的每个属性执行的 <see cref="Action{T}"/> 委托</param>
+        /// <param name="action">
+        /// 要对当前类的每个属性执行的 <see cref="Action{T}"/> 委托。
+        /// 委托的第一个参数为类的属性名，第二个参数为属性名对应的值。
+        /// </param>
         public static void ForIn<T>(this T value, Action<string, object> action) where T : class
         {
             if (value == null) return;
