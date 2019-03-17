@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CommonExtention.Common;
+using CommonExtention.Extensions;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Web.Mvc;
@@ -19,22 +21,19 @@ namespace CommonExtention.HttpResponseFormat
 
         #region 设置返回结果
         /// <summary>
-        /// 设置返回结果
+        /// 初始化 <see cref="JsonResult"/> 返回类型
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="response"></param>
         /// <returns></returns>
-        protected virtual JsonResult Json<T>(T response) where T : class
+        protected virtual JsonResult Json<T>(T response) where T : class => new JsonResult()
         {
-            return new JsonResult()
-            {
-                Data = response,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                ContentEncoding = Encoding.UTF8,
-                MaxJsonLength = int.MaxValue,
-                ContentType = "application/json",
-            };
-        }
+            Data = response,
+            JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+            ContentEncoding = Encoding.UTF8,
+            MaxJsonLength = int.MaxValue,
+            ContentType = "application/json",
+        };
         #endregion
 
         #region Json通用返回格式
@@ -51,7 +50,6 @@ namespace CommonExtention.HttpResponseFormat
             Count = 0,
             Message = "Success",
         });
-
 
         /// <summary>
         /// Json通用返回格式：返回成功
@@ -96,7 +94,7 @@ namespace CommonExtention.HttpResponseFormat
         public virtual JsonResult ResponseSuccess(DataTable dataTable, int count = 0) => Json(new ResponseEntity()
         {
             Code = 0,
-            Data = dataTable,
+            Data = dataTable.ToArrayList(),
             Count = count == 0 ? dataTable.Rows.Count : count,
             Message = "Success",
         });
@@ -176,7 +174,7 @@ namespace CommonExtention.HttpResponseFormat
         public virtual JsonResult ResponseGridResult(DataTable dataTable, int count = 0) => Json(new ResponseGridEntity()
         {
             Code = 0,
-            Rows = dataTable,
+            Rows = dataTable.ToArrayList(),
             Total = count == 0 ? dataTable.Rows.Count : count,
             Message = "Success",
         });

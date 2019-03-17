@@ -979,8 +979,8 @@ namespace CommonExtention.Extensions
         /// <param name="value">要获取后缀名的字符串</param>
         /// <param name="containDot">是否包含"."，true 则包含；false 则不包含，默认为包含</param>
         /// <returns>
-        /// 返回字符串包含"."，且 containDot 参数为 true 则返回最后一个"."后的字符串，包含"."；
-        /// 返回字符串包含"."，且 containDot 参数为 false 则返回最后一个"."后的字符串，不包含"."；
+        /// 如果 containDot 参数为 true 则返回最后一个"."后的字符串，包含"."；
+        /// 如果 containDot 参数为 false 则返回最后一个"."后的字符串，不包含"."；
         /// 如果字符串为 null 或空字符串 ("")，则返回 <see cref="string.Empty"/>
         /// </returns>
         public static string ExtendName(this string value, bool containDot = true)

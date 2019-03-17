@@ -19,41 +19,17 @@ namespace CommonExtention.Extensions
         /// 将当前 <see cref="DataTable"/> 对象转换为 Json 字符串
         /// </summary>
         /// <param name="dataTable">要转换的 <see cref="DataTable"/> </param>
-        /// <returns>如果 <see cref="DataTable"/> 为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串，包含 TableName。</returns>
-        public static string ToJsonString(this DataTable dataTable)
-        {
-            var jsonBuilder = new StringBuilder("{\"").Append(dataTable.TableName).Append("\":[");
-            for (int i = 0; i < dataTable.Rows.Count; i++)
-            {
-                jsonBuilder.Append("{");
-                for (int j = 0; j < dataTable.Columns.Count; j++)
-                {
-                    jsonBuilder.Append("\"")
-                        .Append(dataTable.Columns[j].ColumnName)
-                        .Append("\":")
-                        .Append(GetValueByType(dataTable.Rows[i][j]));
-                    if (j != dataTable.Columns.Count - 1) jsonBuilder.Append(",");
-                }
-                jsonBuilder.Append("},");
-            }
-            if (jsonBuilder.ToString().Substring(jsonBuilder.Length - 1, 1) == ",") jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
-            jsonBuilder.Append("]}");
-            return jsonBuilder.ToString();
-        }
-        #endregion
-
-        #region 将当前 DataTable 对象转换为 Json 数组字符串
-        /// <summary>
-        /// 将当前 <see cref="DataTable"/> 对象转换为 Json 数组字符串
-        /// </summary>
-        /// <param name="dataTable">要转换的 <see cref="DataTable"/> </param>
-        /// <returns>如果 <see cref="DataTable"/> 为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
-        public static string ToJsonArray(this DataTable dataTable)
+        /// <param name="containsTableName">是否包含 <see cref="DataTable.TableName"/> </param>
+        /// <returns>
+        /// 如果 <see cref="DataTable"/> 为 null，则返回 <see cref="string.Empty"/>；
+        /// 否则返回序列化后的 json 字符串。
+        /// </returns>
+        public static string ToJsonString(this DataTable dataTable, bool containsTableName = true)
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return string.Empty;
 
             var jsonBuilder = new StringBuilder("{");
-            if (dataTable.TableName.NotNullAndEmpty()) jsonBuilder.Append($"\"{dataTable.TableName}\":");
+            if (containsTableName) jsonBuilder.Append($"\"{dataTable.TableName}\":");
 
             jsonBuilder.Append("[");
             for (int i = 0; i < dataTable.Rows.Count; i++)
@@ -70,10 +46,10 @@ namespace CommonExtention.Extensions
                 jsonBuilder.Append("}");
                 if (i != dataTable.Rows.Count - 1) jsonBuilder.Append(",");
             }
-            jsonBuilder.Append("]");
-            var json = jsonBuilder.ToString();
-            if (json.Substring(json.Length - 1, 1) == ",") json = json.Substring(0, json.Length - 1);
-            return json;
+            if (jsonBuilder.ToString().Substring(jsonBuilder.Length - 1, 1) == ",") jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
+
+            jsonBuilder.Append("]}");
+            return jsonBuilder.ToString();
         }
 
         /// <summary>
@@ -100,6 +76,15 @@ namespace CommonExtention.Extensions
             }
             return value.ToString();
         }
+        #endregion
+
+        #region 将当前 DataTable 对象转换为 Json 数组字符串
+        /// <summary>
+        /// 将当前 <see cref="DataTable"/> 对象转换为 Json 数组字符串
+        /// </summary>
+        /// <param name="dataTable">要转换的 <see cref="DataTable"/> </param>
+        /// <returns>如果 <see cref="DataTable"/> 为 null，则返回 <see cref="string.Empty"/>；否则返回序列化后的 json 字符串。</returns>
+        public static string ToJsonArray(this DataTable dataTable) => new Serialization().SerializeDataTableToJsonArray(dataTable);
         #endregion
 
         #region 将当前 DataTable 对象转换为 Json 数组字符串
@@ -162,7 +147,7 @@ namespace CommonExtention.Extensions
         /// <returns>返回 <see cref="JObject"/> 对象</returns>
         public static JObject ToJObject(this DataTable dt)
         {
-            return JObject.Parse(dt.ToJsonString());
+            return JObject.Parse(dt.ToJsonString(false));
         }
         #endregion
 
@@ -245,10 +230,10 @@ namespace CommonExtention.Extensions
 
         #region 将当前 DataTable 对象转换为 ArrayList 对象
         /// <summary>
-        /// 将当前DataTable对象转换为 ArrayList 对象
+        /// 将当前 <see cref="DataTable"/> 对象转换为 <see cref="ArrayList"/> 对象
         /// </summary>
-        /// <param name="dt">要转换的DataTable</param>
-        /// <returns>返回Dictionary键值对的 ArrayList 对象</returns>
+        /// <param name="dt">要转换的 <see cref="DataTable"/></param>
+        /// <returns>返回 <see cref="Dictionary{String,Object}"/> 键值对的 ArrayList 对象</returns>
         public static ArrayList ToArrayList(this DataTable dt)
         {
             var arrayList = new ArrayList();
@@ -257,7 +242,7 @@ namespace CommonExtention.Extensions
                 var dictionary = new Dictionary<string, object>();
                 foreach (DataColumn dataColumn in dt.Columns)
                 {
-                    dictionary.Add(dataColumn.ColumnName, dataRow[dataColumn.ColumnName].ToString());
+                    dictionary.Add(dataColumn.ColumnName, dataRow[dataColumn.ColumnName]);
                 }
                 arrayList.Add(dictionary);
             }
