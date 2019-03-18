@@ -22,7 +22,14 @@ namespace CommonExtention.Extensions
             fileStream.Read(bytes, 0, (int)fileStream.Length);
             memoryStream.Write(bytes, 0, (int)fileStream.Length);
             fileStream.Close();
-            if (deleteFile) fileInfo.Delete();
+            try
+            {
+                if (deleteFile) fileInfo.Delete();
+            }
+            catch
+            {
+
+            }
             return memoryStream;
         }
         #endregion
