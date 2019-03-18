@@ -101,6 +101,7 @@
     <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="Common\SequentialGuidGenerator.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
+    <Compile Include="Extensions\HttpFileCollectionBaseExtensions.cs" />
     <Compile Include="Extensions\HttpPostedFileBaseExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />

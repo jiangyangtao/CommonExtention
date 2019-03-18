@@ -1,8 +1,8 @@
 ﻿using CommonExtention.Extensions;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,29 +22,6 @@ namespace CommonExtention.Common
         /// 初始化 <see cref="Excel"/> 类的新实例
         /// </summary>
         public Excel() { }
-        #endregion
-
-        #region 将指定路径的 Excel 文件读取到 DataSet
-        /// <summary>
-        /// 将指定路径的 Excel 文件读取到 <see cref="DataSet"/>
-        /// </summary>
-        /// <param name="filePath">指定文件完整路径名</param>
-        /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
-        /// <param name="addEmptyRow">是否添加空行，默认为 false，不添加</param>
-        /// <returns>
-        /// 如果 filePath 参数为 null 或者空字符串("")，则返回 null；
-        /// 如果 filePath 参数值的磁盘中不存在 Excel 文件，则返回 null；
-        /// 否则返回从指定 Excel 文件读取后的 <see cref="DataSet"/> 对象，
-        /// 其中一个 <see cref="DataTable"/> 对应一个 Sheet 工作簿。
-        /// </returns>
-        public DataSet ReadFileToDataSet(string filePath, bool firstRowIsColumnName = true, bool addEmptyRow = false)
-        {
-            if (filePath.IsNullOrEmpty() || !File.Exists(filePath)) return null;
-
-            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            var dataSet = ReadStreamToDataSet(fileStream, firstRowIsColumnName, addEmptyRow);
-            return dataSet;
-        }
         #endregion
 
         #region 将指定路径的 Excel 文件读取到 DataTable
@@ -70,27 +47,26 @@ namespace CommonExtention.Common
         }
         #endregion
 
-        #region 将 HttpPostedFile 读取到 DataSet
+        #region 将指定路径的 Excel 文件读取到 ICollection<DataTable>
         /// <summary>
-        /// 将 <see cref="HttpPostedFileBase"/> 读取到 <see cref="DataSet"/>
+        /// 将指定路径的 Excel 文件读取到 <see cref="ICollection{DataTable}"/>
         /// </summary>
-        /// <param name="httpPostedFile">要读取的 <see cref="HttpPostedFileBase"/> 对象</param>
+        /// <param name="filePath">指定文件完整路径名</param>
         /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
         /// <param name="addEmptyRow">是否添加空行，默认为 false，不添加</param>
         /// <returns>
-        /// 如果 httpPostedFile 参数为 null，则返回 null；
-        /// 如果 httpPostedFile 参数的 <see cref="HttpPostedFileBase.ContentLength"/> 属性小于或者等于 0，则返回 null；
-        /// 否则返回从 <see cref="HttpPostedFileBase"/>读取后的 <see cref="DataSet"/> 对象，
+        /// 如果 filePath 参数为 null 或者空字符串("")，则返回 null；
+        /// 如果 filePath 参数值的磁盘中不存在 Excel 文件，则返回 null；
+        /// 否则返回从指定 Excel 文件读取后的 <see cref="ICollection{DataTable}"/> 对象，
         /// 其中一个 <see cref="DataTable"/> 对应一个 Sheet 工作簿。
         /// </returns>
-        public DataSet ReadHttpPostedFileToDataSet(HttpPostedFileBase httpPostedFile,
-            bool firstRowIsColumnName = true,
-            bool addEmptyRow = false)
+        public ICollection<DataTable> ReadFileToTables(string filePath, bool firstRowIsColumnName = true, bool addEmptyRow = false)
         {
-            if (httpPostedFile == null || httpPostedFile.ContentLength <= 0) return null;
+            if (filePath.IsNullOrEmpty() || !File.Exists(filePath)) return null;
 
-            var dataSet = ReadStreamToDataSet(httpPostedFile.InputStream, firstRowIsColumnName, addEmptyRow);
-            return dataSet;
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            var tables = ReadStreamToTables(fileStream, firstRowIsColumnName, addEmptyRow);
+            return tables;
         }
         #endregion
 
@@ -120,37 +96,27 @@ namespace CommonExtention.Common
         }
         #endregion
 
-        #region 将 Stream 对象读取到 DataSet
+        #region 将 HttpPostedFile 读取到 ICollection<DataTable>
         /// <summary>
-        /// 将 <see cref="Stream"/> 对象读取到 <see cref="DataSet"/>
+        /// 将 <see cref="HttpPostedFileBase"/> 读取到 <see cref="ICollection{DataTable}"/>
         /// </summary>
-        /// <param name="stream">要读取的 <see cref="Stream"/> 对象</param>
+        /// <param name="httpPostedFile">要读取的 <see cref="HttpPostedFileBase"/> 对象</param>
         /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
         /// <param name="addEmptyRow">是否添加空行，默认为 false，不添加</param>
         /// <returns>
-        /// 如果 stream 参数为 null，则返回 null；
-        /// 如果 stream 参数的 <see cref="Stream.CanRead"/> 属性为 false，则返回 null；
-        /// 如果 stream 参数的 <see cref="Stream.Length"/> 属性小于或者等于 0，则返回 null；
-        /// 否则返回从 <see cref="Stream"/> 读取后的 <see cref="DataSet"/> 对象，
+        /// 如果 httpPostedFile 参数为 null，则返回 null；
+        /// 如果 httpPostedFile 参数的 <see cref="HttpPostedFileBase.ContentLength"/> 属性小于或者等于 0，则返回 null；
+        /// 否则返回从 <see cref="HttpPostedFileBase"/>读取后的 <see cref="ICollection{DataTable}"/> 对象，
         /// 其中一个 <see cref="DataTable"/> 对应一个 Sheet 工作簿。
         /// </returns>
-        public DataSet ReadStreamToDataSet(Stream stream,
+        public ICollection<DataTable> ReadHttpPostedFileToTables(HttpPostedFileBase httpPostedFile,
             bool firstRowIsColumnName = true,
             bool addEmptyRow = false)
         {
-            if (stream == null || !stream.CanRead || stream.Length <= 0) return null;
+            if (httpPostedFile == null || httpPostedFile.ContentLength <= 0) return null;
 
-            var workbook = WorkbookFactory.Create(stream);
-            var dataSet = new DataSet();
-            for (int i = 0; i < workbook.NumberOfSheets; i++)
-            {
-                var sheet = workbook.GetSheetAt(i);
-                if (sheet == null) continue;
-
-                var dataTable = ReadSheetToDataTable(sheet, firstRowIsColumnName, addEmptyRow);
-                dataSet.Tables.Add(dataTable);
-            }
-            return dataSet;
+            var tables = ReadStreamToTables(httpPostedFile.InputStream, firstRowIsColumnName, addEmptyRow);
+            return tables;
         }
         #endregion
 
@@ -186,9 +152,43 @@ namespace CommonExtention.Common
         }
         #endregion
 
-        #region 将 HttpFileCollectionBase 对象读取到 DataSet 集合
+        #region 将 Stream 对象读取到 ICollection<DataTable>
         /// <summary>
-        /// 将 <see cref="HttpFileCollectionBase"/> 对象读取到 <see cref="Collection{DataSet}"/> 集合
+        /// 将 <see cref="Stream"/> 对象读取到 <see cref="ICollection{DataTable}"/>
+        /// </summary>
+        /// <param name="stream">要读取的 <see cref="Stream"/> 对象</param>
+        /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
+        /// <param name="addEmptyRow">是否添加空行，默认为 false，不添加</param>
+        /// <returns>
+        /// 如果 stream 参数为 null，则返回 null；
+        /// 如果 stream 参数的 <see cref="Stream.CanRead"/> 属性为 false，则返回 null；
+        /// 如果 stream 参数的 <see cref="Stream.Length"/> 属性小于或者等于 0，则返回 null；
+        /// 否则返回从 <see cref="Stream"/> 读取后的 <see cref="ICollection{DataTable}"/> 对象，
+        /// 其中一个 <see cref="DataTable"/> 对应一个 Sheet 工作簿。
+        /// </returns>
+        public ICollection<DataTable> ReadStreamToTables(Stream stream,
+            bool firstRowIsColumnName = true,
+            bool addEmptyRow = false)
+        {
+            if (stream == null || !stream.CanRead || stream.Length <= 0) return null;
+
+            var workbook = WorkbookFactory.Create(stream);
+            var tables = new HashSet<DataTable>();
+            for (int i = 0; i < workbook.NumberOfSheets; i++)
+            {
+                var sheet = workbook.GetSheetAt(i);
+                if (sheet == null) continue;
+
+                var dataTable = ReadSheetToDataTable(sheet, firstRowIsColumnName, addEmptyRow);
+                tables.Add(dataTable);
+            }
+            return tables;
+        }
+        #endregion
+
+        #region 将 HttpFileCollectionBase 对象读取到 ICollection<Collection<DataTable>> 集合
+        /// <summary>
+        /// 将 <see cref="HttpFileCollectionBase"/> 对象读取到 <see cref="ICollection{Collection}"/> 集合
         /// </summary>
         /// <param name="httpFileCollection">要读取的 <see cref="HttpFileCollectionBase"/></param>
         /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
@@ -196,18 +196,18 @@ namespace CommonExtention.Common
         /// <returns>
         /// 如果 httpFileCollection 参数为 null，则返回 null；
         /// 如果 httpFileCollection 参数的 <see cref="HttpFileCollectionBase.Count"/> 属性小于或者等于 0，则返回 null；
-        /// 否则返回从 <see cref="HttpFileCollectionBase"/> 读取后的 <see cref="Collection{DataSet}"/> 集合。
+        /// 否则返回从 <see cref="HttpFileCollectionBase"/> 读取后的 <see cref="ICollection{Collection}"/> 集合。
         /// 结构说明：
-        /// <see cref="HttpPostedFileBase"/> 对应 <see cref="DataSet"/>;
+        /// <see cref="HttpPostedFileBase"/> 对应 <see cref="Collection{DataTable}"/>;
         /// <see cref="DataTable"/> 对应 Sheet 工作簿。
         /// </returns>
-        public Collection<DataSet> ReadHttpFileCollectionToDataSets(HttpFileCollectionBase httpFileCollection,
+        public ICollection<Collection<DataTable>> ReadHttpFileCollectionToTableCollection(HttpFileCollectionBase httpFileCollection,
             bool firstRowIsColumnName = true,
             bool addEmptyRow = false)
         {
             if (httpFileCollection == null || httpFileCollection.Count <= 0) return null;
 
-            var collection = new Collection<DataSet>();
+            var collection = new HashSet<Collection<DataTable>>();
             for (int i = 0; i < httpFileCollection.Count; i++)
             {
                 var file = httpFileCollection[i];
@@ -215,16 +215,16 @@ namespace CommonExtention.Common
                 if (stream == null || !stream.CanRead || stream.Length <= 0) continue;
 
                 var workbook = WorkbookFactory.Create(stream);
-                var dataSet = new DataSet();
+                var tables = new Collection<DataTable>();
                 for (int j = 0; j < workbook.NumberOfSheets; j++)
                 {
                     var sheet = workbook.GetSheetAt(j);
                     if (sheet == null) continue;
 
                     var dataTable = ReadSheetToDataTable(sheet, firstRowIsColumnName, addEmptyRow);
-                    dataSet.Tables.Add(dataTable);
+                    tables.Add(dataTable);
                 }
-                collection.Add(dataSet);
+                collection.Add(tables);
             }
 
             return collection;
@@ -333,7 +333,7 @@ namespace CommonExtention.Common
             using (ExcelPackage package = new ExcelPackage(file))
             {
                 var worksheet = package.Workbook.Worksheets.Add(sheetsName);
-                // worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 worksheet = predicate(worksheet, dataTable.Columns, dataTable.Rows);
                 worksheet.Cells.AutoFitColumns();
                 package.Save();
