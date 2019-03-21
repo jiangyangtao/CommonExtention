@@ -19,14 +19,14 @@ namespace CommonExtention.HttpResponseFormat
         public HttpResponseMessageFormatBase() { }
         #endregion
 
-        #region 设置返回结果
+        #region 初始化 HttpResponseMessage 返回类型
         /// <summary>
-        /// 设置返回结果
+        /// 初始化 <see cref="HttpResponseMessage"/> 返回类型
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        protected virtual HttpResponseMessage SetResponseResult<T>(T response) where T : class
+        /// <typeparam name="T">要实例化的类型</typeparam>
+        /// <param name="response">要实例化的实体</param>
+        /// <returns>实例化后的 <see cref="HttpResponseMessage"/></returns>
+        protected virtual HttpResponseMessage HttpResponseMessageResult<T>(T response) where T : class
         {
             var json = JObject.FromObject(response);
             return new HttpResponseMessage()
@@ -44,7 +44,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:"",count:0,message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseSuccess() => SetResponseResult(new ResponseEntity()
+        public virtual HttpResponseMessage ResponseSuccess() => HttpResponseMessageResult(new ResponseEntity()
         {
             Code = 0,
             Data = null,
@@ -60,7 +60,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:data,count:1,message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseSuccess<T>(T data, int count = 1) => SetResponseResult(new ResponseEntity()
+        public virtual HttpResponseMessage ResponseSuccess<T>(T data, int count = 1) => HttpResponseMessageResult(new ResponseEntity()
         {
             Code = 0,
             Data = data,
@@ -76,7 +76,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:List,count:List.Count(),message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseSuccess<T>(List<T> list, int count = 0) => SetResponseResult(new ResponseEntity()
+        public virtual HttpResponseMessage ResponseSuccess<T>(List<T> list, int count = 0) => HttpResponseMessageResult(new ResponseEntity()
         {
             Code = 0,
             Data = list,
@@ -92,7 +92,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:DataTable,count:DataTable.Rows.Count,message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseSuccess(DataTable dataTable, int count = 0) => SetResponseResult(new ResponseEntity()
+        public virtual HttpResponseMessage ResponseSuccess(DataTable dataTable, int count = 0) => HttpResponseMessageResult(new ResponseEntity()
         {
             Code = 0,
             Data = dataTable,
@@ -108,7 +108,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
         /// </returns>
-        public virtual HttpResponseMessage ResponseFail(int code = -1, string message = "Unknown error") => SetResponseResult(new ResponseEntity()
+        public virtual HttpResponseMessage ResponseFail(int code = -1, string message = "Unknown error") => HttpResponseMessageResult(new ResponseEntity()
         {
             Code = code,
             Data = null,
@@ -126,7 +126,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,rows:data,total:1,message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseGridResult<T>(T data, int count = 1) => SetResponseResult(new ResponseGridEntity()
+        public virtual HttpResponseMessage ResponseGridResult<T>(T data, int count = 1) => HttpResponseMessageResult(new ResponseGridEntity()
         {
             Code = 0,
             Rows = data,
@@ -142,7 +142,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,rows:List,total:List.Count(),message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseGridResult<T>(List<T> list, int count = 0) => SetResponseResult(new ResponseGridEntity()
+        public virtual HttpResponseMessage ResponseGridResult<T>(List<T> list, int count = 0) => HttpResponseMessageResult(new ResponseGridEntity()
         {
             Code = 0,
             Rows = list,
@@ -158,7 +158,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,rows:DataTable,total:DataTable.Rows.Count,message:Success}
         /// </returns>
-        public virtual HttpResponseMessage ResponseGridResult(DataTable dataTable, int count = 0) => SetResponseResult(new ResponseGridEntity()
+        public virtual HttpResponseMessage ResponseGridResult(DataTable dataTable, int count = 0) => HttpResponseMessageResult(new ResponseGridEntity()
         {
             Code = 0,
             Rows = dataTable,
@@ -174,7 +174,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:-1,rows:[],total:0,message:Unknown error}
         /// </returns>
-        public virtual HttpResponseMessage ResponseGridResult(int code = -1, string message = "Unknown error") => SetResponseResult(new ResponseGridEntity()
+        public virtual HttpResponseMessage ResponseGridResult(int code = -1, string message = "Unknown error") => HttpResponseMessageResult(new ResponseGridEntity()
         {
             Code = code,
             Rows = null,

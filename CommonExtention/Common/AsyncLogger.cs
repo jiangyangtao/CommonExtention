@@ -19,36 +19,32 @@ namespace CommonExtention.Common
         public AsyncLogger() { }
         #endregion
 
-        #region 静态方法
+        #region 记录异常
         /// <summary>
         /// 记录异常
         /// </summary>
         /// <param name="exception"><see cref="Exception"/> 对象</param>
-        public static void LogException(Exception exception)
-        {
-            //异步线程无法访问到主线程的HttpContext，所以要直接将主线程的HttpContext做为参数传给异步
-            new AsyncLogException(BeginLogException).BeginInvoke(exception, HttpContext.Current, null, null);
-        }
+        public static void LogException(Exception exception) 
+            => new AsyncLogException(BeginLogException).BeginInvoke(exception, HttpContext.Current, null, null);
+        #endregion
 
+        #region 记录关键信息
         /// <summary>
         /// 记录关键信息
         /// </summary>
         /// <param name="information">关键信息</param>
-        public static void LogInformation(string information)
-        {
-            //异步线程无法访问到主线程的HttpContext，所以要直接将主线程的HttpContext做为参数传给异步
+        public static void LogInformation(string information) =>
             new AsyncLogInformation(BeginLogInformation).BeginInvoke(information, HttpContext.Current, null, null);
-        }
+        #endregion
 
+        #region 记录Mvc请求信息
         /// <summary>
         /// 记录Mvc请求信息
         /// </summary>
         /// <param name="model"><see cref="MvcRequestModel"/> 对象</param>
-        public static void LogMvcRequest(MvcRequestModel model)
-        {
-            //异步线程无法访问到主线程的HttpContext，所以要直接将主线程的HttpContext做为参数传给异步
-            new AsyncLogMvcRequest(BeginLogMvcRequest).BeginInvoke(model, HttpContext.Current, null, null);
-        }
+        public static void LogMvcRequest(MvcRequestModel model) 
+            => new AsyncLogMvcRequest(BeginLogMvcRequest).BeginInvoke(model, HttpContext.Current, null, null);
+
         #endregion
 
         #region 异步方法
