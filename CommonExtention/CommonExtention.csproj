@@ -104,6 +104,7 @@
     <Compile Include="Extensions\HttpFileCollectionBaseExtensions.cs" />
     <Compile Include="Extensions\HttpPostedFileBaseExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
+    <Compile Include="Extensions\ICollectionExtensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="HttpResponseFormat\HttpResponseMessageFormatBase.cs" />
@@ -141,7 +142,7 @@
     <Compile Include="Extensions\Int64Extensions.cs" />
     <Compile Include="Extensions\NullableExtensions.cs" />
     <Compile Include="Extensions\ShortExtensions.cs" />
-    <Compile Include="Models\MvcRequestModel.cs" />
+    <Compile Include="Models\MvcRequestl.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

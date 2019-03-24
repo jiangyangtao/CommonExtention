@@ -5,12 +5,12 @@ namespace CommonExtention.Eititys
     /// <summary>
     /// Mvc请求信息。此类不可被继承
     /// </summary>
-    public sealed class MvcRequestModel
+    public sealed class MvcRequest
     {
         /// <summary>
-        /// 初始化 <see cref="MvcRequestModel"/> 类的新实例
+        /// 初始化 <see cref="MvcRequest"/> 类的新实例
         /// </summary>
-        public MvcRequestModel() { }
+        public MvcRequest() { }
 
         /// <summary>
         /// 请求的控制器名
@@ -23,14 +23,14 @@ namespace CommonExtention.Eititys
         public string ActionName { set; get; }
 
         /// <summary>
-        /// 请求的方式(get/post)
+        /// 请求的方式(get/post/delete/put/patch)
         /// </summary>
         public string RequestType { set; get; }
 
         /// <summary>
         /// 请求的参数
         /// </summary>
-        public IDictionary<string, object> Params { set; get; }
+        public string Params { set; get; }
 
         /// <summary>
         /// 请求链接
@@ -43,13 +43,18 @@ namespace CommonExtention.Eititys
         public string UserAgent { set; get; }
 
         /// <summary>
+        /// 线程ID
+        /// </summary>
+        public int ThreadId { set; get; }
+
+        /// <summary>
         /// IP地址
         /// </summary>
         public string IpAddress { set; get; }
 
         /// <summary>
-        /// 运行时间
+        /// 消耗的时间(单位：秒)
         /// </summary>
-        public string RunTime { set; get; }
+        public string ConsumingTime { set; get; }
     }
 }
