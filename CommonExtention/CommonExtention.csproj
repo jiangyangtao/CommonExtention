@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Email.cs" />
     <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="Common\SequentialGuidGenerator.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
@@ -142,6 +143,8 @@
     <Compile Include="Extensions\Int64Extensions.cs" />
     <Compile Include="Extensions\NullableExtensions.cs" />
     <Compile Include="Extensions\ShortExtensions.cs" />
+    <Compile Include="Models\EmailContent.cs" />
+    <Compile Include="Models\EmailServiceConfig.cs" />
     <Compile Include="Models\MvcRequestl.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
