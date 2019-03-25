@@ -43,7 +43,7 @@ namespace CommonExtention.Common
         /// <summary>
         /// 中文编码
         /// </summary>
-        public static Encoding ChineseEncoding = Encoding.GetEncoding(936);
+        public static Encoding ChineseEncoding { get => Encoding.GetEncoding(936); }
         #endregion
 
         #region 私有属性
@@ -226,7 +226,7 @@ namespace CommonExtention.Common
         private bool _SendAsync()
         {
             _SetClientAndMail();
-            _Client.SendAsync(_MailMessage,DateTime.Now.ToFormatDateTime());
+            _Client.SendAsync(_MailMessage, DateTime.Now.ToFormatDateTime());
             return true;
         }
 

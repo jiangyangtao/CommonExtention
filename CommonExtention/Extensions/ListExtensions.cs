@@ -161,7 +161,7 @@ namespace CommonExtention.Extensions
         /// <param name="predicate">用于执行写入 Excel 单元格的函数</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public static MemoryStream WriteToMemoryStream<T>(this List<T> list, Func<ExcelWorksheet, PropertyInfo[], ExcelWorksheet> predicate,
+        public static MemoryStream WriteToMemoryStream<T>(this List<T> list, Action<ExcelWorksheet, PropertyInfo[]> predicate,
             string sheetsName = "sheet1") => new Excel().WriteToMemoryStream(list, predicate, sheetsName);
         #endregion
 

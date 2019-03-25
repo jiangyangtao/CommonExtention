@@ -330,10 +330,10 @@ namespace CommonExtention.Common
         /// 将 <see cref="DataTable"/> 对象写入到 <see cref="MemoryStream"/> 对象
         /// </summary>
         /// <param name="dataTable">要写入的 <see cref="DataTable"/> 对象</param>
-        /// <param name="predicate">用于执行写入 Excel 单元格的委托</param>
+        /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteToMemoryStream(DataTable dataTable, Func<ExcelWorksheet, DataColumnCollection, DataRowCollection, ExcelWorksheet> predicate,
+        public MemoryStream WriteToMemoryStream(DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
             string sheetsName = "sheet1")
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return null;
@@ -343,7 +343,7 @@ namespace CommonExtention.Common
             {
                 var worksheet = package.Workbook.Worksheets.Add(sheetsName);
                 worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                worksheet = predicate(worksheet, dataTable.Columns, dataTable.Rows);
+                action(worksheet, dataTable.Columns, dataTable.Rows);
                 worksheet.Cells.AutoFitColumns();
                 package.SaveAs(memoryStream);
             }
@@ -357,10 +357,10 @@ namespace CommonExtention.Common
         /// 将 <see cref="List{T}"/> 集合写入到 <see cref="MemoryStream"/> 对象
         /// </summary>
         /// <param name="list">要写入的 <see cref="List{T}"/> 集合</param>
-        /// <param name="predicate">用于执行写入 Excel 单元格的委托</param>
+        /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteToMemoryStream<T>(List<T> list, Func<ExcelWorksheet, PropertyInfo[], ExcelWorksheet> predicate,
+        public MemoryStream WriteToMemoryStream<T>(List<T> list, Action<ExcelWorksheet, PropertyInfo[]> action,
             string sheetsName = "sheet1")
         {
             if (list == null || list.Count <= 0) return null;
@@ -371,7 +371,7 @@ namespace CommonExtention.Common
             {
                 var worksheet = package.Workbook.Worksheets.Add(sheetsName);
                 worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                worksheet = predicate(worksheet, properties);
+                action(worksheet, properties);
                 worksheet.Cells.AutoFitColumns();
                 package.SaveAs(memoryStream);
             }
