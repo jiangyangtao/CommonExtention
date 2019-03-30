@@ -116,8 +116,7 @@ namespace CommonExtention.Common
             if (serviceConfig.EmailAddress.IsNullOrEmpty()) throw new ArgumentNullException("未指定邮箱服务的账号。");
             if (!serviceConfig.EmailAddress.IsEmail()) throw new FormatException("指定的邮箱服务账号不是正确的邮箱格式。");
             if (serviceConfig.Password.IsNullOrEmpty()) throw new ArgumentNullException("未指定邮箱服务的密码。");
-            if (serviceConfig.Port < 0 || ServiceConfig.Port >= int.MaxValue) throw new ArgumentOutOfRangeException("指定邮箱服务的端口超出限定范围。");
-
+            if (serviceConfig.Port < 0 || serviceConfig.Port >= int.MaxValue) throw new ArgumentOutOfRangeException("指定邮箱服务的端口超出限定范围。");
             ServiceConfig = serviceConfig;
             _Client = new SmtpClient
             {
@@ -125,7 +124,7 @@ namespace CommonExtention.Common
                 Host = serviceConfig.Host,
                 Port = serviceConfig.Port,
                 EnableSsl = serviceConfig.EnableSsl,
-                UseDefaultCredentials = false,
+                UseDefaultCredentials = serviceConfig.UseDefaultCredentials,
                 Credentials = new NetworkCredential(serviceConfig.EmailAddress, serviceConfig.Password)
             };
         }
@@ -322,6 +321,5 @@ namespace CommonExtention.Common
             _Client.Dispose();
         }
         #endregion
-
     }
 }

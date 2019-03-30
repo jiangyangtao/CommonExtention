@@ -1,5 +1,6 @@
 ﻿
 
+using System.Net;
 using System.Net.Mail;
 
 namespace CommonExtention.Models
@@ -10,7 +11,7 @@ namespace CommonExtention.Models
     public sealed class EmailServiceConfig
     {
         /// <summary>
-        /// 
+        /// 初始化 <see cref="EmailServiceConfig"/> 类的新实例
         /// </summary>
         public EmailServiceConfig() { }
 
@@ -38,6 +39,11 @@ namespace CommonExtention.Models
         /// 密码
         /// </summary>
         public string Password { set; get; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="bool"/> 值，该值控制 <see cref="CredentialCache.DefaultCredentials"/> 是否随请求一起发送，默认为 false。
+        /// </summary>
+        public bool UseDefaultCredentials { set; get; }
 
         /// <summary>
         /// Smtp 传输方式，默认为 Network
