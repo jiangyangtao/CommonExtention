@@ -99,7 +99,7 @@ namespace CommonExtention.Common
         {
             if (httpPostedFile == null || httpPostedFile.ContentLength <= 0) return null;
 
-            var dataTable = ReadStreamToDataTable(httpPostedFile.InputStream, sheetName, firstRowIsColumnName, addEmptyRow);
+            var dataTable = ReadStreamToDataTable(httpPostedFile.InputStream, sheetName, firstRowIsColumnName, addEmptyRow, dispose: false);
             return dataTable;
         }
         #endregion
@@ -123,7 +123,7 @@ namespace CommonExtention.Common
         {
             if (httpPostedFile == null || httpPostedFile.ContentLength <= 0) return null;
 
-            var tables = ReadStreamToTables(httpPostedFile.InputStream, firstRowIsColumnName, addEmptyRow);
+            var tables = ReadStreamToTables(httpPostedFile.InputStream, firstRowIsColumnName, addEmptyRow, dispose: false);
             return tables;
         }
         #endregion
@@ -136,6 +136,7 @@ namespace CommonExtention.Common
         /// <param name="sheetName">指定读取 Excel 工作薄 sheet 的名称</param>
         /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
         /// <param name="addEmptyRow">是否添加空行，默认为 false，不添加</param>
+        /// <param name="dispose">是否释放 <see cref="Stream"/> 资源</param>
         /// <returns>
         /// 如果 stream 参数为 null，则返回 null；
         /// 如果 stream 参数的 <see cref="Stream.CanRead"/> 属性为 false，则返回 null；
@@ -146,7 +147,8 @@ namespace CommonExtention.Common
             Stream stream,
             string sheetName = null,
             bool firstRowIsColumnName = true,
-            bool addEmptyRow = false)
+            bool addEmptyRow = false,
+            bool dispose = true)
         {
             if (stream == null || !stream.CanRead || stream.Length <= 0) return null;
 
@@ -156,6 +158,11 @@ namespace CommonExtention.Common
             if (sheet == null) return null;
 
             var table = ReadSheetToDataTable(sheet, firstRowIsColumnName, addEmptyRow);
+            if (dispose)
+            {
+                stream.Flush();
+                stream.Close();
+            }
             return table;
         }
         #endregion
@@ -167,6 +174,7 @@ namespace CommonExtention.Common
         /// <param name="stream">要读取的 <see cref="Stream"/> 对象</param>
         /// <param name="firstRowIsColumnName">首行是否为 <see cref="DataColumn.ColumnName"/></param>
         /// <param name="addEmptyRow">是否添加空行，默认为 false，不添加</param>
+        /// <param name="dispose">是否释放 <see cref="Stream"/> 资源</param>
         /// <returns>
         /// 如果 stream 参数为 null，则返回 null；
         /// 如果 stream 参数的 <see cref="Stream.CanRead"/> 属性为 false，则返回 null；
@@ -176,7 +184,8 @@ namespace CommonExtention.Common
         /// </returns>
         public ICollection<DataTable> ReadStreamToTables(Stream stream,
             bool firstRowIsColumnName = true,
-            bool addEmptyRow = false)
+            bool addEmptyRow = false,
+            bool dispose = true)
         {
             if (stream == null || !stream.CanRead || stream.Length <= 0) return null;
 
@@ -189,6 +198,12 @@ namespace CommonExtention.Common
 
                 var dataTable = ReadSheetToDataTable(sheet, firstRowIsColumnName, addEmptyRow);
                 tables.Add(dataTable);
+            }
+
+            if (dispose)
+            {
+                stream.Flush();
+                stream.Close();
             }
             return tables;
         }

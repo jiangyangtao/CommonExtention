@@ -11,7 +11,7 @@ namespace CommonExtention.Common
     /// <summary>
     /// 提供发送邮件功能。此类不可被继承
     /// </summary>
-    public sealed class Email
+    public sealed class Email : IDisposable
     {
         #region 公有属性
 
@@ -229,7 +229,6 @@ namespace CommonExtention.Common
             return true;
         }
 
-        private bool SendEmailAsync(Func<SmtpClient, MailMessage, bool> func, SmtpClient client, MailMessage mailMessage) => func(client, mailMessage);
         #endregion
 
         #region 发送邮件
@@ -314,11 +313,12 @@ namespace CommonExtention.Common
 
         #region 释放资源
         /// <summary>
-        /// 向 SMTP 服务器发送一条 QUIT 消息，适当地结束 TCP 连接，并释放由 System.Net.Mail.SmtpClient 类的当前实例使用的所有资源。
+        /// 释放由 <see cref="Email"/> 使用的所有资源
         /// </summary>
         public void Dispose()
         {
             _Client.Dispose();
+            _MailMessage.Dispose();
         }
         #endregion
     }
