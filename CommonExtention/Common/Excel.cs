@@ -4,8 +4,11 @@ using NPOI.SS.UserModel;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.IO;
 using System.Reflection;
@@ -371,6 +374,99 @@ namespace CommonExtention.Common
         /// <summary>
         /// 将 <see cref="List{T}"/> 集合写入到 <see cref="MemoryStream"/> 对象
         /// </summary>
+        /// <typeparam name="T">要写入 <see cref="MemoryStream"/> 的集合元素的类型</typeparam>
+        /// <param name="list">要写入的 <see cref="List{T}"/> 集合</param>
+        /// <param name="sheetsName">Excel 的工作簿名称</param>
+        /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
+        public MemoryStream WriteToMemoryStream<T>(List<T> list, string sheetsName = "sheet1")
+        {
+            if (list == null || list.Count <= 0) return null;
+
+            var memoryStream = new MemoryStream();
+            var propertys = typeof(T).GetProperties();
+            var columns = GetColumns(propertys);
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add(sheetsName);
+                worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                columns.ForEach((item, columnIndex) =>
+                {
+                    worksheet.Cells[1, columnIndex + 1].Value = item.Value;
+                    DrawBorder(worksheet.Cells[1, columnIndex + 1].Style);
+                });
+
+                list.ForEach((row, rowIndex) =>
+                {
+                    columns.ForEach((column, columnIndex) =>
+                    {
+                        var property = propertys.Find(a => a.Name == column.Key);
+                        var value = property.GetValue(row, null);
+                        worksheet.Cells[rowIndex + 2, columnIndex + 1].Value = value;
+                        DrawBorder(worksheet.Cells[rowIndex + 2, columnIndex + 1].Style);
+                    });
+                });
+
+                worksheet.Cells.AutoFitColumns();
+                package.SaveAs(memoryStream);
+            }
+            return memoryStream;
+        }
+
+        /// <summary>
+        /// 获取列名
+        /// </summary>
+        /// <param name="propertys">要获取列名的 <see cref="PropertyInfo"/> 数组</param>
+        /// <returns><see cref="Dictionary{Key,Value}"/>类型的列名</returns>
+        private Dictionary<string, string> GetColumns(PropertyInfo[] propertys)
+        {
+            var displayAttributeType = typeof(NotMappedAttribute);
+            var displayNameAttributeType = typeof(DisplayNameAttribute);
+            var columns = new Dictionary<string, string>();
+            for (int i = 0; i < propertys.Length; i++)
+            {
+                var item = propertys[i];
+                var attrs = item.GetCustomAttributesData();
+                if (attrs.HasAttribute(typeof(NotMappedAttribute))) continue;
+
+                if (attrs.HasAttribute(displayNameAttributeType))
+                {
+                    var value = GetDisplayNameAttributeValue(attrs, displayNameAttributeType);
+                    columns.Add(item.Name, value);
+                }
+            }
+            return columns;
+        }
+
+        /// <summary>
+        /// 获取 <see cref="DisplayNameAttribute"/> 特性的值
+        /// </summary>
+        /// <param name="customs">要获取值的 <see cref="IEnumerable"/></param>
+        /// <param name="type">要匹配的类型</param>
+        /// <returns>
+        /// 如果匹配成功，返回字符串表示形式的值；
+        /// 如果匹配失败，则返回 <see cref="string.Empty"/>。
+        /// </returns>
+        private string GetDisplayNameAttributeValue(IEnumerable<CustomAttributeData> customs, Type type)
+        {
+            foreach (var attr in customs)
+            {
+                if (attr.ToString().Contains(type.FullName) || attr.ConstructorArguments.Count > 0)
+                {
+                    return attr.ConstructorArguments[0].Value.ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+
+        #endregion
+
+        #region 将 List 集合写入到 MemoryStream 对象
+        /// <summary>
+        /// 将 <see cref="List{T}"/> 集合写入到 <see cref="MemoryStream"/> 对象
+        /// </summary>
         /// <param name="list">要写入的 <see cref="List{T}"/> 集合</param>
         /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
@@ -391,6 +487,21 @@ namespace CommonExtention.Common
                 package.SaveAs(memoryStream);
             }
             return memoryStream;
+        }
+        #endregion
+
+        #region 绘制边框
+        /// <summary>
+        /// 绘制边框
+        /// </summary>
+        /// <param name="excelStyle">要绘制边框的 <see cref="ExcelWorksheet.Cells"/> 的 <see cref="ExcelBorderStyle"/></param>
+        /// <param name="excelBorderStyle"><see cref="ExcelBorderStyle"/> 值</param>
+        public static void DrawBorder(ExcelStyle excelStyle, ExcelBorderStyle excelBorderStyle = ExcelBorderStyle.Thin)
+        {
+            excelStyle.Border.Left.Style = excelBorderStyle;
+            excelStyle.Border.Right.Style = excelBorderStyle;
+            excelStyle.Border.Top.Style = excelBorderStyle;
+            excelStyle.Border.Bottom.Style = excelBorderStyle;
         }
         #endregion
     }

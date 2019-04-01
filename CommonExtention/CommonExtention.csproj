@@ -106,6 +106,7 @@
     <Compile Include="Extensions\HttpPostedFileBaseExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Extensions\ICollectionExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="HttpResponseFormat\HttpResponseMessageFormatBase.cs" />
