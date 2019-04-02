@@ -349,17 +349,19 @@ namespace CommonExtention.Common
         /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteDataTableToMemoryStream(DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
+        public MemoryStream WriteToMemoryStream(DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
             string sheetsName = "sheet1")
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return null;
 
             var memoryStream = new MemoryStream();
+            var columns = dataTable.Columns;
+            var rows = dataTable.Rows;
             using (var package = new ExcelPackage())
             {
                 var worksheet = package.Workbook.Worksheets.Add(sheetsName);
                 worksheet.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                action(worksheet, dataTable.Columns, dataTable.Rows);
+                action(worksheet, columns, rows);
                 worksheet.Cells.AutoFitColumns();
                 package.SaveAs(memoryStream);
             }
@@ -376,7 +378,7 @@ namespace CommonExtention.Common
         /// <param name="list">要写入的 <see cref="List{T}"/> 集合</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteListToMemoryStream<T>(List<T> list, string sheetsName = "sheet1")
+        public MemoryStream WriteToMemoryStream<T>(List<T> list, string sheetsName = "sheet1")
         {
             if (list == null || list.Count <= 0) return null;
 
@@ -467,7 +469,7 @@ namespace CommonExtention.Common
         /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteListToMemoryStream<T>(List<T> list, Action<ExcelWorksheet, PropertyInfo[]> action,
+        public MemoryStream WriteToMemoryStream<T>(List<T> list, Action<ExcelWorksheet, PropertyInfo[]> action,
             string sheetsName = "sheet1")
         {
             if (list == null || list.Count <= 0) return null;

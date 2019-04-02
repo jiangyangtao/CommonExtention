@@ -161,7 +161,7 @@ namespace CommonExtention.Extensions
         /// <param name="list">要写入的 <see cref="List{T}"/> 集合</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public static MemoryStream WriteToMemoryStream<T>(this List<T> list, string sheetsName = "sheet1") => new Excel().WriteListToMemoryStream(list, sheetsName);
+        public static MemoryStream WriteToMemoryStream<T>(this List<T> list, string sheetsName = "sheet1") => new Excel().WriteToMemoryStream(list, sheetsName);
         #endregion
 
         #region 将当前 List 集合写入 MemoryStream
@@ -174,7 +174,7 @@ namespace CommonExtention.Extensions
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
         public static MemoryStream WriteToMemoryStream<T>(this List<T> list, Action<ExcelWorksheet, PropertyInfo[]> action,
-            string sheetsName = "sheet1") => new Excel().WriteListToMemoryStream(list, action, sheetsName);
+            string sheetsName = "sheet1") => new Excel().WriteToMemoryStream(list, action, sheetsName);
         #endregion
 
         #region 清除当前 List<T> 中的空元素

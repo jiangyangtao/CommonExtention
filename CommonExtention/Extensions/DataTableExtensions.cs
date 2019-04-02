@@ -261,7 +261,7 @@ namespace CommonExtention.Extensions
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel形式的 <see cref="MemoryStream"/> 对象</returns>
         public static MemoryStream WriteToMemoryStream(this DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
-            string sheetsName = "sheet1") => new Excel().WriteDataTableToMemoryStream(dataTable, action, sheetsName);
+            string sheetsName = "sheet1") => new Excel().WriteToMemoryStream(dataTable, action, sheetsName);
         #endregion
 
         #region 清除当前 DataTable 对象的空行
