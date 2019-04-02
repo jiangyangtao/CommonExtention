@@ -349,7 +349,7 @@ namespace CommonExtention.Common
         /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteToMemoryStream(DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
+        public MemoryStream WriteDataTableToMemoryStream(DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
             string sheetsName = "sheet1")
         {
             if (dataTable == null || dataTable.Rows.Count <= 0) return null;
@@ -376,7 +376,7 @@ namespace CommonExtention.Common
         /// <param name="list">要写入的 <see cref="List{T}"/> 集合</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteToMemoryStream<T>(List<T> list, string sheetsName = "sheet1")
+        public MemoryStream WriteListToMemoryStream<T>(List<T> list, string sheetsName = "sheet1")
         {
             if (list == null || list.Count <= 0) return null;
 
@@ -467,7 +467,7 @@ namespace CommonExtention.Common
         /// <param name="action">用于执行写入 Excel 单元格的委托</param>
         /// <param name="sheetsName">Excel 的工作簿名称</param>
         /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
-        public MemoryStream WriteToMemoryStream<T>(List<T> list, Action<ExcelWorksheet, PropertyInfo[]> action,
+        public MemoryStream WriteListToMemoryStream<T>(List<T> list, Action<ExcelWorksheet, PropertyInfo[]> action,
             string sheetsName = "sheet1")
         {
             if (list == null || list.Count <= 0) return null;
