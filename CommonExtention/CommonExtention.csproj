@@ -128,8 +128,6 @@
     <Compile Include="EncryptDecryption\TripleDataEncryptionAlgorithm.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\DatabaseExtensions.cs" />
-    <Compile Include="Extensions\DataColumnCollectionExtensions.cs" />
-    <Compile Include="Extensions\DataRowCollectionExtensions.cs" />
     <Compile Include="Extensions\DataSetExtensions.cs" />
     <Compile Include="Extensions\DataTableCollectionExtensions.cs" />
     <Compile Include="Extensions\DataTableExtensions.cs" />

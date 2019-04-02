@@ -29,7 +29,7 @@ namespace CommonExtention.Common
         }
         #endregion
 
-        #region Public Property
+        #region 公开属性
         /// <summary>
         /// 是否为中华人民共和国第二代身份证号码。如果身份证验证通过，则为 true; 否则为 false。
         /// </summary>
@@ -66,13 +66,10 @@ namespace CommonExtention.Common
         /// 如果字符串不是是中华人民共和国第二代身份证号码，则返回 false；
         /// 否则返回 true。
         /// </returns>
-        public static bool IsChinaIdentityNumber(string value)
-        {
-            return Verification(value);
-        }
+        public static bool IsChinaIdentityNumber(string value) => Verification(value);
         #endregion
 
-        #region Private Methods
+        #region 私有属性
 
         /// <summary>
         /// 验证指定的字符串是否为中华人民共和国第二代身份证号码

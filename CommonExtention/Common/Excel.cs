@@ -307,9 +307,7 @@ namespace CommonExtention.Common
 
             return table;
         }
-        #endregion
 
-        #region 获取单元格的值
         /// <summary>
         /// 获取单元格的值
         /// </summary>
@@ -459,8 +457,6 @@ namespace CommonExtention.Common
             }
             return string.Empty;
         }
-
-
         #endregion
 
         #region 将 List 集合写入到 MemoryStream 对象

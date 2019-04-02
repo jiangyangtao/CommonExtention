@@ -13,13 +13,10 @@ namespace CommonExtention.Common
         /// <summary>
         /// 初始化 <see cref="PasswordGenerator"/> 类的新实例
         /// </summary>
-        public PasswordGenerator()
-        {
-
-        }
+        public PasswordGenerator() { }
         #endregion
 
-        #region Private property
+        #region 私有属性
         /// <summary>
         /// 数字、大小写字母
         /// </summary>
