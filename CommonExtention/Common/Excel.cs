@@ -1,4 +1,5 @@
-﻿using CommonExtention.Extensions;
+﻿using CommonExtention.Attributes;
+using CommonExtention.Extensions;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using OfficeOpenXml;
@@ -421,18 +422,17 @@ namespace CommonExtention.Common
         /// <returns><see cref="Dictionary{Key,Value}"/>类型的列名</returns>
         private Dictionary<string, string> GetColumns(PropertyInfo[] propertys)
         {
-            var displayAttributeType = typeof(NotMappedAttribute);
-            var displayNameAttributeType = typeof(DisplayNameAttribute);
+            var excelColumnNameAttributeType = typeof(ExcelColumnNameAttribute);
             var columns = new Dictionary<string, string>();
             for (int i = 0; i < propertys.Length; i++)
             {
                 var item = propertys[i];
                 var attrs = item.GetCustomAttributesData();
-                if (attrs.HasAttribute(typeof(NotMappedAttribute))) continue;
+                if (attrs.HasAttribute(typeof(ExcelExcludeColumnAttribute))) continue;
 
-                if (attrs.HasAttribute(displayNameAttributeType))
+                if (attrs.HasAttribute(excelColumnNameAttributeType))
                 {
-                    var value = GetDisplayNameAttributeValue(attrs, displayNameAttributeType);
+                    var value = GetAttributeValue(attrs, excelColumnNameAttributeType);
                     columns.Add(item.Name, value);
                 }
             }
@@ -440,7 +440,7 @@ namespace CommonExtention.Common
         }
 
         /// <summary>
-        /// 获取 <see cref="DisplayNameAttribute"/> 特性的值
+        /// 获取 <see cref="ExcelColumnNameAttribute.ColumnName"/> 的值
         /// </summary>
         /// <param name="customs">要获取值的 <see cref="IEnumerable"/></param>
         /// <param name="type">要匹配的类型</param>
@@ -448,7 +448,7 @@ namespace CommonExtention.Common
         /// 如果匹配成功，返回字符串表示形式的值；
         /// 如果匹配失败，则返回 <see cref="string.Empty"/>。
         /// </returns>
-        private string GetDisplayNameAttributeValue(IEnumerable<CustomAttributeData> customs, Type type)
+        private string GetAttributeValue(IEnumerable<CustomAttributeData> customs, Type type)
         {
             foreach (var attr in customs)
             {

@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ExcelColumnNameAttribute.cs" />
+    <Compile Include="Attributes\ExcelExcludeColumnAttribute.cs" />
     <Compile Include="Common\Email.cs" />
     <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="Common\SequentialGuidGenerator.cs" />
@@ -150,13 +152,14 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Common\AsyncLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HttpResponseFormat\ResponseEntity.cs" />
+    <Compile Include="Models\ResponseEntity.cs" />
     <Compile Include="HttpResponseFormat\JsonResultFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
