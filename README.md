@@ -1,6 +1,18 @@
 # CommonExtention
-.Net常用与扩展
 
-#Nuget Package
+>.Net Framework 常用与扩展
 
-CommonExtention
+## Install Nuget Package
+
+- **Package Manager :** Install-Package CommonExtention
+
+- **.NET CLI :** dotnet add package CommonExtention
+
+- **Paket CLI :** paket add CommonExtention
+
+<br />
+<br />
+
+## 开发文档
+
+>[中文文档](https://github.com/jiangyangtao/CommonExtention/UsingDocument.md)
