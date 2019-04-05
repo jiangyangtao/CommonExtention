@@ -2,7 +2,10 @@
 
 ## 异步日志
 
-> 命名空间：`using CommonExtention.Common;`
+> 命名空间：`using CommonExtention.Common;`  
+> 日志不会阻塞线程。  
+> 日志路径：当前项目根目录的 `log` 文件夹下。  
+> 异常日志：error.txt，信息日志：information.txt，请求日志：request.txt。
 
 - 记录异常
 
@@ -31,10 +34,10 @@ AsyncLogger.LogMvcRequest(MvcRequest model)
 
 ``` json
 {
-  code : 0,
-  data : {},
-  count : 0,
-  message : 'Success'
+  "code" : 0,
+  "data" : {},
+  "count" : 0,
+  "message" : "Success"
 }
 ```
 
@@ -82,10 +85,10 @@ ResponseFail(int code = -1, string message = "Unknown error");
 
 ``` json
 {
-  code : 0,
-  rows : {},
-  total : 0,
-  message : 'Success'
+  "code" : 0,
+  "rows" : {},
+  "total" : 0,
+  "message" : "Success"
 }
 ```
 
@@ -236,3 +239,161 @@ email.SendAsync(Collection<MailAddress> mails);
 
 ## Excel 操作
 
+> 封装对 Excel 导入、导出的操作。  
+> 命名空间：`using CommonExtention.Common;` 、`using CommonExtention.Extensions;`
+
+### 导入
+
+- 通过 FormData 上传，读取单个文件的指定的 Sheet
+
+``` csharp
+
+// 通过实例化 Excel 类使用
+var excel = new Excel();
+excel.ReadToDataTable(httpPostedFile, sheetName, firstRowIsColumnName, addEmptyRow);
+
+// 通过 Rqequest.Files 的扩展使用
+Request.Files[0].ReadToDataTable(sheetName, firstRowIsColumnName, addEmptyRow);
+
+```
+
+- 通过 FormData 上传，读取单个文件的所有的 Sheet
+
+``` csharp
+
+// 通过实例化 Excel 类
+var excel = new Excel();
+excel.ReadToDataTable(httpPostedFile, sheetName, firstRowIsColumnName, addEmptyRow);
+
+// 通过 Rqequest.Files 的扩展使用
+Request.Files[0].ReadToTables(firstRowIsColumnName, addEmptyRow);
+
+```
+
+- 通过 FormData 上传，读取所有文件的所有的 Sheet
+
+``` csharp
+
+// 通过实例化 Excel 类
+var excel = new Excel();
+excel.ReadToDataTable(httpPostedFile, sheetName, firstRowIsColumnName, addEmptyRow);
+
+// 通过 Rqequest.Files 的扩展使用
+Request.Files.ReadToTableCollection();
+
+```
+
+- 通过指定文件的路径，读取单个文件的指定的 Sheet
+
+``` csharp
+
+var excel = new Excel();
+excel.ReadFileToDataTable(filePath, sheetName, firstRowIsColumnName, addEmptyRow);
+
+```
+
+- 通过指定文件的路径，读取单个文件的所有的 Sheet
+
+``` csharp
+
+var excel = new Excel();
+excel.ReadFileToTables(filePath, firstRowIsColumnName, addEmptyRow);
+
+```
+
+- 通过 Stream 流，读取单个文件的指定的 Sheet
+
+``` csharp
+
+var excel = new Excel();
+excel.ReadStreamToDataTable(stream, sheetName, firstRowIsColumnName, addEmptyRow);
+
+```
+
+- 通过 Stream 流，读取单个文件的所有的 Sheet
+
+``` csharp
+
+var excel = new Excel();
+excel.ReadStreamToTables(stream, firstRowIsColumnName, addEmptyRow);
+
+```
+
+### 导出
+
+- DataTable 导出
+
+``` csharp
+
+var table = new DataTable();
+
+// 通过实例化 Excel 类使用
+var excel = new Excel();
+var memoryStream = excel.WriteToMemoryStream(table,(worksheet, columns, rows) =>
+{
+   // TO DO
+}, "Sheet");
+
+
+// 通过 DataTable 的扩展使用
+var memoryStream = table.WriteToMemoryStream((worksheet, columns, rows) =>
+{
+    // 表头
+    for (int columnIndex = 0; columnIndex < columns.Count; columnIndex++)
+    {
+        var column = columns[columnIndex];
+        worksheet.Cells[1, columnIndex + 1].Value = column.ColumnName;
+        Excel.DrawBorder(worksheet.Cells[1, columnIndex + 1].Style);
+    }
+
+    // 数据行
+    for (int rowIndex = 0; rowIndex < rows.Count; rowIndex++)
+    {
+        var row = rows[rowIndex];
+        for (int columnIndex = 0; columnIndex < columns.Count; columnIndex++)
+        {
+            var column = columns[columnIndex];
+            var cell = worksheet.Cells[rowIndex + 2, columnIndex + 1];
+            cell.Value = row[column.ColumnName];
+            Excel.DrawBorder(cell.Style);
+        }
+    }
+}, "Sheet");
+
+return File(memoryStream.GetBuffer(), Excel.ContentType, "Excel.xlsx");
+
+```
+
+- List 导出
+
+``` csharp
+
+var list = new List<T>();
+
+// 通过实例化 Excel 类使用
+var excel = new Excel();
+var memoryStream = excel.WriteToMemoryStream(list,(worksheet, columns, rows) =>
+{
+   // TO DO
+}, "Sheet");
+
+
+// 通过 List 的扩展使用
+var memoryStream = list.WriteToMemoryStream((worksheet, properties)=>{
+  propertes.ForEach((column, columnIndex) => {
+      worksheet.Cells[1, columnIndex + 1].Value = column.Name;
+      Excel.DrawBorder(worksheet.Cells[1, columnIndex + 1].Style);
+  });
+
+  list.ForEach((row, rowIndex) => {
+      propertes.ForEach((column, columnIndex) => {
+          var value = column.GetValue(row, null);
+          worksheet.Cells[rowIndex + 2, columnIndex + 1].Value = value;
+          Excel.DrawBorder(worksheet.Cells[rowIndex + 2, columnIndex + 1].Style);
+      });
+  });
+}, "Sheet");
+
+return File(memoryStream.GetBuffer(), Excel.ContentType, "Excel.xlsx");
+
+```

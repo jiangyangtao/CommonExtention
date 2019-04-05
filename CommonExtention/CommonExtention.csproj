@@ -103,6 +103,8 @@
     <Compile Include="Common\Email.cs" />
     <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="Common\SequentialGuidGenerator.cs" />
+    <Compile Include="Extensions\DataColumnCollectionExtensions.cs" />
+    <Compile Include="Extensions\DataRowCollectionExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\HttpFileCollectionBaseExtensions.cs" />
     <Compile Include="Extensions\HttpPostedFileBaseExtensions.cs" />
