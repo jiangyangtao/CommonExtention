@@ -15,4 +15,4 @@
 
 ## 开发文档
 
->[中文文档](https://github.com/jiangyangtao/CommonExtention/UsingDocument.md)
+>[开发文档](https://github.com/jiangyangtao/CommonExtention/blob/master/UsingDocument.md)

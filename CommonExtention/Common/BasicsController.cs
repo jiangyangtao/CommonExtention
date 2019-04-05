@@ -69,6 +69,15 @@ namespace CommonExtention.Common
         #endregion
 
         #region Json通用网格返回格式
+
+        /// <summary>
+        /// Json通用网格返回格式：返回成功
+        /// </summary>
+        /// <returns>
+        /// Json格式 : {code:0,rows:data,total:1,message:Success}
+        /// </returns>
+        protected virtual JsonResult ResponseGridResult() => JsonResultFormat.ResponseGridResult();
+
         /// <summary>
         /// Json通用网格返回格式：返回成功
         /// </summary>
