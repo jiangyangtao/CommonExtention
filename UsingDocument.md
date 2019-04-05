@@ -123,7 +123,6 @@ ResponseGridResult(int code = -1, string message = "Unknown error");
 
 ```
 
-
 <br/>
 <br/>
 
@@ -305,8 +304,12 @@ excel.ReadFileToTables(filePath, firstRowIsColumnName, addEmptyRow);
 
 ``` csharp
 
+// 通过实例化 Excel 类
 var excel = new Excel();
 excel.ReadStreamToDataTable(stream, sheetName, firstRowIsColumnName, addEmptyRow);
+
+// 通过 Stream 的扩展使用
+stream.ReadStreamToDataTable(sheetName, firstRowIsColumnName, addEmptyRow);
 
 ```
 
@@ -314,8 +317,12 @@ excel.ReadStreamToDataTable(stream, sheetName, firstRowIsColumnName, addEmptyRow
 
 ``` csharp
 
+// 通过实例化 Excel 类
 var excel = new Excel();
 excel.ReadStreamToTables(stream, firstRowIsColumnName, addEmptyRow);
+
+// 通过 Stream 的扩展使用
+stream.ReadStreamToTables(firstRowIsColumnName, addEmptyRow);
 
 ```
 
@@ -395,5 +402,156 @@ var memoryStream = list.WriteToMemoryStream((worksheet, properties)=>{
 }, "Sheet");
 
 return File(memoryStream.GetBuffer(), Excel.ContentType, "Excel.xlsx");
+
+```
+
+<br/>
+<br/>
+
+## Cookie 操作
+
+> 命名空间：`using CommonExtention.Common;`
+
+- 指示 Cookie 是否存在
+
+``` csharp
+
+HttpCookieConfigure.IsExist(name, value);
+
+```
+
+- 清除所有 Cookie
+
+``` csharp
+
+HttpCookieConfigure.ClearAll();
+
+```
+
+- 清除单个的Cookie
+
+``` csharp
+
+HttpCookieConfigure.Clear(name);
+
+```
+
+- 设置单个Cookie值
+
+``` csharp
+
+HttpCookieConfigure.SetCookie(name, value, HttpOnly);
+
+```
+
+- 设置客户端允许访问的Cookie
+
+``` csharp
+
+HttpCookieConfigure.SetCookie(name, value);
+
+```
+
+- 设置客户端不允许访问的Cookie
+
+``` csharp
+
+HttpCookieConfigure.SetCookieHttpOnly(name, value);
+
+```
+
+- 设置客户端不允许访问的Cookie
+
+``` csharp
+
+HttpCookieConfigure.GetCookie(name);
+
+```
+
+<br/>
+<br/>
+
+## 身份证号码的验证
+
+> 命名空间：`using CommonExtention.Common;`
+
+- 通过实例化 IdentityCardNumber 使用
+
+``` csharp
+
+var identityCardNumber = new IdentityCardNumber(value);
+
+// 是否为身份证号码。如果身份证验证通过，则为 true; 否则为 false
+identityCardNumber.IsIdentityNumber
+
+// 出生日期。如果身份证验证通过，则为 身份证号码上的出生日期; 否则为 null
+identityCardNumber.BirthDate
+
+// 年龄。如果身份证验证通过，则为 身份证号码公民的当前周岁; 否则为 -1
+AidentityCardNumber.ge
+
+// 性别。如果身份证验证通过，则返回 男 / 女; 否则返回 空字符串("")
+identityCardNumber.GenderText
+
+// 性别代码。如果身份证验证通过，则为 0：女 / 1：男; 否则为 -1
+identityCardNumber.GenderCode
+
+```
+
+- 通过 String 的扩展使用
+
+``` csharp
+
+// 是否为身份证号码，true：是，false：否
+value.IsChinaIdentityNumber();
+
+// 获取身份证号码字符串的出生日期
+value.GetDateOfBirthOfChinaIDNumber();
+
+
+// 获取身份证号码字符串的当前年龄
+value.GetAgeOfChinaIDNumber();
+
+// 获取身份证号码字符串的性别的文字，男 / 女
+value.GetGenderTextOfChinaIDNumber();
+
+
+// 获取身份证号码字符串的性别的数字，0 - 女，1 - 男
+value.GetGenderCodeOfChinaIDNumber();
+
+```
+
+<br/>
+<br/>
+
+## 图片验证码
+
+> 命名空间：`using CommonExtention.Common;`
+
+``` csharp
+
+var imageVerificationCode = new ImageVerificationCode(number);
+
+// 验证码
+imageVerificationCode.Code
+
+// 生成图片验证码
+imageVerificationCode.CreateImage(width, height, fontSize, fontFamily, backgroundColor, lineNumber, lineColor, drawPoint, dotNumber);
+
+```
+
+<br/>
+<br/>
+
+## 生成密码
+
+> 命名空间：`using CommonExtention.Common;`
+
+``` csharp
+
+var passwordGenerator = new PasswordGenerator();
+
+// 生成密码
+passwordGenerator.NewPassword(length, containsAtSymbol, containsSymbol);
 
 ```

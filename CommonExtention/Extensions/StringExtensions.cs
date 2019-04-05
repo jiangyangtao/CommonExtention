@@ -119,10 +119,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串不是是中华人民共和国第二代身份证号码，则返回 false；
         /// 否则返回 true。
         /// </returns>
-        public static bool IsChinaIdentityNumber(this string value)
-        {
-            return IdentityCardNumber.IsChinaIdentityNumber(value);
-        }
+        public static bool IsChinaIdentityNumber(this string value) => IdentityCardNumber.IsChinaIdentityNumber(value);
         #endregion
 
         #region 指示指定的字符串是否为等效的 Int16 类型
