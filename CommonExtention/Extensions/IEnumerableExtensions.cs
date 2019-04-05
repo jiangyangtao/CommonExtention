@@ -56,7 +56,7 @@ namespace CommonExtention.Extensions
         /// 如果不存在，则为 false;
         /// </returns>
         public static bool HasAttribute(this IEnumerable<CustomAttributeData> customs, Type type) =>
-            customs.Any(a => a.ToString().Contains(type.FullName));
+            customs.Any(a => a.AttributeType == type);
         #endregion
     }
 }

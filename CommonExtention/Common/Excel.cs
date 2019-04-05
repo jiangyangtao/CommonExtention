@@ -8,11 +8,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CommonExtention.Common
@@ -371,6 +370,18 @@ namespace CommonExtention.Common
         }
         #endregion
 
+        #region 将 DataTable 对象用异步方式写入到 MemoryStream 对象
+        /// <summary>
+        /// 将 <see cref="DataTable"/> 对象用异步方式写入到 <see cref="MemoryStream"/> 对象
+        /// </summary>
+        /// <param name="dataTable">要写入的 <see cref="DataTable"/> 对象</param>
+        /// <param name="action">用于执行写入 Excel 单元格的委托</param>
+        /// <param name="sheetsName">Excel 的工作簿名称</param>
+        /// <returns>Excel 形式的 <see cref="MemoryStream"/> 对象</returns>
+        public async Task<MemoryStream> WriteToMemoryStreamAsync(DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
+            string sheetsName = "sheet1") => await Task.Factory.StartNew(() => WriteToMemoryStream(dataTable, action, sheetsName));
+        #endregion
+
         #region 将 List 集合写入到 MemoryStream 对象
         /// <summary>
         /// 将 <see cref="List{T}"/> 集合写入到 <see cref="MemoryStream"/> 对象
@@ -403,7 +414,7 @@ namespace CommonExtention.Common
                     columns.ForEach((column, columnIndex) =>
                     {
                         var property = propertys.Find(a => a.Name == column.Key);
-                        var value = property.GetValue(row, null);
+                        var value = property.GetValue(row);
                         worksheet.Cells[rowIndex + 2, columnIndex + 1].Value = value;
                         DrawBorder(worksheet.Cells[rowIndex + 2, columnIndex + 1].Style);
                     });
@@ -452,7 +463,7 @@ namespace CommonExtention.Common
         {
             foreach (var attr in customs)
             {
-                if (attr.ToString().Contains(type.FullName) || attr.ConstructorArguments.Count > 0)
+                if (attr.AttributeType == type || attr.ConstructorArguments.Count > 0)
                 {
                     return attr.ConstructorArguments[0].Value.ToString();
                 }
