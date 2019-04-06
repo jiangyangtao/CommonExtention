@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CommonExtention.Extensions
 {
@@ -230,6 +231,16 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
+        #region 将当前 DataTable 对象用异步方式转换为 List 对象
+        /// <summary>
+        /// 将当前 <see cref="DataTable"/> 对象用异步方式转换为 <see cref="List{T}"/> 对象
+        /// </summary>
+        /// <typeparam name="T">要转换的元素的类型</typeparam>
+        /// <param name="dt">要转换的 <see cref="DataTable"/> </param>
+        /// <returns>转换过后的 <see cref="List{T}"/> 对象</returns>
+        public static async Task<List<T>> ToListAsync<T>(this DataTable dt) where T : class, new() => await Task.Run(() => dt.ToList<T>());
+        #endregion
+
         #region 将当前 DataTable 对象转换为 ArrayList 对象
         /// <summary>
         /// 将当前 <see cref="DataTable"/> 对象转换为 <see cref="ArrayList"/> 对象
@@ -239,15 +250,12 @@ namespace CommonExtention.Extensions
         public static ArrayList ToArrayList(this DataTable dt)
         {
             var arrayList = new ArrayList();
-            foreach (DataRow dataRow in dt.Rows)
+            dt.Rows.ForEach(row =>
             {
                 var dictionary = new Dictionary<string, object>();
-                foreach (DataColumn dataColumn in dt.Columns)
-                {
-                    dictionary.Add(dataColumn.ColumnName, dataRow[dataColumn.ColumnName]);
-                }
+                dt.Columns.ForEach(column => dictionary.Add(column.ColumnName, row[column.ColumnName]));
                 arrayList.Add(dictionary);
-            }
+            });
             return arrayList;
         }
         #endregion
@@ -262,6 +270,19 @@ namespace CommonExtention.Extensions
         /// <returns>Excel形式的 <see cref="MemoryStream"/> 对象</returns>
         public static MemoryStream WriteToMemoryStream(this DataTable dataTable, Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
             string sheetsName = "sheet1") => new Excel().WriteToMemoryStream(dataTable, action, sheetsName);
+        #endregion
+
+        #region 将当前 DataTable 对象用异步方式写入 MemoryStream
+        /// <summary>
+        /// 将当前 <see cref="DataTable"/> 对象用异步方式写入 <see cref="MemoryStream"/>
+        /// </summary>
+        /// <param name="dataTable">要写入的 <see cref="DataTable"/> 对象</param>
+        /// <param name="action">用于执行写入 Excel 单元格的委托</param>
+        /// <param name="sheetsName">Excel 的工作簿名称</param>
+        /// <returns>Excel形式的 <see cref="MemoryStream"/> 对象</returns>
+        public static async Task<MemoryStream> WriteToMemoryStreamAsync(this DataTable dataTable,
+            Action<ExcelWorksheet, DataColumnCollection, DataRowCollection> action,
+            string sheetsName = "sheet1") => await new Excel().WriteToMemoryStreamAsync(dataTable, action, sheetsName);
         #endregion
 
         #region 清除当前 DataTable 对象的空行
