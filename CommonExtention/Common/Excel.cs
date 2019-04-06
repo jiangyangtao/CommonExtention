@@ -48,7 +48,7 @@ namespace CommonExtention.Common
         /// 如果 filePath 参数值的磁盘中不存在 Excel 文件，则返回 null；
         /// 否则返回从指定 Excel 文件读取后的 <see cref="DataTable"/> 对象。
         /// </returns>
-        public DataTable ReadFileToDataTable(string filePath, string sheetName = null, bool firstRowIsColumnName = true, bool addEmptyRow = false)
+        public DataTable ReadExcelToDataTable(string filePath, string sheetName = null, bool firstRowIsColumnName = true, bool addEmptyRow = false)
         {
             if (filePath.IsNullOrEmpty() || !File.Exists(filePath)) return null;
 
@@ -71,7 +71,7 @@ namespace CommonExtention.Common
         /// 否则返回从指定 Excel 文件读取后的 <see cref="ICollection{DataTable}"/> 对象，
         /// 其中一个 <see cref="DataTable"/> 对应一个 Sheet 工作簿。
         /// </returns>
-        public ICollection<DataTable> ReadFileToTables(string filePath, bool firstRowIsColumnName = true, bool addEmptyRow = false)
+        public ICollection<DataTable> ReadExcelToTables(string filePath, bool firstRowIsColumnName = true, bool addEmptyRow = false)
         {
             if (filePath.IsNullOrEmpty() || !File.Exists(filePath)) return null;
 
@@ -94,8 +94,8 @@ namespace CommonExtention.Common
         /// 如果 filePath 参数值的磁盘中不存在 Excel 文件，则返回 null；
         /// 否则返回从指定 Excel 文件读取后的 <see cref="DataTable"/> 对象。
         /// </returns>
-        public async Task<DataTable> ReadFileToDataTableAsync(string filePath, string sheetName = null, bool firstRowIsColumnName = true, bool addEmptyRow = false) =>
-            await Task.Run(() => ReadFileToDataTable(filePath, sheetName, firstRowIsColumnName, addEmptyRow));
+        public async Task<DataTable> ReadExcelToDataTableAsync(string filePath, string sheetName = null, bool firstRowIsColumnName = true, bool addEmptyRow = false) =>
+            await Task.Run(() => ReadExcelToDataTable(filePath, sheetName, firstRowIsColumnName, addEmptyRow));
         #endregion
 
         #region 将指定路径的 Excel 文件用异步方式读取到 ICollection<DataTable>
@@ -111,8 +111,8 @@ namespace CommonExtention.Common
         /// 否则返回从指定 Excel 文件读取后的 <see cref="ICollection{DataTable}"/> 对象，
         /// 其中一个 <see cref="DataTable"/> 对应一个 Sheet 工作簿。
         /// </returns>
-        public async Task<ICollection<DataTable>> ReadFileToTablesAsync(string filePath, bool firstRowIsColumnName = true, bool addEmptyRow = false) =>
-            await Task.Run(() => ReadFileToTables(filePath, firstRowIsColumnName, addEmptyRow));
+        public async Task<ICollection<DataTable>> ReadExcelToTablesAsync(string filePath, bool firstRowIsColumnName = true, bool addEmptyRow = false) =>
+            await Task.Run(() => ReadExcelToTables(filePath, firstRowIsColumnName, addEmptyRow));
         #endregion
 
         #region 将 HttpPostedFileBase 读取到 DataTable

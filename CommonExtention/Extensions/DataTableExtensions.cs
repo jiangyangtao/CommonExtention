@@ -166,7 +166,7 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将当前 DataTable 对象转换为 List 对象
+        #region 将当前 DataTable 对象转换为 List
         /// <summary>
         /// 将当前 <see cref="DataTable"/> 对象转换为 <see cref="List{T}"/> 对象
         /// </summary>
@@ -231,9 +231,9 @@ namespace CommonExtention.Extensions
         }
         #endregion
 
-        #region 将当前 DataTable 对象用异步方式转换为 List 对象
+        #region 将当前 DataTable 对象用异步方式转换为 List
         /// <summary>
-        /// 将当前 <see cref="DataTable"/> 对象用异步方式转换为 <see cref="List{T}"/> 对象
+        /// 将当前 <see cref="DataTable"/> 对象用异步方式转换为 <see cref="List{T}"/>
         /// </summary>
         /// <typeparam name="T">要转换的元素的类型</typeparam>
         /// <param name="dt">要转换的 <see cref="DataTable"/> </param>

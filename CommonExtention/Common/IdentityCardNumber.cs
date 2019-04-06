@@ -56,19 +56,6 @@ namespace CommonExtention.Common
         public int GenderCode { get; private set; } = -1;
         #endregion
 
-        #region 指示指定的字符串是否为中华人民共和国第二代身份证号码
-        /// <summary>
-        /// 指示指定的字符串是否为中华人民共和国第二代身份证号码
-        /// </summary>
-        /// <param name="value">要检测的字符串</param>
-        /// <returns>
-        /// 如果字符串为 null 或空字符串 ("")，则返回 false；
-        /// 如果字符串不是是中华人民共和国第二代身份证号码，则返回 false；
-        /// 否则返回 true。
-        /// </returns>
-        public static bool IsChinaIdentityNumber(string value) => Verification(value);
-        #endregion
-
         #region 私有属性
 
         /// <summary>
@@ -157,6 +144,19 @@ namespace CommonExtention.Common
             var diff = DateTime.Now.Subtract(BirthDate.Value);
             return diff.Days / 365;
         }
+        #endregion
+
+        #region 指示指定的字符串是否为中华人民共和国第二代身份证号码
+        /// <summary>
+        /// 指示指定的字符串是否为中华人民共和国第二代身份证号码
+        /// </summary>
+        /// <param name="value">要检测的字符串</param>
+        /// <returns>
+        /// 如果字符串为 null 或空字符串 ("")，则返回 false；
+        /// 如果字符串不是是中华人民共和国第二代身份证号码，则返回 false；
+        /// 否则返回 true。
+        /// </returns>
+        public static bool IsChinaIdentityNumber(string value) => Verification(value);
         #endregion
     }
 }
