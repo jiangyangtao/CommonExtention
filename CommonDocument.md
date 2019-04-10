@@ -555,3 +555,48 @@ var passwordGenerator = new PasswordGenerator();
 passwordGenerator.NewPassword(length, containsAtSymbol, containsSymbol);
 
 ```
+
+<br/>
+<br/>
+
+## 连续的 Guid
+
+> 命名空间：`using CommonExtention.Common;`  
+> 代码出自: <a href="https://www.cnblogs.com/CameronWu/p/guids-as-fast-primary-keys-under-multiple-database.html" target="_blank">使用有序GUID：提升其在各数据库中作为主键时的性能</a>  
+> <font color="red">此代码尚未测试，谨慎使用。</font>
+
+``` csharp
+
+// Sequential As String
+SequentialGuidGenerator.NewSequentialGuid(SequentialGuidType.SequentialAsString);
+
+// Sequential As Binary
+SequentialGuidGenerator.NewSequentialGuid(SequentialGuidType.SequentialAsBinary);
+
+// Sequential At End
+SequentialGuidGenerator.NewSequentialGuid(SequentialGuidType.SequentialAtEnd);
+
+```
+
+<br/>
+<br/>
+
+## WebConfig 文件的操作
+
+> 命名空间：`using CommonExtention.Common;`  
+
+- 根据指定的 key 获取 Web.Config 文件中 AppSettings 节点对应的 value 值
+
+``` csharp
+
+WebConfig.GetAppSetting(string key)
+
+```
+
+- 根据指定的 name 获取 Web.Config 文件中 connectionStrings 节点对应的 connectionString
+
+``` csharp
+
+WebConfig.GetConnectionStrings(string name)
+
+```

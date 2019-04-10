@@ -17,7 +17,7 @@ namespace CommonExtention.Common
         /// </summary>
         SequentialAsBinary,
         /// <summary>
-        /// Sequential A tEnd
+        /// Sequential At End
         /// </summary>
         SequentialAtEnd
     }
