@@ -77,7 +77,6 @@ ResponseFail(int code = -1, string message = "Unknown error");
 <br/>
 <br/>
 
-
 ## Json 通用网格返回格式
 
 > 命名空间：`using CommonExtention.Common;`  

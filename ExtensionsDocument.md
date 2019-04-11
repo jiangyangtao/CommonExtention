@@ -71,3 +71,251 @@ intArray.ForEach((item, index) =>
 });
 
 ```
+
+<br />
+<br />
+
+## Database 扩展
+
+- 创建一个原始 Sql 查询，将该查询的结果返回给 DataTable
+
+``` csharp
+
+DbContext.Database.SqlQueryToDataTable(sql, parameters);
+
+```
+
+- 创建一个原始 Sql 查询，将该查询的结果返回给 DataSet
+
+``` csharp
+
+DbContext.Database.SqlQueryToDataSet(sql, parameters);
+
+```
+
+<br />
+<br />
+
+## DataColumnCollection 扩展
+
+- 对 DataColumnCollection 的每个元素执行指定操作
+
+``` csharp
+
+DataTable.Columns.ForEach(item =>
+{
+    // TO DO
+});
+
+```
+
+- 对 DataColumnCollection 的每个元素执行指定操作
+
+``` csharp
+
+DataTable.Columns.ForEach((item, index) =>
+{
+    // TO DO
+});
+
+```
+
+<br />
+<br />
+
+## DataRowCollection 扩展
+
+- 对 DataRowCollection 的每个元素执行指定操作
+
+``` csharp
+
+DataTable.Rows.ForEach(item =>
+{
+    // TO DO
+});
+
+```
+
+- 对 DataRowCollection 的每个元素执行指定操作
+
+``` csharp
+
+DataTable.Rows.ForEach((item, index) =>
+{
+    // TO DO
+});
+
+```
+
+<br />
+<br />
+
+## DataSet 扩展
+
+- 将当前 DataSet 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataSet.ToJson(formatting);
+
+```
+
+- 将当前 DataSet 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataSet.ToJson(settings);
+
+```
+
+- 将当前 DataSet 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataSet.ToJson(converters);
+
+```
+
+- 将当前 DataSet 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataSet.ToJson(formatting, settings);
+
+```
+
+- 将当前 DataSet 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataSet.ToJson(formatting, converters);
+
+```
+
+<br />
+<br />
+
+## DataTableCollection 扩展
+
+- 对 DataTableCollection 的每个元素执行指定操作
+
+``` csharp
+
+DataSet.Tables.ForEach(item =>
+{
+    // TO DO
+});
+
+```
+
+- 对 DataTableCollection 的每个元素执行指定操作
+
+``` csharp
+
+DataTable.Rows.ForEach((item, index) =>
+{
+    // TO DO
+});
+
+```
+
+<br />
+<br />
+
+## DataTable 扩展
+
+- 将当前 DataTable 对象转换为 Json 字符串
+
+``` csharp
+
+DataTable.ToJsonString(formatting);
+
+```
+
+- 将当前 DataTable 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataTable.ToJsonArray(formatting);
+
+```
+
+- 将当前 DataTable 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataTable.ToJsonArray(settings);
+
+```
+
+- 将当前 DataTable 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataTable.ToJsonArray(converters);
+
+```
+
+- 将当前 DataTable 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataTable.ToJsonArray(formatting, settings);
+
+```
+
+- 将当前 DataTable 对象转换为 Json 数组字符串
+
+``` csharp
+
+DataTable.ToJsonArray(formatting, converters);
+
+```
+
+- 将当前 DataTable 对象转换为 List
+
+``` csharp
+
+DataTable.ToList<T>();
+
+```
+
+- 将当前 DataTable 对象用异步方式转换为 List
+
+``` csharp
+
+async DataTable.ToListAsync<T>();
+
+```
+
+- 将当前 DataTable 对象转换为 ArrayList 对象
+
+``` csharp
+
+DataTable.ToArrayList();
+
+```
+
+- 将当前 DataTable 对象写入 MemoryStream
+
+``` csharp
+
+DataTable.WriteToMemoryStream(action, sheetsName);
+
+```
+
+- 将当前 DataTable 对象用异步方式写入 MemoryStream
+
+``` csharp
+
+async DataTable.WriteToMemoryStreamAsync(action, sheetsName);
+
+```
+
+- 清除当前 DataTable 对象的空行
+
+``` csharp
+
+DataTable.ClearEmptyRow();
+
+```
