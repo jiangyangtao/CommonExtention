@@ -319,3 +319,194 @@ async DataTable.WriteToMemoryStreamAsync(action, sheetsName);
 DataTable.ClearEmptyRow();
 
 ```
+
+<br />
+<br />
+
+## DateTime 扩展
+
+- Sql Server 数据库 DateTime 初始值
+
+``` csharp
+
+// 公元 1900 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
+DateTimeExtensions.MsSQLDateTimeInitial
+
+```
+
+- Sql Server 数据库 DateTime 最小值
+
+``` csharp
+
+// 公元 1900 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
+DateTimeExtensions.MsSQLDateTimeMinValue
+
+```
+
+- Sql Server 数据库 DateTime 最大值
+
+``` csharp
+
+// 公元 9999 年 12 月 31 号 11 点 59 分 59 秒 999 毫秒
+DateTimeExtensions.MsSQLDateTimeMaxValue
+
+```
+
+- MySql 数据库 DateTime 初始值
+
+``` csharp
+
+// 公元 1753 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
+DateTimeExtensions.MySqlDateTimeInitial
+
+```
+
+- MySql 数据库 DateTime 最小值
+
+``` csharp
+
+// 公元 1753 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
+DateTimeExtensions.MySqlDateTimeMinValue
+
+```
+
+- MySql 数据库 DateTime 最大值
+
+``` csharp
+
+// 公元 9999 年 12 月 31 号 11 点 59 分 59 秒 999 毫秒
+DateTimeExtensions.MySqlDateTimeMaxValue
+
+```
+
+- 将当前 DateTime 实例转换为 Unix 时间
+
+``` csharp
+
+DateTime.Now.ToUnixTime();
+
+```
+
+- 将当前 DateTime 实例转换为格式化后的日期的字符串表示形式
+
+``` csharp
+
+// 默认格式：yyyy-MM-dd
+DateTime.Now.ToFormatDate();
+
+```
+
+- 将当前 DateTime 实例转换为格式化后的日期时间的字符串表示形式
+
+``` csharp
+
+// 默认格式：yyyy-MM-dd HH:mm:ss
+DateTime.Now.ToFormatDateTime();
+
+```
+
+- 从当前 DateTime 实例中计算出与当前时间的时间差
+
+``` csharp
+
+DateTime.TimeRange();
+
+```
+
+- 从当前 DateTime 实例中计算出与当前时间之前的时间差
+
+``` csharp
+
+DateTime.BeforeTimeRange();
+
+```
+
+- 从当前 DateTime 实例中计算出与当前时间之后的时间差
+
+``` csharp
+
+DateTime.AfterTimeRange();
+
+```
+
+- 从当前 DateTime 实例中取得当前月的第一天
+
+``` csharp
+
+DateTime.Now.FirstDayOfMonth();
+
+```
+
+- 从当前 DateTime 实例中取得当前月的最后一天
+
+``` csharp
+
+DateTime.Now.LastDayOfMonth();
+
+```
+
+- 从当前 DateTime 实例中取得当前周以星期天开始的第一天
+
+``` csharp
+
+DateTime.Now.FirstDayOfWeekFromSunday();
+
+```
+
+- 从当前 DateTime 实例中取得当前周以星期一开始的第一天
+
+``` csharp
+
+DateTime.Now.FirstDayOfWeekFromMonday();
+
+```
+
+- 从当前 DateTime 实例中取得当前周以星期天开始的最后一天
+
+``` csharp
+
+DateTime.Now.LastDayOfWeekFromSunday();
+
+```
+
+- 从当前 DateTime 实例中取得当前周以星期一开始的最后一天
+
+``` csharp
+
+DateTime.Now.LastDayOfWeekFromMonday();
+
+```
+
+<br />
+<br />
+
+## decimal 扩展
+
+- 将此实例的数值转换为其千分位的字符串表示形式
+
+``` csharp
+
+decimal.ToThousand();
+
+```
+
+<br />
+<br />
+
+## double 扩展
+
+- 返回 length 对应的 Size
+
+``` csharp
+
+double.FileSize();
+
+```
+
+- 将此实例的数值转换为其千分位的字符串表示形式
+
+``` csharp
+
+double.ToThousand();
+
+```

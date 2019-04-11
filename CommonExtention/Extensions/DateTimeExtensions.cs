@@ -7,21 +7,21 @@ namespace CommonExtention.Extensions
     /// </summary>
     public static class DateTimeExtensions
     {
-        #region Sql Server 数据库 DateTime 初始值 
+        #region Sql Server 数据库 DateTime 初始值
         /// <summary>
         /// Sql Server 数据库 <see cref="DateTime"/> 初始值 : 公元 1900 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
         /// </summary>
         public static DateTime MsSQLDateTimeInitial { get => new DateTime(1900, 1, 1, 0, 0, 0, 0); }
         #endregion
 
-        #region Sql Server 数据库 DateTime 最小值 
+        #region Sql Server 数据库 DateTime 最小值
         /// <summary>
         /// Sql Server 数据库 <see cref="DateTime"/> 最小值 : 公元 1900 年 1 月 1 号 00 点 00 分 00 秒 000 毫秒
         /// </summary>
         public static DateTime MsSQLDateTimeMinValue { get => MsSQLDateTimeInitial; }
         #endregion
 
-        #region Sql Server 数据库 DateTime 最大值 
+        #region Sql Server 数据库 DateTime 最大值
         /// <summary>
         /// Sql Server 数据库 <see cref="DateTime"/> 最大值 : 公元 9999 年 12 月 31 号 11 点 59 分 59 秒 999 毫秒
         /// </summary>
