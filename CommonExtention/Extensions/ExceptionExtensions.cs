@@ -41,10 +41,7 @@ namespace CommonExtention.Extensions
         /// 将当前 <see cref="Exception"/> 对象用异步方式写入日志
         /// </summary>
         /// <param name="exception">当前 Exception 对象</param>
-        public static void WriteLogAsync(this Exception exception)
-        {
-            AsyncLogger.LogException(exception);
-        }
+        public static void WriteLogAsync(this Exception exception) => AsyncLogger.LogException(exception);
         #endregion
     }
 }

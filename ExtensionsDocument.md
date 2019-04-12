@@ -510,3 +510,256 @@ double.FileSize();
 double.ToThousand();
 
 ```
+
+<br />
+<br />
+
+## Exception 扩展
+
+- 返回 Exception 对象中的 InnerException
+
+``` csharp
+
+Exception.GetInnerException();
+
+```
+
+- 返回当前 Exception 对象中 InnerException 的 Message
+
+``` csharp
+
+Exception.ExceptionMessage();
+
+```
+
+- 将当前 Exception 对象用异步方式写入日志
+
+``` csharp
+
+Exception.WriteLogAsync();
+
+```
+
+<br />
+<br />
+
+## FileInfo 扩展
+
+- 将当前 FileInfo 对象转换成 MemoryStream 对象
+
+``` csharp
+
+FileInfo.ToMemoryStream();
+
+```
+
+- 获取当前 FileInfo 对象的无符号字节数组
+
+``` csharp
+
+FileInfo.GetBuffer();
+
+```
+
+<br />
+<br />
+
+## Guid 扩展
+
+- 指示指定的 Guid 是否为 System.Guid.Empty
+
+``` csharp
+
+Guid.IsEmpty();
+
+```
+
+- 指示指定的 Guid 是否不为 System.Guid.Empty
+
+``` csharp
+
+Guid.NotEmpty();
+
+```
+
+- 指示指定的 Guid? 是 null 还是 System.Guid.Empty
+
+``` csharp
+
+Guid?.IsNullOrEmpty();
+
+```
+
+- 指示指定的 Guid? 是否为 null
+
+``` csharp
+
+Guid?.IsNull();
+
+```
+
+- 指示指定的 Guid? 是否不为 null
+
+``` csharp
+
+Guid?.NotNull();
+
+```
+
+- 指示指定的 Guid? 不为 null 和 System.Guid.Empty
+
+``` csharp
+
+Guid?.NotNullAndEmpty();
+
+```
+
+<br />
+<br />
+
+## HttpRequest 扩展
+
+- 获取当前请求的参数
+
+``` csharp
+
+HttpRequest.GetParamsString();
+
+```
+
+<br />
+<br />
+
+## ICollection 扩展
+
+- 对 ICollection 的每个元素执行指定操作
+
+``` csharp
+
+ICollection<T>.ForEach(item => {
+    // TO DO
+});
+
+```
+
+- 对 ICollection 的每个元素执行指定操作
+
+``` csharp
+
+ICollection<T>.ForEach((item, index) => {
+    // TO DO
+});
+
+```
+
+<br />
+<br />
+
+## IEnumerable 扩展
+
+- 对 ICollection 的每个元素执行指定操作
+
+``` csharp
+
+IEnumerable<T>.ForEach(item => {
+    // TO DO
+});
+
+```
+
+- 对 ICollection 的每个元素执行指定操作
+
+``` csharp
+
+IEnumerable<T>.ForEach((item, index) => {
+    // TO DO
+});
+
+```
+
+- 指示 CustomAttributeData 公开枚举器中是否存在指定的 Attribute
+
+``` csharp
+
+IEnumerable<T>.HasAttribute(type);
+
+```
+
+<br />
+<br />
+
+## long 扩展
+
+- 将此实例的Unix时间格式的数值转换为DateTime对象
+
+``` csharp
+
+long.ToDateTime();
+
+```
+
+- 返回 length 对应的 Size
+
+``` csharp
+
+long.FileSize();
+
+```
+
+- 将此实例的数值转换为其千分位的字符串表示形式
+
+``` csharp
+
+long.ToThousand();
+
+```
+
+<br />
+<br />
+
+## int 扩展
+
+- 返回 length 对应的 Size
+
+``` csharp
+
+int.FileSize();
+
+```
+
+- 将此实例的数值转换为其千分位的字符串表示形式
+
+``` csharp
+
+int.ToThousand();
+
+```
+
+<br />
+<br />
+
+## Json 扩展
+
+- 返回 Key 对应的字符串表示形式的值
+
+``` csharp
+
+JObject.GetValue(key);
+
+```
+
+- 返回 Key 对应的指定类型的值
+
+``` csharp
+
+JObject.GetValue(key);
+
+```
+
+- 返回 Key 对应的键值对
+
+``` csharp
+
+JObject.GetKeyValue(key);
+
+```
