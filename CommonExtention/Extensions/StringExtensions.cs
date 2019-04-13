@@ -1159,7 +1159,7 @@ namespace CommonExtention.Extensions
         /// 如果字符串检验结果不为中华人民共和国第二代身份证号码，则返回 null；
         /// 否则返回从出生日期到今天的年龄。
         /// </returns>
-        public static int? GetAgeOfChinaIDNumber(string value)
+        public static int? GetAgeOfChinaIDNumber(this string value)
         {
             if (value.IsNullOrEmpty()) return null;
             var _date = value.GetDateOfBirthOfChinaIDNumber();

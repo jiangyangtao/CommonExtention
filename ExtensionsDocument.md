@@ -681,7 +681,7 @@ IEnumerable<T>.ForEach((item, index) => {
 
 ``` csharp
 
-IEnumerable<T>.HasAttribute(type);
+IEnumerable<CustomAttributeData>.HasAttribute(type);
 
 ```
 
@@ -761,5 +761,1190 @@ JObject.GetValue(key);
 ``` csharp
 
 JObject.GetKeyValue(key);
+
+```
+
+<br />
+<br />
+
+## List 扩展
+
+- 将当前 List 集合转换为 DataTable
+
+``` csharp
+
+List<T>.ToDataTable();
+
+```
+
+- 将当前 List 对象转换为 Json 字符串
+
+``` csharp
+
+List<T>.ToJsonString(formatting);
+
+```
+
+- 将当前 List 对象转换为 Json 数组字符串
+
+``` csharp
+
+List<T>.ToJsonArray(formatting);
+
+```
+
+- 将当前 List 对象转换为 Json 数组字符串
+
+``` csharp
+
+List<T>.ToJsonArray(settings);
+
+```
+
+- 将当前 List 对象转换为 Json 数组字符串
+
+``` csharp
+
+List<T>.ToJsonArray(converters);
+
+```
+
+- 将当前 List 对象转换为 Json 数组字符串
+
+``` csharp
+
+List<T>.ToJsonArray(formatting, settings);
+
+```
+
+- 将当前 List 对象转换为 Json 数组字符串
+
+``` csharp
+
+List<T>.ToJsonArray(formatting, converters);
+
+```
+
+- 对当前 List 集合的每个元素执行指定操作
+
+``` csharp
+
+List<T>.ForEach((item, index) => {
+    // TO DO
+});
+
+```
+
+- 清除当前 List 中的空元素
+
+``` csharp
+
+List<T>.ClearNullItem();
+
+```
+
+<br />
+<br />
+
+## NameValueCollection 扩展
+
+- 对 ICollection 的每个元素执行指定操作
+
+``` csharp
+
+ICollection<T>.ForEach(item => {
+    // TO DO
+});
+
+```
+
+- 对 ICollection 的每个元素执行指定操作
+
+``` csharp
+
+ICollection<T>.ForEach((item, index) => {
+    // TO DO
+});
+
+```
+
+- 将当前集合序列化成 Json 的字符串表示形式
+
+``` csharp
+
+ICollection<T>.ToJson();
+
+```
+
+<br />
+<br />
+
+## Nullable 扩展
+
+- 将当前 short? 对象转换为其等效的安全值
+
+``` csharp
+
+short?.ToInt16();
+
+```
+
+- 将当前 int? 对象转换为其等效的安全值
+
+``` csharp
+
+int?.ToInt16();
+
+```
+
+- 将当前 long? 对象转换为其等效的安全值
+
+``` csharp
+
+long?.ToInt16();
+
+```
+
+- 将当前 float? 对象转换为其等效的安全值
+
+``` csharp
+
+float?.ToInt16();
+
+```
+
+- 将当前 double? 对象转换为其等效的安全值
+
+``` csharp
+
+double?.ToInt16();
+
+```
+
+- 将当前 decimal? 对象转换为其等效的安全值
+
+``` csharp
+
+decimal?.ToInt16();
+
+```
+
+- 将当前 DateTime? 对象转换为其等效的安全值
+
+``` csharp
+
+DateTime?.ToInt16();
+
+```
+
+- 将当前 short? 对象转换为其千分位的字符串表示形式
+
+``` csharp
+
+short?.ToThousand();
+
+```
+
+- 将当前 int? 对象转换为其千分位的字符串表示形式
+
+``` csharp
+
+int?.ToThousand();
+
+```
+
+- 将当前 long? 对象转换为其千分位的字符串表示形式
+
+``` csharp
+
+long?.ToThousand();
+
+```
+
+- 将当前 float? 对象转换为其千分位的字符串表示形式
+
+``` csharp
+
+float?.ToThousand();
+
+```
+
+- 将当前 double? 对象转换为其千分位的字符串表示形式
+
+``` csharp
+
+double?.ToThousand();
+
+```
+
+- 将当前 decimal? 对象转换为其千分位的字符串表示形式
+
+``` csharp
+
+decimal?.ToThousand();
+
+```
+
+- 将当前 DateTime? 对象转换为格式化后的日期字符串
+
+``` csharp
+
+DateTime?.ToFormatDate();
+
+```
+
+- 将当前 DateTime? 对象转换为格式化后的日期时间字符串
+
+``` csharp
+
+DateTime?.ToFormatDateTime();
+
+```
+
+<br />
+<br />
+
+## Object 扩展
+
+> 对当前类的每个属性执行指定操作
+
+``` csharp
+
+T.ForIn<T>();
+
+```
+
+> 指示指定的 object 对象是否不为 null
+
+``` csharp
+
+csharp bool NotNull();
+
+```
+
+> 指示指定的 object 对象不是 null 和 System.String.Empty 字符串
+
+``` csharp
+
+object.NotNullAndEmpty();
+
+```
+
+> 指示指定的 object 对象是否为 null
+
+``` csharp
+
+object.IsNull();
+
+```
+
+> 指示指定的 object 对象是 null 还是 System.String.Empty 字符串
+
+``` csharp
+
+object.IsNullOrEmpty();
+
+```
+
+> 将指定的 object 对象转换不为 null 的 System.String 表示形式
+
+``` csharp
+
+object.ToNotNullString();
+
+```
+
+> 将指定的 object 对象转换为去除空格后的 System.String 表示形式
+
+``` csharp
+
+object.ToNotSpaceString();
+
+```
+
+> 指示指定的 object 是否为等效的 String 类型
+
+``` csharp
+
+object.IsString();
+
+```
+
+> 指示指定的 object 是否为等效的 Int16 类型
+
+``` csharp
+
+object.IsInt16();
+
+```
+
+> 指示指定的 object 是否为等效的 Int32 类型
+
+``` csharp
+
+object.IsInt();
+
+```
+
+> 指示指定的 object 是否为等效的 Int64 类型
+
+``` csharp
+
+object.IsInt64();
+
+```
+
+> 指示指定的 object 是否为等效的 Decimal 类型
+
+``` csharp
+
+object.IsDecimal();
+
+```
+
+> 指示指定的 object 是否为等效的 Single 类型
+
+``` csharp
+
+object.IsSingle();
+
+```
+
+> 指示指定的 object 是否为等效的 Double 类型
+
+``` csharp
+
+object.IsDouble();
+
+```
+
+> 指示指定的 object 是否为等效的 DadeTime 对象
+
+``` csharp
+
+object.IsDateTime();
+
+```
+
+> 指示指定的 object 是否为等效的 Boolean 类型
+
+``` csharp
+
+object.IsBoolean();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 Int16 的值
+
+``` csharp
+
+object.ToInt16();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 Int32 的值
+
+``` csharp
+
+object.ToInt();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 Int64 的值
+
+``` csharp
+
+object.ToInt64();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 Single 的值
+
+``` csharp
+
+object.ToSingle();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 Double 的值
+
+``` csharp
+
+object.ToDouble();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 Decimal 的值
+
+``` csharp
+
+object.ToDecimal();
+
+```
+
+> 将时间形式的 object 对象转换为其等效的 DateTime 对象
+
+``` csharp
+
+object.ToDateTime();
+
+```
+
+> 将布尔形式的 object 对象转换为其等效的 Boolean 的值
+
+``` csharp
+
+object.ToBoolean();
+
+```
+
+> 将 Guid 形式的 object 对象转换为其等效的 Guid 的值
+
+``` csharp
+
+object.ToGuid();
+
+```
+
+> 将 Guid 形式的 object 对象转换为其等效的 Guid 的值
+
+``` csharp
+
+object.ToGuid();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 short? 的值
+
+``` csharp
+
+object.ToNullableInt16();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 int? 的值
+
+``` csharp
+
+object.ToNullableInt();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 long? 的值
+
+``` csharp
+
+object.ToNullableInt64();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 float? 的值
+
+``` csharp
+
+object.ToNullableSingle();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 double? 的值
+
+``` csharp
+
+object.ToNullableDouble();
+
+```
+
+> 将数字形式的 object 对象转换为其等效的 decimal? 的值
+
+``` csharp
+
+ object.ToNullableDecimal();
+
+```
+
+> 将时间形式的 object 对象转换为其等效的 DateTime? 对象
+
+``` csharp
+
+object.ToNullableDateTime();
+
+```
+
+> 将布尔形式的 object 对象转换为其等效的 bool? 的值
+
+``` csharp
+
+object.ToNullableBoolean();
+
+```
+
+> 将 Guid 形式的 object 对象转换为其等效的 Guid? 的值
+
+``` csharp
+
+object.ToNullableGuid();
+
+```
+
+> 将 Guid 形式的 object 对象转换为其等效的 Guid? 的值
+
+``` csharp
+
+object.ToNullableGuid();
+
+```
+
+<br />
+<br />
+
+## short 扩展
+
+> 将此实例的数值转换为其千分位的字符串表示形式
+
+``` csharp
+
+short.ToThousand();
+
+```
+
+<br />
+<br />
+
+## float 扩展
+
+> 将此实例的数值转换为其千分位的字符串表示形式
+
+``` csharp
+
+float.ToThousand();
+
+```
+
+<br />
+<br />
+
+## String 扩展
+
+> 初始化一个字符串形式的 GUID 对象
+
+``` csharp
+
+string.NewGuid();
+
+```
+
+> 将字符串形式的Unix时间转换为 DateTime 对象
+
+``` csharp
+
+string.UnixToDateTime();
+
+```
+
+> 指示指定的字符串是否为 null
+
+``` csharp
+
+string.IsNull();
+
+```
+
+> 指示指定的字符串是否为 System.String.Empty 字符串
+
+``` csharp
+
+string.IsEmpty();
+
+```
+
+> 指示指定的字符串是 null 还是 System.String.Empty 字符串
+
+``` csharp
+
+string.IsNullOrEmpty();
+
+```
+
+> 指示指定的字符串是否不为 null
+
+``` csharp
+
+string.NotNull();
+
+```
+
+> 指示指定的字符串是否不为 System.String.Empty 字符串
+
+``` csharp
+
+string.NotEmpty();
+
+```
+
+> 指示指定的字符串不为 null 和 System.String.Empty 字符串
+
+``` csharp
+
+string.NotNullAndEmpty();
+
+```
+
+> 指示指定的字符串是否为电子邮箱
+
+``` csharp
+
+string.IsEmail();
+
+```
+
+> 指示指定的字符串是否为中华人民共和国第二代身份证号码
+
+``` csharp
+
+string.IsChinaIdentityNumber();
+
+```
+
+> 指示指定的字符串是否为等效的 Int16 类型
+
+``` csharp
+
+string.IsInt16();
+
+```
+
+> 指示指定的字符串是否为等效的 Int32 类型
+
+``` csharp
+
+string.IsInt();
+
+```
+
+> 指示指定的字符串是否为等效的 Int64 类型
+
+``` csharp
+
+string.IsInt64();
+
+```
+
+> 指示指定的字符串是否为等效的 Decimal 类型
+
+``` csharp
+
+string.IsDecimal();
+
+```
+
+> 指示指定的字符串是否为等效的 Single 类型
+
+``` csharp
+
+string.IsSingle();
+
+```
+
+> 指示指定的字符串是否为等效的 Double 类型
+
+``` csharp
+
+string.IsDouble();
+
+```
+
+> 指示指定的字符串是否为等效的 DadeTime 对象
+
+``` csharp
+
+string.IsDateTime();
+
+```
+
+> 指示指定的字符串是否为等效的 Boolean 类型
+
+``` csharp
+
+string.IsBoolean();
+
+```
+
+> 指示指定的字符串是否为等效的 Guid 类型
+
+``` csharp
+
+string.IsGuid();
+
+```
+
+> 指示指定的字符串是否为等效的 Guid 类型
+
+``` csharp
+
+string.IsGuid();
+
+```
+
+> 指示指定要加密的字符串进行 MD5 算法的16位小写加密
+
+``` csharp
+
+string.ToMD5();
+
+```
+
+> 指示指定要加密的字符串进行 MD5 算法的16位大写加密
+
+``` csharp
+
+string.ToMD5Upper();
+
+```
+
+> 指示指定要加密的字符串进行 MD5 算法的32位小写加密
+
+``` csharp
+
+string.ToMD5Lower32();
+
+```
+
+> 指示指定要加密的字符串进行 MD5 算法的32位大写加密
+
+``` csharp
+
+string.ToMD5Upper32();
+
+```
+
+> 指示指定要加密的字符串进行 MD5 混淆加密
+
+``` csharp
+
+string.ToMD5Confusion();
+
+```
+
+> 指示指定要加密的字符串进行 SHA1 算法小写加密
+
+``` csharp
+
+string.ToSHA1();
+
+```
+
+> 指示指定要加密的字符串进行 SHA1 算法大写加密
+
+``` csharp
+
+string.ToSHA1Upper();
+
+```
+
+> 指示指定要加密的字符串进行 SHA1 算法混淆加密
+
+``` csharp
+
+string.ToSHA1Confusion();
+
+```
+
+> 指示指定要加密的字符串进行 SHA256 算法小写加密
+
+``` csharp
+
+string.ToSHA256();
+
+```
+
+> 指示指定要加密的字符串进行 SHA256 算法大写加密
+
+``` csharp
+
+string.ToSHA256Upper();
+
+```
+
+> 指示指定要加密的字符串进行 SHA384 算法小写加密
+
+``` csharp
+
+string.ToSHA384();
+  
+```
+
+> 指示指定要加密的字符串进行 SHA384 算法大写加密
+
+``` csharp
+
+string.ToSHA384Upper();
+
+```
+
+> 指示指定要加密的字符串进行 SHA512 算法小写加密
+
+``` csharp
+
+string.ToSHA512();
+
+```
+
+> 指示指定要加密的字符串进行 SHA512 算法大写加密
+
+``` csharp
+
+string.ToSHA512Upper();
+
+```
+
+> 指示指定要加密的字符串进行 DES 算法加密
+
+``` csharp
+
+string.ToDesEncrypt();
+
+```
+
+> 指示指定要解密的字符串进行 DES 算法解密
+
+``` csharp
+
+string.ToDesDecrypt();
+
+```
+
+> 指示指定要加密的字符串进行 3DES 算法加密
+
+``` csharp
+
+string.To3DesEncrypt();
+
+```
+
+> 指示指定要解密的字符串进行 3DES 算法解密
+
+``` csharp
+
+string.To3DesDecrypt();
+
+```
+
+> 指示指定要解密的字符串进行 AES 算法加密(CBC模式)
+
+``` csharp
+
+string.ToAesEncrypt();
+
+```
+
+> 指示指定要解密的字符串进行 AES 算法解密(CBC模式)
+
+``` csharp
+
+string.ToAesDecrypt();
+
+```
+
+> 将指定的字符串去除空格
+
+``` csharp
+
+string.ToNotSpaceString();
+
+```
+
+> 将字符串的表示形式转换不为 null 的 System.String 的值
+
+``` csharp
+
+string.ToNotNullString();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 Int16 的值
+
+``` csharp
+
+string.ToInt16();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 Int32 的值
+
+``` csharp
+
+string.ToInt();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 Int64 的值
+
+``` csharp
+
+string.ToInt64();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 Single 的值
+
+``` csharp
+
+string.ToSingle();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 Double 的值
+
+``` csharp
+
+string.ToDouble();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 Decimal 的值
+
+``` csharp
+
+string.ToDecimal();
+
+```
+
+> 将时间的字符串表示形式转换为其等效的 DateTime 对象
+
+``` csharp
+
+string.ToDateTime();
+
+```
+
+> 将布尔的字符串表示形式转换为其等效的 Boolean 的值
+
+``` csharp
+
+string.ToBoolean();
+
+```
+
+> 将 Guid 的字符串表示形式转换为其等效的 Guid 的值
+
+``` csharp
+
+string.ToGuid();
+
+```
+
+> 将 Guid 的字符串表示形式转换为其等效的 Guid 的值
+
+``` csharp
+
+string.ToGuid();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 short? 的值
+
+``` csharp
+
+string.ToNullableInt16();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 int? 的值
+
+``` csharp
+
+string.ToNullableInt();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 long? 的值
+
+``` csharp
+
+string.ToNullableInt64();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 float? 的值
+
+``` csharp
+
+string.ToNullableSingle();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 double? 的值
+
+``` csharp
+
+string.ToNullableDouble();
+
+```
+
+> 将数字的字符串表示形式转换为其等效的 decimal? 的值
+
+``` csharp
+
+string.ToNullableDecimal();
+
+```
+
+> 将时间的字符串表示形式转换为其等效的 DateTime? 对象
+
+``` csharp
+
+string.ToNullableDateTime();
+
+```
+
+> 将布尔的字符串表示形式转换为其等效的 bool? 的值
+
+``` csharp
+
+string.ToNullableBoolean();
+
+```
+
+> 将 Guid 的字符串表示形式转换为其等效的 Guid? 的值
+
+``` csharp
+
+string.ToNullableGuid();
+
+```
+
+> 将 Guid 的字符串表示形式转换为其等效的 Guid? 的值
+
+``` csharp
+
+string.ToNullableGuid();
+
+```
+
+> 将 Json 的字符串表示形式转换为 Newtonsoft.Json.Linq.JObject 对象
+
+``` csharp
+
+string.ToJson();
+
+```
+
+> 将 Json 数组的字符串表示形式转换为 Newtonsoft.Json.Linq.JArray 对象
+
+``` csharp
+
+string.ToJsonArray();
+
+```
+
+> 将 Base64 字符串表示形式转换为等效的字符串
+
+``` csharp
+
+string.FromBase64ToString();
+
+```
+
+> 将当前字符串转换为 Base64 字符串表示形式
+
+``` csharp
+
+string.ToBase64String();
+
+```
+
+> 将当前字符串转换为一个字节序列
+
+``` csharp
+
+string.ToByte();
+
+```
+
+> 计算指定字符串的16位 MD5 的哈希/散列值
+
+``` csharp
+
+string.To16MD5Hash();
+
+```
+
+> 计算指定字符串的32位 MD5 的哈希/散列值
+
+``` csharp
+
+string.To32MD5Hash();
+
+```
+
+> 计算指定字符串的 SHA1 算法的哈希/散列值
+
+``` csharp
+
+string.ToSHA1Hash();
+
+```
+
+> 获取指定的字符串中包含的后缀名
+
+``` csharp
+
+string.ExtendName();
+
+```
+
+> 获取当前电子邮箱的字符串表示形式的前缀
+
+``` csharp
+
+string.EmailPrefix();
+
+```
+
+> 获取 Json 的字符串表示形式中的值
+
+``` csharp
+
+string.GetJsonValue(key);
+
+```
+
+> 获取 Json 的字符串表示形式中的值
+
+``` csharp
+
+string.GetJsonValue(key);
+
+```
+
+> 获取指定的中华人民共和国第二代身份证号码字符串的出生日期
+
+``` csharp
+
+string.GetDateOfBirthOfChinaIDNumber();
+
+```
+
+> 获取指定的中华人民共和国第二代身份证号码字符串的当前年龄
+
+``` csharp
+
+string.GetAgeOfChinaIDNumber();
+
+```
+
+> 获取指定的中华人民共和国第二代身份证号码字符串的性别的文字
+
+``` csharp
+
+string.GetGenderTextOfChinaIDNumber();
+
+```
+
+> 获取指定的中华人民共和国第二代身份证号码字符串的性别的数字
+
+``` csharp
+
+string.GetGenderCodeOfChinaIDNumber();
 
 ```
