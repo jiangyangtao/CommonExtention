@@ -26,7 +26,6 @@ namespace CommonExtention.Common
         /// </returns>
         protected virtual JsonResult ResponseSuccess() => JsonResultFormat.ResponseSuccess();
 
-
         /// <summary>
         /// Json通用返回格式：返回成功
         /// </summary>
@@ -60,12 +59,21 @@ namespace CommonExtention.Common
         /// <summary>
         /// Json通用返回格式：返回失败
         /// </summary>
+        /// <param name="message">错误信息(默认为"Unknown error")</param>
+        /// <returns>
+        /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
+        /// </returns>
+        protected virtual JsonResult ResponseFail(string message = "Unknown error") => JsonResultFormat.ResponseFail(message);
+
+        /// <summary>
+        /// Json通用返回格式：返回失败
+        /// </summary>
         /// <param name="code">错误代码</param>
         /// <param name="message">错误信息(默认为"Unknown error")</param>
         /// <returns>
         /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
         /// </returns>
-        protected virtual JsonResult ResponseFail(int code = -1, string message = "Unknown error") => JsonResultFormat.ResponseFail();
+        protected virtual JsonResult ResponseFail(int code = -1, string message = "Unknown error") => JsonResultFormat.ResponseFail(code, message);
         #endregion
 
         #region Json通用网格返回格式
@@ -108,6 +116,14 @@ namespace CommonExtention.Common
         /// </returns>
         protected virtual JsonResult ResponseGridResult(DataTable dataTable, int count = 0) => JsonResultFormat.ResponseGridResult(dataTable, count);
 
+        /// <summary>
+        /// Json通用网格返回格式：返回失败
+        /// </summary>
+        /// <param name="message">失败信息</param>
+        /// <returns>
+        /// Json格式 : {code:-1,rows:[],total:0,message:Unknown error}
+        /// </returns>
+        protected virtual JsonResult ResponseGridResult(string message = "Unknown error") => JsonResultFormat.ResponseGridResult(message);
 
         /// <summary>
         /// Json通用网格返回格式：返回失败

@@ -104,6 +104,21 @@ namespace CommonExtention.HttpResponseFormat
         /// <summary>
         /// Json通用返回格式：返回失败
         /// </summary>
+        /// <param name="message">错误信息(默认为"Unknown error")</param>
+        /// <returns>
+        /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
+        /// </returns>
+        public virtual HttpResponseMessage ResponseFail(string message = "Unknown error") => HttpResponseMessageResult(new ResponseEntity()
+        {
+            Code = -1,
+            Data = null,
+            Count = 0,
+            Message = message,
+        });
+
+        /// <summary>
+        /// Json通用返回格式：返回失败
+        /// </summary>
         /// <param name="code">错误代码</param>
         /// <param name="message">错误信息(默认为"Unknown error")</param>
         /// <returns>
@@ -119,6 +134,21 @@ namespace CommonExtention.HttpResponseFormat
         #endregion
 
         #region Json通用网格返回格式
+
+        /// <summary>
+        /// Json通用网格返回格式：返回成功
+        /// </summary>
+        /// <returns>
+        /// Json格式 : {code:0,rows:data,total:1,message:Success}
+        /// </returns>
+        public virtual HttpResponseMessage ResponseGridResult() => HttpResponseMessageResult(new ResponseGridEntity()
+        {
+            Code = 0,
+            Rows = null,
+            Total = 0,
+            Message = "Success",
+        });
+
         /// <summary>
         /// Json通用网格返回格式：返回成功
         /// </summary>
@@ -165,6 +195,21 @@ namespace CommonExtention.HttpResponseFormat
             Rows = dataTable,
             Total = count == 0 ? dataTable.Rows.Count : count,
             Message = "Success",
+        });
+
+        /// <summary>
+        /// Json通用网格返回格式：返回失败
+        /// </summary>
+        /// <param name="message">失败信息</param>
+        /// <returns>
+        /// Json格式 : {code:-1,rows:[],total:0,message:Unknown error}
+        /// </returns>
+        public virtual HttpResponseMessage ResponseGridResult(string message = "Unknown error") => HttpResponseMessageResult(new ResponseGridEntity()
+        {
+            Code = -1,
+            Rows = null,
+            Total = 0,
+            Message = message,
         });
 
         /// <summary>

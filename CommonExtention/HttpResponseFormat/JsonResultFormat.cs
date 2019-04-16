@@ -23,9 +23,7 @@ namespace CommonExtention.HttpResponseFormat
         /// <returns>
         /// Json格式 : {code:0,data:"",count:0,message:Success}
         /// </returns>
-        public static JsonResult ResponseSuccess() => new JsonResponseFormat().ResponseSuccess();
-
-
+        public static JsonResult ResponseSuccess() => new JsonResponseFormat().ResponseSuccess();        
 
         /// <summary>
         /// Json通用返回格式：返回成功
@@ -56,6 +54,15 @@ namespace CommonExtention.HttpResponseFormat
         /// Json格式 : {code:0,data:DataTable,count:DataTable.Rows.Count,message:Success}
         /// </returns>
         public static JsonResult ResponseSuccess(DataTable dataTable, int count = 0) => new JsonResponseFormat().ResponseSuccess(dataTable, count);
+
+        /// <summary>
+        /// Json通用返回格式：返回失败
+        /// </summary>
+        /// <param name="message">错误信息(默认为"Unknown error")</param>
+        /// <returns>
+        /// Json格式 : {code:-1,data:"",count:-1,message:Unknown error}
+        /// </returns>
+        public static JsonResult ResponseFail(string message = "Unknown error") => new JsonResponseFormat().ResponseFail(message);
 
         /// <summary>
         /// Json通用返回格式：返回失败
@@ -107,6 +114,14 @@ namespace CommonExtention.HttpResponseFormat
         /// </returns>
         public static JsonResult ResponseGridResult(DataTable dataTable, int count = 0) => new JsonResponseFormat().ResponseGridResult(dataTable, count);
 
+        /// <summary>
+        /// Json 通用网格返回格式：返回失败
+        /// </summary>
+        /// <param name="message">失败信息</param>
+        /// <returns>
+        /// Json格式 : {code:-1,rows:[],total:0,message:Unknown error}
+        /// </returns>
+        public static JsonResult ResponseGridResult(string message = "Unknown error") => new JsonResponseFormat().ResponseGridResult(message);
 
         /// <summary>
         /// Json 通用网格返回格式：返回失败
