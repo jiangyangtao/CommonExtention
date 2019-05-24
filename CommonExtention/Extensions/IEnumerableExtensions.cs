@@ -55,8 +55,7 @@ namespace CommonExtention.Extensions
         /// 如果集合中存在指定的 <see cref="Attribute"/> 或者 Filter，则为 true;
         /// 如果不存在，则为 false;
         /// </returns>
-        public static bool HasAttribute(this IEnumerable<CustomAttributeData> customs, Type type) =>
-            customs.Any(a => a.AttributeType == type);
+        public static bool HasAttribute(this IEnumerable<CustomAttributeData> customs, Type type) => customs.Any(a => a.AttributeType == type);
         #endregion
     }
 }

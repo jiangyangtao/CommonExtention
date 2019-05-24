@@ -98,11 +98,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ExcelColumnNameAttribute.cs" />
-    <Compile Include="Attributes\ExcelExcludeColumnAttribute.cs" />
+    <Compile Include="Attributes\ExcelColumnAttribute.cs" />
     <Compile Include="Common\Email.cs" />
     <Compile Include="Common\ImageVerificationCode.cs" />
     <Compile Include="Common\SequentialGuidGenerator.cs" />
+    <Compile Include="Common\Snowflake.cs" />
     <Compile Include="Extensions\DataColumnCollectionExtensions.cs" />
     <Compile Include="Extensions\DataRowCollectionExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
